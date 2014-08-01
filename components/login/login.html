@@ -1,0 +1,76 @@
+<div data-ng-controller="LoginController as model">
+
+<h2 class="headline">Sign in to {{model.siteTitle}}</h2>
+
+<div class="alert alert-info headline" data-ng-show="model.request">
+  Please sign in to complete your request.
+</div>
+
+<form class="headline" method="post" action="" data-ng-submit="model.submit()">
+  <fieldset>
+    <div class="control-group">
+      <div data-ng-hide="model.multiple" class="controls">
+        <input name="sysIdentifier" type="text" autofocus="autofocus"
+          data-ng-model="model.sysIdentifier"
+          placeholder="Email" data-ng-disabled="model.loading" />
+      </div>
+
+      <div data-ng-show="model.multiple">
+        <p class="alert alert-info">
+          <strong>Note:</strong>
+          Your email address ({{email}}) is associated with multiple
+          identities. Please select the identity you'd like to sign in with.
+        </p>
+        <div class="controls">
+          <select name="identity" autofocus="autofocus"
+            data-ng-model="identity"
+            data-ng-options="value.id as value.label for value in model.choices"
+            data-ng-disabled="model.loading">
+          </select>
+        </div>
+      </div>
+
+      <div class="controls">
+        <input name="password" type="password" placeholder="Password"
+          data-ng-model="model.password" data-ng-disabled="model.loading" />
+      </div>
+
+      <div data-spinner="model.loading"
+        data-spinner-class="center-spinner"></div>
+
+      <div data-ng-hide="model.loading">
+        <div class="btn-group">
+          <a class="btn btn-primary" data-submit-form><i
+            class="icon-signin"></i> Sign In</a>
+          <a class="btn btn-primary"
+            stackable-trigger="model.signInMenu"
+            stackable-toggle="'active'">
+            <i class="caret"></i>
+          </a>
+        </div>
+        <stackable-popover stackable="model.signInMenu"
+          stackable-hide-arrow="true"
+          stackable-placement="bottom"
+          stackable-alignment="right">
+          <ul class="stackable-menu">
+            <li>
+              <a href="/join">
+                <i class="icon-user"></i>
+                Create an Identity
+              </a>
+            </li>
+            <li>
+              <a href="/session/passcode">
+                <i class="icon-refresh"></i>
+                Password Reset
+              </a>
+            </li>
+          </ul>
+        </stackable-popover>
+      </div>
+
+    </div>
+  </fieldset>
+</form>
+
+</div>

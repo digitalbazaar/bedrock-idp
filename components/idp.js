@@ -1,33 +1,24 @@
 /*!
- * Components module.
+ * IDP components module.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
 define([
   'angular',
-  './alert/alert',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
-  './form/form',
   './identity/identity',
   './key/key',
   './login/login',
-  './modal/modal',
   './navbar/navbar',
   './passcode/passcode',
-  './placeholder/placeholder',
-  './remote-file-selector/remote-file-selector',
-  './selector/selector',
-  './settings/settings',
-  './slug/slug',
-  './tabs/tabs',
-  './util/util'
+  './settings/settings'
 ], function(angular) {
 
 'use strict';
 
-angular.module('app.components', Array.prototype.slice.call(arguments, 1));
+angular.module('bedrock.idp', Array.prototype.slice.call(arguments, 1));
 
 });

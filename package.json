@@ -23,10 +23,17 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-idp",
   "dependencies": {
-    "async": "~0.9.0"
+    "async": "~0.9.0",
+    "cors": "~2.4.2",
+    "underscore": "~1.7.0"
   },
   "peerDependencies": {
-    "bedrock": "~0.3.0"
+    "bedrock": "~0.3.0",
+    "bedrock-docs": "~0.1.0",
+    "bedrock-identity": "~0.1.0",
+    "bedrock-rest": "~0.1.0",
+    "bedrock-validation": "~0.1.0",
+    "bedrock-views": "~0.1.0"
   },
   "directories": {
     "lib": "./lib"

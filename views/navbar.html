@@ -1,3 +1,21 @@
+{% if pageLayout == "error" %}
+<div class="ng-cloak">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">
+          {% if style.brand.src %}
+          <img src="{{style.brand.src}}" width="{{style.brand.width}}" height="{{style.brand.height}}" alt="{{style.brand.alt}}" />
+          {% else %}
+          {{siteTitle}}
+          {% endif %}
+        </a>
+      </div>
+    </div>
+  </nav>
+  <div br-alerts br-fixed="true"></div>
+</div>
+{% else %}
 <div class="ng-cloak" ng-controller="NavbarController as model">
   <nav class="navbar navbar-default" role="navigation"
     ng-class="{'navbar-login': app.services.identity.identity}">
@@ -153,3 +171,4 @@
   </nav>
   <div br-alerts br-fixed="true"></div>
 </div>
+{% endif %}

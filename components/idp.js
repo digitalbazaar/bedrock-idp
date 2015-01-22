@@ -19,6 +19,6 @@ define([
 
 'use strict';
 
-angular.module('bedrock.idp', Array.prototype.slice.call(arguments, 1));
+angular.module('app.idp', Array.prototype.slice.call(arguments, 1));
 
 });

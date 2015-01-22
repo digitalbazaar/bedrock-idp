@@ -31,6 +31,7 @@
     "bedrock": "~0.3.0",
     "bedrock-docs": "~0.1.0",
     "bedrock-identity": "~0.1.0",
+    "bedrock-passport": "~0.1.0",
     "bedrock-rest": "~0.1.0",
     "bedrock-validation": "~0.1.0",
     "bedrock-views": "~0.1.0"

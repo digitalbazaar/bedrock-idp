@@ -1,0 +1,14 @@
+{
+  "name": "bedrock-idp",
+  "main": "./app.js",
+  "ignore": [
+    "lib",
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "tests",
+    "views"
+  ],
+  "dependencies": {
+  }
+}

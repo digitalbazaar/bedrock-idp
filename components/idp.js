@@ -19,6 +19,39 @@ define([
 
 'use strict';
 
-angular.module('app.idp', Array.prototype.slice.call(arguments, 1));
+var module = angular.module(
+  'app.idp', Array.prototype.slice.call(arguments, 1));
+
+/* @ngInject */
+module.config(function(config) {
+  config.site = config.site || {};
+  config.site.navbar = {
+    private: [
+      {
+        slug: 'dashboard',
+        icon: 'fa fa-dashboard',
+        label: 'Dashboard',
+        pageTitle: 'Dashboard'
+      },
+      {
+        slug: 'settings',
+        icon: 'fa fa-wrench',
+        label: 'Settings',
+        pageTitle: 'Settings'
+      }
+    ],
+    public: []
+  };
+
+  config.settings = config.settings || {};
+  config.settings.panes = [
+    {
+      templateUrl: '/app/components/identity/identity-settings.html'
+    },
+    {
+      templateUrl: '/app/components/key/key-settings.html'
+    }
+  ];
+});
 
 });

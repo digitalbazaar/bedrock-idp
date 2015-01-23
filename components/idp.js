@@ -23,7 +23,7 @@ var module = angular.module(
   'app.idp', Array.prototype.slice.call(arguments, 1));
 
 /* @ngInject */
-module.config(function(config) {
+module.run(function(config) {
   config.site = config.site || {};
   config.site.navbar = {
     private: [
@@ -53,5 +53,7 @@ module.config(function(config) {
     }
   ];
 });
+
+return module.name;
 
 });

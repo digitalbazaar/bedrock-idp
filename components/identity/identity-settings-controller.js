@@ -1,14 +1,21 @@
 /*!
  * Identity Settings.
  *
- * Copyright (c) 2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author David I. Lehn
  */
-define(['angular', 'forge/forge', 'underscore'], function(angular, forge, _) {
+define([
+  'angular',
+  'forge/forge',
+  'module',
+  'underscore'
+], function(angular, forge, module, _) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory($scope, config, brAlertService, brIdentityService) {
@@ -21,6 +28,7 @@ function factory($scope, config, brAlertService, brIdentityService) {
   self.publicMode = 'most';
   self.public = {};
   self.loading = true;
+  self.modulePath = modulePath;
 
   var _gravatarUrl = function() {
     var url = 'https://secure.gravatar.com/avatar/' + self.emailHash;

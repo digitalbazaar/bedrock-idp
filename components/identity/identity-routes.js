@@ -1,28 +1,30 @@
 /*!
  * Identity Routes.
  *
- * Copyright (c) 2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Manu Sporny
  * @author David I. Lehn
  * @author Dave Longley
  */
-define([], function() {
+define(['module'], function(module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 var base = window.data.identityBasePath;
 return [{
   path: base,
   options: {
     title: 'Identity Credentials',
-    templateUrl: '/app/components/identity/identity-credentials.html'
+    templateUrl: modulePath + 'identity-credentials.html'
   }
 }, {
   path: base + '/:identity',
   options: {
     title: 'Identity',
-    templateUrl: '/app/components/identity/identity.html'
+    templateUrl: modulePath + 'identity.html'
   }
 }];
 

@@ -1,13 +1,15 @@
 /*!
  * Login Modal.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([], function() {
+define(['module'], function(module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory($http, $timeout, brAlertService, brRefreshService, config) {
@@ -15,7 +17,7 @@ function factory($http, $timeout, brAlertService, brRefreshService, config) {
     restrict: 'A',
     scope: {},
     require: '^stackable',
-    templateUrl: '/app/components/login/login-modal.html',
+    templateUrl: modulePath + 'login-modal.html',
     link: Link
   };
 

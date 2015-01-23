@@ -1,13 +1,15 @@
 /*!
  * Identity Selector directive.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([], function() {
+define(['module'], function(module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory() {
@@ -20,7 +22,7 @@ function factory() {
       invalid: '=brInvalid',
       fixed: '@brFixed'
     },
-    templateUrl: '/app/components/identity/identity-selector.html',
+    templateUrl: modulePath + 'identity-selector.html',
     link: function(scope, element, attrs) {
       attrs.$observe('brFixed', function(value) {
         scope.fixed = value;

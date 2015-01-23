@@ -1,28 +1,30 @@
 /*!
  * Key Routes.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Manu Sporny
  * @author David I. Lehn
  * @author Dave Longley
  */
-define([], function() {
+define(['module'], function(module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 var base = window.data.identityBasePath + '/:identity/keys';
 return [{
   path: base,
   options: {
     title: 'Keys',
-    templateUrl: '/app/components/key/keys.html'
+    templateUrl: modulePath + 'keys.html'
   }
 }, {
   path: base + '/:keyId',
   options: {
     title: 'Key',
-    templateUrl: '/app/components/key/key.html'
+    templateUrl: modulePath + 'key.html'
   }
 }];
 

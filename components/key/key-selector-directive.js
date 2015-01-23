@@ -1,13 +1,15 @@
 /*!
  * Key Selector directive.
  *
- * Copyright (c) 2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([], function() {
+define(['module'], function(module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function keySelectorInner(brKeyService) {
@@ -52,7 +54,7 @@ function keySelector() {
       invalid: '=brInvalid',
       fixed: '=?brFixed'
     },
-    templateUrl: '/app/components/key/key-selector.html'
+    templateUrl: modulePath + 'key-selector.html'
   };
 }
 

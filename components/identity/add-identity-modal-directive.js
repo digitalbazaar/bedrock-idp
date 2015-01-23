@@ -1,13 +1,15 @@
 /*!
  * Add Identity Modal.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define(['angular'], function(angular) {
+define(['angular', 'module'], function(angular, module) {
 
 'use strict';
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory(brAlertService, brIdentityService, config) {
@@ -15,7 +17,7 @@ function factory(brAlertService, brIdentityService, config) {
     restrict: 'A',
     scope: {identityTypes: '=brIdentityTypes'},
     require: '^stackable',
-    templateUrl: '/app/components/identity/add-identity-modal.html',
+    templateUrl: modulePath + 'add-identity-modal.html',
     link: Link
   };
 

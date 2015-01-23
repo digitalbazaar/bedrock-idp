@@ -1,11 +1,13 @@
 /*!
  * Generate Key Pair Modal.
  *
- * Copyright (c) 2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define(['forge/pki'], function(pki) {
+define(['forge/pki', 'module'], function(pki, module) {
+
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory(brAlertService, brKeyService, config) {
@@ -13,7 +15,7 @@ function factory(brAlertService, brKeyService, config) {
     restrict: 'A',
     scope: {},
     require: '^stackable',
-    templateUrl: '/app/components/key/generate-key-pair-modal.html',
+    templateUrl: modulePath + 'generate-key-pair-modal.html',
     link: Link
   };
 

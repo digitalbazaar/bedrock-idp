@@ -29,6 +29,7 @@ function factory(
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
+    model.modulePath = modulePath;
     model.mode = 'add';
     model.loading = false;
     model.success = false;

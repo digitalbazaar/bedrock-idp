@@ -8,7 +8,7 @@
       <div class="modal-body">
         <br-demo-warning></br-demo-warning>
         <div ng-hide="model.success">
-          <div ng-include="'/app/components/key/key-form.html'"></div>
+          <div ng-include="model.modulePath + 'key-form.html'"></div>
         </div>
         <div ng-show="model.success">
           <p>

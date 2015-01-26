@@ -24,6 +24,7 @@ function factory(brAlertService, brKeyService, config) {
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
+    model.modulePath = modulePath;
     model.mode = 'generate';
     model.loading = false;
     model.success = false;

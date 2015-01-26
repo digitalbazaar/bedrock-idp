@@ -8,7 +8,7 @@
       <div class="modal-body">
         <br-demo-warning></br-demo-warning>
         <div ng-hide="model.success">
-          <p ng-include="'/app/components/key/generate-key-pair-help.html'"></p>
+          <p ng-include="model.modulePath + 'generate-key-pair-help.html'"></p>
           <p ng-hide="model.success">
             Please be patient as it may take a couple of minutes to complete. Once
             completed, you will have the opportunity to enter some details about
@@ -26,7 +26,7 @@
             Your new signing key has been generated. Please enter
             information below about the key before saving it.
           </p>
-          <div ng-include="'/app/components/key/key-form.html'"></div>
+          <div ng-include="model.modulePath + 'key-form.html'"></div>
           <p class="alert alert-success">
             Key generated. Click "Save" to save the key.
           </p>

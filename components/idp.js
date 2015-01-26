@@ -7,6 +7,7 @@
  */
 define([
   'angular',
+  'module',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
@@ -15,12 +16,14 @@ define([
   './navbar/navbar',
   './passcode/passcode',
   './settings/settings'
-], function(angular) {
+], function(angular, module) {
 
 'use strict';
 
+var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
+
 var module = angular.module(
-  'app.idp', Array.prototype.slice.call(arguments, 1));
+  'app.idp', Array.prototype.slice.call(arguments, 2));
 
 /* @ngInject */
 module.run(function(config) {
@@ -46,10 +49,10 @@ module.run(function(config) {
   config.settings = config.settings || {};
   config.settings.panes = [
     {
-      templateUrl: '/app/components/identity/identity-settings.html'
+      templateUrl: modulePath + 'identity/identity-settings.html'
     },
     {
-      templateUrl: '/app/components/key/key-settings.html'
+      templateUrl: modulePath + 'key/key-settings.html'
     }
   ];
 });

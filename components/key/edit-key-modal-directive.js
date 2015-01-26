@@ -26,6 +26,7 @@ function factory(brAlertService, brIdentityService, brKeyService, config) {
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
+    model.modulePath = modulePath;
     model.mode = 'edit';
     model.loading = false;
     // copy source budget for editing

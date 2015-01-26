@@ -13,7 +13,7 @@ define([
 
 'use strict';
 
-var module = angular.module('app.dashboard', []);
+var module = angular.module('bedrock.dashboard', []);
 
 module.controller(controller);
 

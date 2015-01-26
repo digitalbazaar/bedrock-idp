@@ -19,7 +19,7 @@ define([
 
 'use strict';
 
-var module = angular.module('app.login', []);
+var module = angular.module('bedrock.login', []);
 
 module.controller(loginController);
 module.directive(loginModalDirective);

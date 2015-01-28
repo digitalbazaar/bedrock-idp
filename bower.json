@@ -3,13 +3,18 @@
   "moduleType": ["amd"],
   "main": "./components/idp.js",
   "ignore": [
+    "bedrock",
+    "bedrock.json",
+    "bower_components",
     "lib",
     "node_modules",
-    "bower_components",
     "package.json",
-    "tests",
     "views"
   ],
   "dependencies": {
+    "bedrock-angular": "~0.0.1",
+    "bedrock-angular-alert": "~0.0.1",
+    "bedrock-angular-form": "~0.0.1",
+    "bedrock-angular-ui": "~0.0.1"
   }
 }

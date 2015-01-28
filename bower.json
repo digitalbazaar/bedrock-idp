@@ -9,7 +9,8 @@
     "lib",
     "node_modules",
     "package.json",
-    "views"
+    "views",
+    "tests"
   ],
   "dependencies": {
     "bedrock-angular": "~0.0.1",

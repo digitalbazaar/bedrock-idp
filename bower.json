@@ -3,8 +3,10 @@
   "moduleType": ["amd"],
   "main": "./components/idp.js",
   "ignore": [
-    "bedrock",
-    "bedrock.json",
+    "bedrock/pages",
+    "bedrock/prepare",
+    "bedrock/selectors",
+    "bedrock/tests",
     "bower_components",
     "lib",
     "node_modules",

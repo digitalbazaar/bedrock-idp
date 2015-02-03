@@ -3,15 +3,26 @@
  *
  * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  */
+var fs = require('fs');
 var path = require('path');
 
 module.exports = function(bedrock) {
-  if(bedrock.config.protractor) {
-    var config = bedrock.config.protractor.config;
+  var prepare = path.join(__dirname, 'prepare.js');
+  if(bedrock.config.protractor && fs.existsSync(prepare)) {
+    var protractor = bedrock.config.protractor.config;
     // add protractor tests
-    config.suites['bedrock-idp'] =
+    protractor.suites['bedrock-idp'] =
       path.join(__dirname, './tests/**/*.js');
-    config.params.config.onPrepare.push(
-      path.join(__dirname, './prepare'));
+    protractor.params.config.onPrepare.push(prepare);
   }
+
+  // ignore server-side views
+  bedrock.config.views.optimize.angular.templates.packages['bedrock-idp'] = {
+    src: [
+      '**/*.html',
+      '!node_modules/**',
+      '!bower_components',
+      '!views/**'
+    ]
+  };
 };

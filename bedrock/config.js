@@ -17,7 +17,7 @@ module.exports = function(bedrock) {
   }
 
   // ignore server-side views
-  bedrock.config.views.optimize.angular.templates.packages['bedrock-idp'] = {
+  bedrock.config.views.angular.optimize.templates.packages['bedrock-idp'] = {
     src: [
       '**/*.html',
       '!node_modules/**',

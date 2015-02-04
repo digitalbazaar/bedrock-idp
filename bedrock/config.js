@@ -20,9 +20,9 @@ module.exports = function(bedrock) {
   bedrock.config.views.angular.optimize.templates.packages['bedrock-idp'] = {
     src: [
       '**/*.html',
-      '!node_modules/**',
-      '!bower_components/**',
-      '!views/**'
+      '!node_modules/**/*.html',
+      '!bower_components/**/*.html',
+      '!views/**/*.html'
     ]
   };
 };

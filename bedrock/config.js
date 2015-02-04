@@ -21,7 +21,7 @@ module.exports = function(bedrock) {
     src: [
       '**/*.html',
       '!node_modules/**',
-      '!bower_components',
+      '!bower_components/**',
       '!views/**'
     ]
   };

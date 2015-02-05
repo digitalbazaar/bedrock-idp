@@ -5,11 +5,9 @@
  *
  * @author Dave Longley
  */
-define(['module'], function(module) {
+define([], function() {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory() {
@@ -22,7 +20,8 @@ function factory() {
       invalid: '=brInvalid',
       fixed: '@brFixed'
     },
-    templateUrl: modulePath + 'identity-selector.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/identity/identity-selector.html'),
     link: function(scope, element, attrs) {
       attrs.$observe('brFixed', function(value) {
         scope.fixed = value;

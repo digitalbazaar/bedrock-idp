@@ -7,7 +7,6 @@
  */
 define([
   'angular',
-  'module',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
@@ -16,11 +15,11 @@ define([
   './navbar/navbar',
   './passcode/passcode',
   './settings/settings'
-], function(angular, module) {
+], function(angular) {
 
 'use strict';
 
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
+var modulePath = requirejs.toUrl('bedrock-idp/components/');
 
 var module = angular.module(
   'app.idp', Array.prototype.slice.call(arguments, 2));

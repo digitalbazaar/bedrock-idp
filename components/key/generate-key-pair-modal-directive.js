@@ -5,9 +5,7 @@
  *
  * @author Dave Longley
  */
-define(['forge/pki', 'module'], function(pki, module) {
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
+define(['forge/pki'], function(pki) {
 
 /* @ngInject */
 function factory(brAlertService, brKeyService, config) {
@@ -15,7 +13,8 @@ function factory(brAlertService, brKeyService, config) {
     restrict: 'A',
     scope: {},
     require: '^stackable',
-    templateUrl: modulePath + 'generate-key-pair-modal.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/key/generate-key-pair-modal.html'),
     link: Link
   };
 
@@ -24,7 +23,7 @@ function factory(brAlertService, brKeyService, config) {
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
-    model.modulePath = modulePath;
+    model.modulePath = requirejs.toUrl('bedrock-idp/components/key/');
     model.mode = 'generate';
     model.loading = false;
     model.success = false;

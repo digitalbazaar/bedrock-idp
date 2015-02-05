@@ -5,19 +5,18 @@
  *
  * @author Dave Longley
  */
-define(['angular', 'module'], function(angular, module) {
+define(['angular'], function(angular) {
 
 'use strict';
 
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
-
 /* @ngInject */
-function factory(brAlertService, brIdentityService, brKeyService, config) {
+function factory(brAlertService, brKeyService, config) {
   return {
     restrict: 'A',
     scope: {sourceKey: '=brKey'},
     require: '^stackable',
-    templateUrl: modulePath + 'edit-key-modal.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/key/edit-key-modal.html'),
     link: Link
   };
 
@@ -26,7 +25,7 @@ function factory(brAlertService, brIdentityService, brKeyService, config) {
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
-    model.modulePath = modulePath;
+    model.modulePath = requirejs.toUrl('bedrock-idp/components/key/');
     model.mode = 'edit';
     model.loading = false;
     // copy source budget for editing

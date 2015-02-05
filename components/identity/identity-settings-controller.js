@@ -9,13 +9,10 @@
 define([
   'angular',
   'forge/forge',
-  'module',
   'underscore'
-], function(angular, forge, module, _) {
+], function(angular, forge, _) {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory($scope, config, brAlertService, brIdentityService) {
@@ -28,7 +25,7 @@ function factory($scope, config, brAlertService, brIdentityService) {
   self.publicMode = 'most';
   self.public = {};
   self.loading = true;
-  self.modulePath = modulePath;
+  self.modulePath = requirejs.toUrl('bedrock-idp/components/identity/');
 
   var _gravatarUrl = function() {
     var url = 'https://secure.gravatar.com/avatar/' + self.emailHash;

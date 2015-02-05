@@ -5,11 +5,9 @@
  *
  * @author Dave Longley
  */
-define(['module'], function(module) {
+define([], function() {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory($http, $timeout, brAlertService, brRefreshService, config) {
@@ -17,7 +15,8 @@ function factory($http, $timeout, brAlertService, brRefreshService, config) {
     restrict: 'A',
     scope: {},
     require: '^stackable',
-    templateUrl: modulePath + 'login-modal.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/login/login-modal.html'),
     link: Link
   };
 

@@ -5,11 +5,9 @@
  *
  * @author Dave Longley
  */
-define(['angular', 'module'], function(angular, module) {
+define(['angular'], function(angular) {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory(brAlertService, brIdentityService, config) {
@@ -17,7 +15,8 @@ function factory(brAlertService, brIdentityService, config) {
     restrict: 'A',
     scope: {identityTypes: '=brIdentityTypes'},
     require: '^stackable',
-    templateUrl: modulePath + 'add-identity-modal.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/identity/add-identity-modal.html'),
     link: Link
   };
 

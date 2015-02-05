@@ -6,11 +6,9 @@
  * @author Dave Longley
  * @author David I. Lehn
  */
-define(['module'], function(module) {
+define([], function() {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function factory(
@@ -20,7 +18,8 @@ function factory(
     restrict: 'A',
     scope: {},
     require: '^stackable',
-    templateUrl: modulePath + 'add-key-modal.html',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/key/add-key-modal.html'),
     link: Link
   };
 
@@ -29,7 +28,7 @@ function factory(
     var keys = brKeyService.get({
       identityMethod: 'route'
     });
-    model.modulePath = modulePath;
+    model.modulePath = requirejs.toUrl('bedrock-idp/components/key/');
     model.mode = 'add';
     model.loading = false;
     model.success = false;

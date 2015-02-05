@@ -5,11 +5,9 @@
  *
  * @author Dave Longley
  */
-define(['module'], function(module) {
+define([], function() {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 /* @ngInject */
 function keySelectorInner(brKeyService) {
@@ -54,7 +52,7 @@ function keySelector() {
       invalid: '=brInvalid',
       fixed: '=?brFixed'
     },
-    templateUrl: modulePath + 'key-selector.html'
+    templateUrl: requirejs.toUrl('bedrock-idp/components/key/key-selector.html')
   };
 }
 

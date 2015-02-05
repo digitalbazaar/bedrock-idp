@@ -7,11 +7,9 @@
  * @author David I. Lehn
  * @author Dave Longley
  */
-define(['module'], function(module) {
+define([], function() {
 
 'use strict';
-
-var modulePath = module.uri.substr(0, module.uri.lastIndexOf('/')) + '/';
 
 return [{
   path: '/session/login',
@@ -21,7 +19,7 @@ return [{
       // avoid login entry form on login page
       hideNavbarLogin: true
     },
-    templateUrl: modulePath + 'login.html'
+    templateUrl: requirejs.toUrl('bedrock-idp/components/login/login.html')
   }
 }];
 

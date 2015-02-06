@@ -1,6 +1,7 @@
 /*
  * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  */
+var constants = require('bedrock').config.constants;
 var schemas = require('bedrock-validation').schemas;
 
 var sysImageType = {
@@ -40,7 +41,7 @@ var postIdentity = {
   title: 'Post Identity',
   type: 'object',
   properties: {
-    '@context': schemas.jsonldContext(),
+    '@context': schemas.jsonldContext(constants.IDENTITY_CONTEXT_V1_URL),
     id: schemas.identifier(),
     description: schemas.description({required: false}),
     //email: schemas.email({required: false}),
@@ -134,7 +135,7 @@ var postIdentities = {
     description: 'Create an Identity',
     type: 'object',
     properties: {
-      '@context': schemas.jsonldContext(),
+      '@context': schemas.jsonldContext(constants.IDENTITY_CONTEXT_V1_URL),
       type: {
         required: true,
         type: 'string',

@@ -38,7 +38,7 @@ function factory($routeParams, brIdentityService, brKeyService, config) {
   };
   self.setDefaultSigningKeyId = function(keyId) {
     var update = {
-      '@context': config.data.contextUrl,
+      '@context': config.data.contextUrls.identity,
       id: self.identity.id,
       sysSigningKey: keyId
     };

@@ -38,7 +38,7 @@ function factory(
       keys: keys.state
     };
     model.key = {
-      '@context': config.data.contextUrl,
+      '@context': config.data.contextUrls.identity,
       label: 'Access Key 1',
       publicKeyPem: ''
     };
@@ -65,7 +65,7 @@ function factory(
 
           // form data to send to callback
           model.callbackKey = {
-            '@context': config.data.contextUrl,
+            '@context': config.data.contextUrls.identity,
             id: key.id
           };
           scope.$apply();

@@ -35,7 +35,7 @@ function factory(brAlertService, brIdentityService, config) {
     };
     angular.forEach(scope.identityTypes, function(type) {
       scope.identity[type] = {
-        '@context': config.data.contextUrl,
+        '@context': config.data.contextUrls.identity,
         type: type
       };
     });

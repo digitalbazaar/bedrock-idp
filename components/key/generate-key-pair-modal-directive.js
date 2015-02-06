@@ -31,7 +31,7 @@ function factory(brAlertService, brKeyService, config) {
       keys: keys.state
     };
     model.key = {
-      '@context': config.data.contextUrl,
+      '@context': config.data.contextUrls.identity,
       label: 'Signing Key 1'
     };
 

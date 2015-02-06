@@ -16,7 +16,7 @@ function factory($scope, $http, $window, brAlertService, config) {
   self.data = config.data;
   self.loading = false;
   self.identity = {
-    '@context': config.data.contextUrl,
+    '@context': config.data.contextUrls.identity,
     type: 'Identity',
     label: '',
     email: '',

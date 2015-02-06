@@ -139,7 +139,7 @@ function factory($scope, config, brAlertService, brIdentityService) {
     _setupPublic('url');
 
     var update = {
-      '@context': config.data.contextUrl,
+      '@context': config.data.contextUrls.identity,
       id: self.identity.id,
       description: self.identity.description,
       label: self.identity.label,

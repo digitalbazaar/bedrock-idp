@@ -35,7 +35,7 @@ function factory(brAlertService, brKeyService, config) {
     model.editKey = function() {
       // set all fields from UI
       var key = {
-        '@context': config.data.contextUrl,
+        '@context': config.data.contextUrls.identity,
         id: model.key.id,
         label: model.key.label
       };

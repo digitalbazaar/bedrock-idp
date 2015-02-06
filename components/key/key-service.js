@@ -64,7 +64,7 @@ function factory(
 
   Service.prototype.revoke = function(keyId, options) {
     return this.collection.update({
-      '@context': config.data.contextUrl,
+      '@context': config.data.contextUrls.identity,
       id: keyId,
       revoked: ''
     }, options);

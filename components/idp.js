@@ -25,7 +25,7 @@ var module = angular.module(
   'app.idp', Array.prototype.slice.call(arguments, 2));
 
 /* @ngInject */
-module.run(function(config) {
+module.run(function($location, $rootScope, $route, $window, config, util) {
   config.site = config.site || {};
   config.site.navbar = {
     private: [
@@ -54,6 +54,41 @@ module.run(function(config) {
       templateUrl: modulePath + 'key/key-settings.html'
     }
   ];
+
+  // do immediate initial location change prior to loading any page content
+  // in case a redirect is necessary
+  locationChangeStart();
+
+  $rootScope.$on('$locationChangeStart', locationChangeStart);
+
+  function locationChangeStart() {
+    if(config.data.queuedRequest) {
+      // re-route to login if not already there
+      if($location.path() !== '/session/login') {
+        $location.url('/session/login');
+      }
+      return;
+    }
+
+    // session auth check
+    var authenticated = !!(config.data.session || {}).identity;
+    if(authenticated) {
+      return;
+    }
+
+    // if the current path is a route that requires authentication,
+    // redirect to login
+    var route = util.getRouteFromPath($route, $location.path());
+    if(route && route.session === 'required') {
+      $window.location.href = '/session/login';
+      if(event) {
+        event.preventDefault();
+      } else {
+        throw new Error('Session not found.');
+      }
+      return;
+    }
+  }
 });
 
 return module.name;

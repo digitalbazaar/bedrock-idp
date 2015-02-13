@@ -15,12 +15,11 @@ function factory(
   config) {
   var service = {};
 
+  var idp = config.data.idp;
   service.collection = new brResourceService.Collection({
-    url: config.data.identityBaseUri
+    url: idp.identityBaseUri
   });
-
-  var session = config.data.session || {auth: false};
-  service.identity = session.identity || null;
+  service.identity = idp.session.identity || null;
   service.state = service.collection.state;
 
   // add session identities to identity storage and save result references
@@ -104,10 +103,10 @@ function factory(
       return service.identity.id;
     }
     if(options.identityMethod === 'route') {
-      return config.data.identityBaseUri + '/' + $routeParams.identity;
+      return idp.identityBaseUri + '/' + $routeParams.identity;
     }
     if(options.identityMethod === 'shortId' && options.identityShortId) {
-      return config.data.identityBaseUri + '/' + options.identityShortId;
+      return idp.identityBaseUri + '/' + options.identityShortId;
     }
     if(options.identityMethod === 'id' && options.id) {
       return options.id;

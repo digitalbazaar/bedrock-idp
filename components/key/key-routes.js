@@ -11,7 +11,7 @@ define([], function() {
 
 'use strict';
 
-var base = window.data.identityBasePath + '/:identity/keys';
+var base = window.data.idp.identityBasePath + '/:identity/keys';
 return [{
   path: base,
   options: {

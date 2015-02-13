@@ -71,7 +71,7 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     }
 
     // session auth check
-    var authenticated = !!(config.data.session || {}).identity;
+    var authenticated = !!config.data.idp.session.identity;
     if(authenticated) {
       return;
     }

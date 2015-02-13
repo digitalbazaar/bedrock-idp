@@ -13,8 +13,9 @@ define([], function() {
 /* @ngInject */
 function factory($scope, brAlertService, brIdentityService, config) {
   var self = this;
-  self.email = config.data.session ? config.data.session.identity.email : '';
-  self.sysPasscode = config.data.sysPasscode || '';
+  var identity = config.data.idp.session.identity || {};
+  self.email = identity.email || '';
+  self.sysPasscode = config.data.idp.sysPasscode || '';
   self.sysPasswordNew = '';
   self.loading = false;
 

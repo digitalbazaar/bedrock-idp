@@ -27,7 +27,7 @@ function factory($http, $timeout, brAlertService, brRefreshService, config) {
     });
 
     var model = scope.model = {};
-    model.sysIdentifier = config.data.identity.id;
+    model.sysIdentifier = config.data.idp.session.identity.id;
     model.password = '';
     model.loading = false;
 

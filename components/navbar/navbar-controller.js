@@ -12,7 +12,7 @@ define([], function() {
 /* @ngInject */
 function factory($rootScope, brRefreshService, brIdentityService, config) {
   var self = this;
-  self.session = config.data.session;
+  self.session = config.data.idp.session;
   self.navbar = config.site.navbar;
   self.identity = brIdentityService.identity;
 

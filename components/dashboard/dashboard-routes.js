@@ -11,7 +11,7 @@ define([], function() {
 'use strict';
 
 return [{
-  path: window.data.identityBasePath + '/:identity/dashboard',
+  path: window.data.idp.identityBasePath + '/:identity/dashboard',
   options: {
     title: 'Dashboard',
     session: 'required',

@@ -16,7 +16,7 @@ function factory(
   var self = this;
   self.loading = false;
   self.identity = brIdentityService.identity;
-  self.identityCredentials = config.data.identityCredentials;
+  self.identityCredentials = config.data.idp.identityCredentials;
 
   self.authorize = function(accept) {
     // TODO: modify query to reflect user's choices from UI

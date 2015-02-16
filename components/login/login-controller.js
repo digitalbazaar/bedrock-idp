@@ -69,7 +69,7 @@ function factory($scope, $http, $compile, $window, brAlertService, config) {
       }
     }).catch(function(err) {
       // FIXME: use directive to show feedback?
-      if(err.type === 'bedrock.validation.ValidationError') {
+      if(err.type === 'ValidationError') {
         err = new Error('Please enter your email address and password.');
       }
       brAlertService.add('error', err);

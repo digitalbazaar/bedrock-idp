@@ -59,7 +59,7 @@ function factory(
     if(!service.identity) {
       var err = new Error(
         'You must be logged in to verify an email address.');
-      err.type = 'bedrock.website.PermissionDenied';
+      err.type = 'PermissionDenied';
       return Promise.reject(err);
     }
     return Promise.resolve($http.post(service.identity.id + '/email/verify', {

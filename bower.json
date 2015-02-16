@@ -15,9 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "bedrock-angular": "~0.0.1",
-    "bedrock-angular-alert": "~0.0.1",
-    "bedrock-angular-form": "~0.0.1",
-    "bedrock-angular-ui": "~0.0.1"
+    "bedrock-angular": "~0.1.0",
+    "bedrock-angular-alert": "~0.1.0",
+    "bedrock-angular-form": "~0.1.0",
+    "bedrock-angular-ui": "~0.1.0"
   }
 }

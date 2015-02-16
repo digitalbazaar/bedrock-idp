@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Bedrock Identity Provider",
   "main": "index.js",
   "scripts": {
@@ -29,14 +29,14 @@
   },
   "peerDependencies": {
     "bedrock": "~0.3.0",
-    "bedrock-docs": "~0.0.1",
-    "bedrock-identity": "~0.0.1",
-    "bedrock-mail": "~0.0.1",
-    "bedrock-mongodb": "~0.0.1",
-    "bedrock-passport": "~0.0.1",
-    "bedrock-rest": "~0.0.1",
-    "bedrock-validation": "~0.0.1",
-    "bedrock-views": "~0.0.1"
+    "bedrock-docs": "~0.1.0",
+    "bedrock-identity": "~0.1.0",
+    "bedrock-mail": "~0.1.0",
+    "bedrock-mongodb": "~0.1.0",
+    "bedrock-passport": "~0.1.0",
+    "bedrock-rest": "~0.1.0",
+    "bedrock-validation": "~0.1.0",
+    "bedrock-views": "~0.1.0"
   },
   "directories": {
     "lib": "./lib"

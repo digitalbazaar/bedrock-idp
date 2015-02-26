@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2015-02-25
+
 ### Added
 - Config namespace `config.identityCredentials`.
 - `allowInsecureCallback` config value.
@@ -16,5 +18,6 @@
 - See git history for changes.
 
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-server/compare/0.1.1...HEAD
-[0.1.1]: https://github.com/digitalbazaar/bedrock-server/compare/0.1.0...0.1.1
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.1...0.1.2
+[0.1.1]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.0...0.1.1

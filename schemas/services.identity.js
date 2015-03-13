@@ -160,7 +160,7 @@ var postPreferences = {
   title: 'Post Preferences',
   type: 'object',
   properties: {
-    '@context': schemas.jsonldContext(),
+    '@context': schemas.jsonldContext(constants.IDENTITY_CONTEXT_V1_URL),
     type: schemas.jsonldType('IdentityPreferences'),
     publicKey: {
       required: false,

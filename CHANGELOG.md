@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Add view context var once in config vs in every addViewVars call.
+
 ## [0.1.2] - 2015-02-25
 
 ### Added

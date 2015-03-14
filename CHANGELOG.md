@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Fix config typo.
+
 ## [0.1.3] - 2015-03-13
 
 ### Changed

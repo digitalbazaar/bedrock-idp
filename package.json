@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "0.1.4",
+  "version": "0.1.5-dev",
   "description": "Bedrock Identity Provider",
   "main": "index.js",
   "scripts": {

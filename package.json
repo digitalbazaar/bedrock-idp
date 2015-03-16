@@ -2,7 +2,7 @@
   "name": "bedrock-idp",
   "version": "0.1.5-dev",
   "description": "Bedrock Identity Provider",
-  "main": "index.js",
+  "main": "./lib/idp",
   "scripts": {
     "test": "node test.js"
   },
@@ -43,6 +43,5 @@
   },
   "devDependencies": {
     "superagent": "~0.21.0"
-  },
-  "main": "./lib/idp"
+  }
 }

@@ -12,7 +12,7 @@ define([
 
 'use strict';
 
-var module = angular.module('app.passcode', []);
+var module = angular.module('bedrock.passcode', []);
 
 module.controller(controller);
 

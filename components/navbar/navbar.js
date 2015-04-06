@@ -12,7 +12,7 @@ define([
 
 'use strict';
 
-var module = angular.module('app.navbar', []);
+var module = angular.module('bedrock.navbar', []);
 
 module.controller(controller);
 

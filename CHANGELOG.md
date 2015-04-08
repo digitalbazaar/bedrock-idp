@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2015-04-08
+
+### Changed
+- Change "app" to "bedrock" in module name.
+
 ## [0.1.4] - 2015-03-13
 
 ### Fixed
@@ -27,8 +32,8 @@
 
 - See git history for changes.
 
-
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.4...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.4...1.0.0
 [0.1.4]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.1...0.1.2

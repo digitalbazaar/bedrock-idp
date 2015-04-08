@@ -1,5 +1,6 @@
 {
   "name": "bedrock-idp",
+  "version": "1.0.0",
   "moduleType": ["amd"],
   "main": "./components/idp.js",
   "ignore": [
@@ -15,9 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "bedrock-angular": "~0.1.0",
-    "bedrock-angular-alert": "~0.1.0",
-    "bedrock-angular-form": "~0.1.0",
-    "bedrock-angular-ui": "~0.1.0"
+    "bedrock-angular": "^1.0.0",
+    "bedrock-angular-alert": "^1.0.0",
+    "bedrock-angular-form": "^1.0.0",
+    "bedrock-angular-ui": "^1.0.0"
   }
 }

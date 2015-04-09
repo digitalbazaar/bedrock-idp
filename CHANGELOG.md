@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Changed
+- Move `bedrock.config.identityCredentials.*` to `bedrock.config.idp.*`.
+
+### Deprecated
+- `bedrock.config.identityCredentials.*`
+
 ## [1.0.0] - 2015-04-08
 
 ### Changed

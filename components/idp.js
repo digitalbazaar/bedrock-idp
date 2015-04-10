@@ -22,7 +22,7 @@ define([
 var modulePath = requirejs.toUrl('bedrock-idp/components/');
 
 var module = angular.module(
-  'bedrock.idp', Array.prototype.slice.call(arguments, 2));
+  'bedrock.idp', Array.prototype.slice.call(arguments, 1));
 
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {

@@ -40,7 +40,7 @@ function factory($http, $filter, brAlertService, config) {
     function change(value) {
       // determine if owner input is ready
       var ownerReady = (scope.owner === undefined ||
-        scope.owner.length > (scope.data.identityBaseUri + '/').length);
+        scope.owner.length > (scope.data.idp.identityBaseUri + '/').length);
 
       // initialized once value is defined and owner is ready
       if(!init && value !== undefined && ownerReady) {

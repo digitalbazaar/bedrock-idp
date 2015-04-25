@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fix idp data access.
+- Upgrade tests to work with bedrock-protractor v2.
 
 ## [1.0.1] - 2015-04-09
 

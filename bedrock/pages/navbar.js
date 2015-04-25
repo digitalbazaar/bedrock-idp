@@ -28,6 +28,7 @@ api.login = function(identifier, password) {
 api.logout = function() {
   bedrock.get('/');
   element(by.trigger('model.hovercard')).click();
+  bedrock.waitForModalTransition();
   element(by.linkText('Sign Out')).click();
   bedrock.get('/');
   expect(element(by.brModel('model.sysIdentifier')).isPresent())

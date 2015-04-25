@@ -1,24 +1,25 @@
 var bedrock = GLOBAL.bedrock;
+var browser = GLOBAL.browser;
+var by = GLOBAL.by;
+var element = GLOBAL.element;
+var expect = GLOBAL.expect;
 
 var api = {};
 module.exports = api;
 
-var by = GLOBAL.by;
-var element = GLOBAL.element;
-var expect = GLOBAL.expect;
-var ptor = GLOBAL.protractor.getInstance();
-
 api.get = function(slug) {
   var url = '/i/' + slug + '/settings';
   bedrock.get(url);
-  expect(ptor.getCurrentUrl()).to.eventually.equal(bedrock.baseUrl + url);
+  expect(browser.getCurrentUrl()).to.eventually.equal(bedrock.baseUrl + url);
   return api;
 };
 
 api.generateKey = function(options) {
   options = options || {};
   element(by.linkText('Keys')).click();
+  bedrock.waitForModalTransition();
   element(by.brHeadlineMenu('Keys')).click();
+  bedrock.waitForModalTransition();
   element(by.linkText('Generate Key Pair')).click();
   bedrock.waitForModalTransition();
   var modal = element(by.modal());
@@ -35,6 +36,7 @@ api.generateKey = function(options) {
 
 api.revokeKey = function(query) {
   element(by.linkText('Keys')).click();
+  bedrock.waitForModalTransition();
   api.getKeys().then(function(keys) {
     var key = bedrock.findOne(keys, query);
     expect(key).to.exist;
@@ -44,7 +46,9 @@ api.revokeKey = function(query) {
     var i = result.index;
     var row = element(by.repeater('key in model.keys').row(i));
     row.element(by.trigger('menu')).click();
+    bedrock.waitForModalTransition();
     element(by.linkText('Revoke')).click();
+    bedrock.waitForModalTransition();
     var modal = element(by.modal());
     modal.element(by.partialButtonText('Revoke')).click();
     return api.getKey({id: result.key.id});

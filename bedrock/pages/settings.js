@@ -51,6 +51,7 @@ api.revokeKey = function(query) {
     bedrock.waitForModalTransition();
     var modal = element(by.modal());
     modal.element(by.partialButtonText('Revoke')).click();
+    bedrock.waitForModalTransition();
     return api.getKey({id: result.key.id});
   }).then(function(key) {
     expect(key).to.exist;

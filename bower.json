@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "1.0.2-dev",
+  "version": "1.0.2",
   "moduleType": ["amd"],
   "main": "./components/idp.js",
   "ignore": [

@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [1.0.2] - 2015-05-07
+
 ### Fixed
 - Fix idp data access.
 - Upgrade tests to work with bedrock-protractor v2.
@@ -45,7 +47,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.4...1.0.0
 [0.1.4]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.3...0.1.4

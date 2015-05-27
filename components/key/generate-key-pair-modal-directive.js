@@ -5,7 +5,7 @@
  *
  * @author Dave Longley
  */
-define(['forge/pki'], function(pki) {
+define(['forge/js/pki'], function(pki) {
 
 /* @ngInject */
 function factory(brAlertService, brKeyService, config) {

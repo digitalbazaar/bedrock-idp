@@ -8,7 +8,7 @@
  */
 define([
   'angular',
-  'forge/forge',
+  'forge',
   'underscore'
 ], function(angular, forge, _) {
 

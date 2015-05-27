@@ -19,6 +19,7 @@
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
     "bedrock-angular-form": "^1.0.0",
-    "bedrock-angular-ui": "^1.0.0"
+    "bedrock-angular-ui": "^1.0.0",
+    "forge": "~0.6.30"
   }
 }

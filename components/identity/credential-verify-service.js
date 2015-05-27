@@ -1,12 +1,12 @@
 /*!
  * Credential Verification Service.
  *
- * Copyright (c) 2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
 define([
-  'forge/md', 'forge/pki', 'forge/util', 'jsonld', 'underscore',
+  'forge/js/md', 'forge/js/pki', 'forge/js/util', 'jsonld', 'underscore',
   'opencred-verifier'],
 function(md, pki, util, jsonld, _, verifierFactory) {
 

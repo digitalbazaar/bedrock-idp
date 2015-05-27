@@ -37,7 +37,7 @@
     "bedrock-passport": "^1.0.0",
     "bedrock-rest": "^1.0.0",
     "bedrock-validation": "^1.0.0",
-    "bedrock-views": "^1.0.0"
+    "bedrock-views": "^1.0.4"
   },
   "directories": {
     "lib": "./lib"

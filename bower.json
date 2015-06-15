@@ -5,9 +5,11 @@
   "main": "./components/idp.js",
   "ignore": [
     "bedrock/bower.json",
+    "bedrock/bower_components",
     "bedrock/package.json",
     "bedrock/pages",
     "bedrock/prepare",
+    "bedrock/node_modules",
     "bedrock/selectors",
     "bedrock/tests",
     "bedrock/test.js",

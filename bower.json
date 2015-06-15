@@ -4,6 +4,8 @@
   "moduleType": ["amd"],
   "main": "./components/idp.js",
   "ignore": [
+    "bedrock/bower.json",
+    "bedrock/package.json",
     "bedrock/pages",
     "bedrock/prepare",
     "bedrock/selectors",
@@ -19,7 +21,10 @@
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
     "bedrock-angular-form": "^1.0.0",
+    "bedrock-angular-modal": "^1.0.0",
+    "bedrock-angular-resource": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",
-    "forge": "~0.6.30"
+    "forge": "~0.6.30",
+    "opencred-verifier": "~0.0.6"
   }
 }

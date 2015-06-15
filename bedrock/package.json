@@ -1,0 +1,33 @@
+{
+  "name": "bedrock-idp-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node test.js test --framework protractor --protractor-suite bedrock-idp",
+    "postinstall": "bower install",
+    "postupdate": "bower update",
+    "bower-install": "bower install",
+    "bower-update": "bower update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-idp"
+  },
+  "dependencies": {
+    "bedrock": "^1.0.0",
+    "bedrock-docs": "^1.0.0",
+    "bedrock-identity": "^1.0.0",
+    "bedrock-mail": "^1.0.0",
+    "bedrock-mongodb": "^1.0.0",
+    "bedrock-passport": "^1.0.0",
+    "bedrock-rest": "^1.0.0",
+    "bedrock-validation": "^1.0.0",
+    "bedrock-views": "^1.0.3",
+    "bower": "~1.4.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "directories": {},
+  "main": "test.js"
+}

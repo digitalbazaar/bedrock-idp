@@ -10,6 +10,7 @@
     "bedrock/prepare",
     "bedrock/selectors",
     "bedrock/tests",
+    "bedrock/test.js",
     "bower_components",
     "lib",
     "node_modules",

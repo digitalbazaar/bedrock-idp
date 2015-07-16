@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Fixed
+- Fix error handling bugs.
+
 ## [1.0.2] - 2015-05-07
 
 ### Fixed

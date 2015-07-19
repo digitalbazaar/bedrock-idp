@@ -3,7 +3,8 @@ var bedrock = GLOBAL.bedrock;
 describe('join', function() {
   var identity = {};
   identity.sysIdentifier = bedrock.randomString().toLowerCase();
-  identity.id = bedrock.baseUrl + '/i/' + identity.sysIdentifier;
+  identity.id =
+    bedrock.baseUrl + bedrock.config.identityBasePath + identity.sysIdentifier;
   identity.label = identity.sysIdentifier;
   identity.email = identity.sysIdentifier + '@bedrock.dev';
   identity.password = 'password';

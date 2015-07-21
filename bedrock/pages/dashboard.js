@@ -6,7 +6,7 @@ var api = {};
 module.exports = api;
 
 api.get = function(slug) {
-  var url = '/i/' + slug + '/dashboard';
+  var url = bedrock.config.identityBasePath + '/' + slug + '/dashboard';
   bedrock.get(url);
   expect(browser.getCurrentUrl()).to.eventually.equal(bedrock.baseUrl + url);
   return api;

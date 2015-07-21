@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "1.0.3-dev",
+  "version": "1.0.4-dev",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
@@ -36,7 +36,7 @@
     "bedrock-credentials-mongodb": "^1.0.0",
     "bedrock-credential-curator": "^1.0.0",
     "bedrock-docs": "^1.0.0",
-    "bedrock-identity": "^1.0.0",
+    "bedrock-identity": "^1.0.2",
     "bedrock-mail": "^1.0.0",
     "bedrock-mongodb": "^1.0.0",
     "bedrock-passport": "^1.0.0",

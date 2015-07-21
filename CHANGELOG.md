@@ -6,6 +6,15 @@
 - Add credentials menu tab and UI.
 - Add test credentials for test mode.
 
+## [1.0.3] - 2015-07-16
+
+### Changed
+- Depend on forge and fix paths.
+- Update bedrock-identity version.
+
+### Fixed
+- Fix error handling bugs.
+
 ## [1.0.2] - 2015-05-07
 
 ### Fixed
@@ -51,7 +60,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.4...1.0.0

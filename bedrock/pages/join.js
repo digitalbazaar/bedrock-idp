@@ -23,7 +23,8 @@ api.createIdentity = function(options) {
         return disabled !== 'true';
       });
       element(by.buttonText('Create Identity')).click();
-      bedrock.waitForUrl('/i/' + slug + '/dashboard');
+      bedrock.waitForUrl(
+        bedrock.config.identityBasePath + '/' + slug + '/dashboard');
       bedrock.waitForAngular();
     });
   return api;

@@ -21,6 +21,7 @@
     "bedrock-mongodb": "^1.0.0",
     "bedrock-passport": "^1.0.0",
     "bedrock-rest": "^1.0.0",
+    "bedrock-session-mongodb": "^1.0.0",
     "bedrock-validation": "^1.0.0",
     "bedrock-views": "^1.0.3",
     "bower": "~1.4.1"

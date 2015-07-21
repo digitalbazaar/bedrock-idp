@@ -2,6 +2,7 @@
   "name": "bedrock-idp-test",
   "version": "0.0.0",
   "dependencies": {
+    "bedrock-credentials-rest": "^0.0.0",
     "bedrock-idp": "^1.0.0",
     "forge": "~0.6.30"
   },

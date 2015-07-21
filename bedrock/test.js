@@ -7,6 +7,7 @@ var path = require('path');
 
 require('bedrock-express');
 require('bedrock-requirejs');
+require('bedrock-session-mongodb');
 require('bedrock-views');
 require('../lib/idp');
 
@@ -65,5 +66,36 @@ roles['identity.registered'] = {
   comment: 'Role for registered identities.',
   sysPermission: [].concat(roles['identity.manager'].sysPermission)
 };
+
+bedrock.config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test',
+  type: 'Credential',
+  name: 'Test',
+  issued: '2015-01-02T03:04:05',
+  issuer: 'urn:issuer:test',
+  recipient: 'urn:recipient:test',
+  sysState: 'claimed'
+});
+bedrock.config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-2',
+  type: 'Credential',
+  name: 'Test 2',
+  issued: '2015-02-03T04:05:06',
+  issuer: 'urn:issuer:test',
+  recipient: 'https://bedrock.dev:18443/i/dev',
+  sysState: 'claimed'
+});
+bedrock.config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-3',
+  type: 'Credential',
+  name: 'Test 3',
+  issued: '2015-03-04T05:06:07',
+  issuer: 'urn:issuer:test',
+  recipient: 'https://bedrock.dev:18443/i/dev',
+  sysState: 'claimed'
+});
 
 bedrock.start();

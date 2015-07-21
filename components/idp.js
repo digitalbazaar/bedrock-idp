@@ -7,6 +7,7 @@
  */
 define([
   'angular',
+  './credentials/credentials',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
@@ -20,6 +21,8 @@ define([
 'use strict';
 
 var modulePath = requirejs.toUrl('bedrock-idp/components/');
+var curatorModulePath =
+  requirejs.toUrl('bedrock-credential-curator/components/');
 
 var module = angular.module(
   'bedrock.idp', Array.prototype.slice.call(arguments, 1));
@@ -34,6 +37,12 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
         icon: 'fa fa-dashboard',
         label: 'Dashboard',
         pageTitle: 'Dashboard'
+      },
+      {
+        slug: 'credentials',
+        icon: 'fa fa-trophy',
+        label: 'Credentials',
+        pageTitle: 'Credentials'
       },
       {
         slug: 'settings',
@@ -52,7 +61,10 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     },
     {
       templateUrl: modulePath + 'key/key-settings.html'
-    }
+    }/*,
+    {
+      templateUrl: curatorModulePath + 'key/key-settings.html'
+    }*/
   ];
 
   // do immediate initial location change prior to loading any page content

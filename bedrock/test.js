@@ -70,31 +70,43 @@ roles['identity.registered'] = {
 bedrock.config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test',
-  type: 'Credential',
+  type: ['Credential', 'EmailCredential'],
   name: 'Test',
   issued: '2015-01-02T03:04:05',
   issuer: 'urn:issuer:test',
   recipient: 'urn:recipient:test',
+  claim: {
+    id: 'urn:recipient:test',
+    email: 'recipient-test@example.com'
+  },
   sysState: 'claimed'
 });
 bedrock.config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test-2',
-  type: 'Credential',
+  type: ['Credential', 'EmailCredential'],
   name: 'Test 2',
   issued: '2015-02-03T04:05:06',
   issuer: 'urn:issuer:test',
   recipient: 'https://bedrock.dev:18443/i/dev',
+  claim: {
+    id: 'urn:recipient:test',
+    email: 'dev@example.com'
+  },
   sysState: 'claimed'
 });
 bedrock.config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test-3',
-  type: 'Credential',
+  type: ['Credential', 'EmailCredential'],
   name: 'Test 3',
   issued: '2015-03-04T05:06:07',
   issuer: 'urn:issuer:test',
   recipient: 'https://bedrock.dev:18443/i/dev',
+  claim: {
+    id: 'urn:recipient:test',
+    email: 'dev@example.com'
+  },
   sysState: 'claimed'
 });
 

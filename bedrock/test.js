@@ -67,7 +67,7 @@ roles['identity.registered'] = {
   sysPermission: [].concat(roles['identity.manager'].sysPermission)
 };
 
-bedrock.config['credentials-mongodb'].provider.credentials.push({
+config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test',
   type: ['Credential', 'EmailCredential'],
@@ -81,7 +81,7 @@ bedrock.config['credentials-mongodb'].provider.credentials.push({
   },
   sysState: 'claimed'
 });
-bedrock.config['credentials-mongodb'].provider.credentials.push({
+config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test-2',
   type: ['Credential', 'EmailCredential'],
@@ -95,7 +95,7 @@ bedrock.config['credentials-mongodb'].provider.credentials.push({
   },
   sysState: 'claimed'
 });
-bedrock.config['credentials-mongodb'].provider.credentials.push({
+config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test-3',
   type: ['Credential', 'EmailCredential'],
@@ -109,6 +109,17 @@ bedrock.config['credentials-mongodb'].provider.credentials.push({
   },
   sysState: 'claimed'
 });
+
+// idp config
+config.idp.defaults.identity.address = [];
+config.idp.defaults.identity.preferences = {
+  type: 'IdentityPreferences'
+};
+config.idp.defaults.identity.sysPublic = [];
+config.idp.defaults.identity.sysResourceRole = [{
+  sysRole: 'identity.registered',
+  generateResource: 'id'
+}];
 
 // identities
 config.idp.identities.push({

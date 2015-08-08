@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div class="row">
+<div ng-if="model.displayForm" class="row">
   <div class="col-md-offset-2 col-md-8">
 
     <form class="form-horizontal" ng-submit="model.submit()">
@@ -160,7 +160,7 @@
         <div class="col-md-offset-2">
           <button type="submit"
             ng-disabled="model.loading || model.identitySlugAvailable != 'available' || (model.emailAvailable != 'available' && model.emailAvailable != 'unavailable') || !model.agreementChecked"
-            class="btn btn-primary btn-lg">Create Identity</button>
+            class="btn btn-primary btn-lg">Next</button>
           <span ng-show="model.loading">
             <i class="fa fa-refresh fa-spin fa-lg"></i>
           </span>
@@ -169,6 +169,13 @@
     </form>
 
   </div>
+</div>
+<div ng-if="model.displayInformation" class="row">
+  <h3>This data is stored in a cookie</h3>
+  <pre>{{ model.identity | json }}</pre>
+  <button ng-click="model.registerIdentity()" type="button"
+    class="btn btn-primary">registerDid Polyfill</button>
+</div>
 </div>
 {% endraw %}
 

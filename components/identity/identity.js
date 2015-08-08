@@ -23,7 +23,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.identity', []);
+var module = angular.module('bedrock.identity', ['ipCookie']);
 
 module.controller(createIdentity);
 module.controller(controller);

@@ -6,12 +6,15 @@
  * @author Dave Longley
  * @author Manu Sporny
  */
-define([], function() {
+define([
+  'node-uuid'
+], function(uuid) {
 
 'use strict';
 
 /* @ngInject */
-function factory($scope, $http, $window, brAlertService, config) {
+function factory(
+  $scope, $http, $window, brAlertService, config, ipCookie) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -25,22 +28,37 @@ function factory($scope, $http, $window, brAlertService, config) {
     sysSlug: ''
   };
   self.agreementChecked = false;
+  self.displayForm = true;
+  self.displayInformation = false;
+  self.identityToken = null;
 
   self.submit = function() {
     if(!self.agreementChecked) {
       return false;
     }
     brAlertService.clearFeedback();
-    self.loading = true;
-    Promise.resolve($http.post('/join', self.identity))
-      .then(function(response) {
-        // redirect to new dashboard
-        $window.location = response.data.id + '/dashboard';
-      }).catch(function(err) {
-        brAlertService.add('error', err);
-        self.loading = false;
-        $scope.$apply();
-      });
+
+    self.displayForm = false;
+    self.displayInformation = true;
+    self.identityToken = uuid.v4();
+    // FIXME: possibly bcrypt the password contained in self.identity
+    var cookieOptions = {
+      secure: true,
+      expirationUnit: 'minutes',
+      expires: 90
+    };
+    ipCookie(self.identityToken, self.identity, cookieOptions);
+  };
+
+  // FIXME: set all of these values based on config
+  self.registerIdentity = function() {
+    var options = {
+      idp: 'did:291f1b71-de7f-45de-9b6d-9eecc335ecf3',
+      registrationUrl: 'https://authorization.dev:33443/register',
+      registrationCallback:
+        'https://bedrock.dev:18443/register/' + self.identityToken
+    };
+    return navigator.credentials.registerDid(options);
   };
 }
 

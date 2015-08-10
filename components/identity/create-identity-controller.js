@@ -28,18 +28,21 @@ function factory(
     sysSlug: ''
   };
   self.agreementChecked = false;
-  self.displayForm = true;
-  self.displayInformation = false;
+  self.display = {};
+  self.display.form = true;
+  self.display.information = false;
   self.identityToken = null;
+  self.baseUri = config.data.baseUri;
+  self.aioBaseUri = config.data.aioBaseUri;
+  self.idpOwnerDid = config.data.idpOwnerDid;
 
   self.submit = function() {
     if(!self.agreementChecked) {
       return false;
     }
     brAlertService.clearFeedback();
-
-    self.displayForm = false;
-    self.displayInformation = true;
+    self.display.form = false;
+    self.display.information = true;
     self.identityToken = uuid.v4();
     // FIXME: possibly bcrypt the password contained in self.identity
     var cookieOptions = {
@@ -53,10 +56,9 @@ function factory(
   // FIXME: set all of these values based on config
   self.registerIdentity = function() {
     var options = {
-      idp: 'did:291f1b71-de7f-45de-9b6d-9eecc335ecf3',
-      registrationUrl: 'https://authorization.dev:33443/register',
-      registrationCallback:
-        'https://bedrock.dev:18443/register/' + self.identityToken
+      idp: self.idpOwnerDid,
+      registrationUrl: self.aioBaseUri + '/register',
+      registrationCallback: self.baseUri + '/register/' + self.identityToken
     };
     return navigator.credentials.registerDid(options);
   };

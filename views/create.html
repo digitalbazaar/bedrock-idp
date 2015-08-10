@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div ng-if="model.displayForm" class="row">
+<div ng-if="model.display.form" class="row">
   <div class="col-md-offset-2 col-md-8">
 
     <form class="form-horizontal" ng-submit="model.submit()">
@@ -170,7 +170,7 @@
 
   </div>
 </div>
-<div ng-if="model.displayInformation" class="row">
+<div ng-if="model.display.information" class="row">
   <h3>This data is stored in a cookie</h3>
   <pre>{{ model.identity | json }}</pre>
   <button ng-click="model.registerIdentity()" type="button"

@@ -6,18 +6,29 @@
  * @author Dave Longley
  * @author David I. Lehn
  */
-define([], function() {
+define([], function(config) {
 
 'use strict';
 
-return [{
-  path: window.data.idp.identityBasePath + '/:identity/credentials',
-  options: {
-    title: 'Credentials',
-    session: 'required',
-    templateUrl: requirejs.toUrl(
-      'bedrock-idp/components/credentials/credentials.html')
+return [
+  {
+    path: window.data.idp.identityBasePath + '/:identity/credentials',
+    options: {
+      title: 'Credentials',
+      session: 'required',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/credentials/credentials.html')
+    }
+  },
+  {
+    path: '/credentials/',
+    options: {
+      title: 'Credentials',
+      session: 'required',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/credentials/credentials.html')
+    }
   }
-}];
+];
 
 });

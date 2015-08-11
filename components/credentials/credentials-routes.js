@@ -21,7 +21,7 @@ return [
     }
   },
   {
-    path: '/credentials/',
+    path: '/credentials',
     options: {
       title: 'Credentials',
       session: 'required',

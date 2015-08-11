@@ -3,9 +3,12 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory($scope, $http, $location, $routeParams, brAlertService) {
+function factory(
+  $scope, $http, $location, $routeParams, brAlertService, config) {
   var self = this;
-  self.idp = {identity: {something: 'fun'}};   //window.data.idp;
+  self.request = config.data.request;
+  self.idp = {};
+  self.idp.identity = config.data.curator.credential;
   self.action = 'request';
   self.routeParams = $routeParams;
 
@@ -16,7 +19,7 @@ function factory($scope, $http, $location, $routeParams, brAlertService) {
   // transmit the selected credential to the requestor
   self.transmit = function(identity) {
     navigator.credentials.transmit(identity, {
-      responseUrl: self.idp.credentialCallbackUrl
+      responseUrl: self.request.credentialCallbackUrl
     });
   };
 

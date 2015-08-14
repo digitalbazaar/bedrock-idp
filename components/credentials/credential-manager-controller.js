@@ -8,7 +8,9 @@ function factory(
   var self = this;
   self.request = config.data.request;
   self.idp = {};
-  self.idp.identity = config.data.curator.credential;
+  if(config.data.curator !== undefined) {
+    self.idp.identity = config.data.curator.credential;
+  }
   self.action = 'request';
   self.routeParams = $routeParams;
 

@@ -5,30 +5,42 @@
 'use strict';
 
 var bedrock = require('bedrock');
-var superagent = require('superagent');
+var request = require('request');
+var jar = request.jar();
+request = request.defaults({jar: jar, json: true});
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 describe('bedrock-idp.login', function() {
   it('should reject bad cookie-based login as dev', function(done) {
     var loginService = bedrock.config.server.baseUri + '/session/login';
-    superagent.post(loginService)
-      .send({sysIdentifier: 'INVALID_LOGIN', password: 'password'})
-      .end(function(err, res) {
-        res.status.should.equal(400);
+    request.post(
+      {
+        url: loginService,
+        body: {sysIdentifier: 'INVALID_LOGIN', password: 'password'}
+      },
+      function(err, res, body) {
+        res.headers['set-cookie'].should.exist;
+        res.statusCode.should.equal(400);
         res.body.should.not.have.property('identity');
         done(err);
-      });
+      }
+    );
   });
 
   it('should accept good cookie-based login as dev', function(done) {
     var loginService = bedrock.config.server.baseUri + '/session/login';
-    superagent.post(loginService)
-      .send({sysIdentifier: 'dev', password: 'password'})
-      .end(function(err, res) {
-        res.status.should.equal(200);
+    request.post(
+      {
+        url: loginService,
+        body: {sysIdentifier: 'dev', password: 'password'}
+      },
+      function(err, res, body) {
+        res.statusCode.should.equal(200);
         res.body.should.have.property('identity');
         done(err);
-      });
+      }
+    );
   });
+
 });

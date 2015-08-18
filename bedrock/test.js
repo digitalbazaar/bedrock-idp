@@ -90,7 +90,7 @@ config['credentials-mongodb'].provider.credentials.push({
   issuer: 'urn:issuer:test',
   recipient: 'https://bedrock.dev:18443/i/dev',
   claim: {
-    id: 'urn:recipient:test',
+    id: 'https://bedrock.dev:18443/i/dev',
     email: 'dev@example.com'
   },
   sysState: 'claimed'
@@ -104,7 +104,7 @@ config['credentials-mongodb'].provider.credentials.push({
   issuer: 'urn:issuer:test',
   recipient: 'https://bedrock.dev:18443/i/dev',
   claim: {
-    id: 'urn:recipient:test',
+    id: 'https://bedrock.dev:18443/i/dev',
     email: 'dev@example.com'
   },
   sysState: 'claimed'

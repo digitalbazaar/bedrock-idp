@@ -67,12 +67,14 @@ roles['identity.registered'] = {
   sysPermission: [].concat(roles['identity.manager'].sysPermission)
 };
 
+var devId = 'https://bedrock.dev:18443/i/dev';
+
 config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
-  id: 'urn:credential:test',
+  id: 'urn:credential:test-recipient-1',
   type: ['Credential', 'EmailCredential'],
-  name: 'Test',
-  issued: '2015-01-02T03:04:05',
+  name: 'Test 1: email',
+  issued: '2015-01-01T01:02:03',
   issuer: 'urn:issuer:test',
   recipient: 'urn:recipient:test',
   claim: {
@@ -83,29 +85,86 @@ config['credentials-mongodb'].provider.credentials.push({
 });
 config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
-  id: 'urn:credential:test-2',
+  id: 'urn:credential:test-dev-1',
   type: ['Credential', 'EmailCredential'],
-  name: 'Test 2',
-  issued: '2015-02-03T04:05:06',
+  name: 'Test 1: .com email',
+  issued: '2015-01-01T01:02:03',
   issuer: 'urn:issuer:test',
-  recipient: 'https://bedrock.dev:18443/i/dev',
+  recipient: devId,
   claim: {
-    id: 'https://bedrock.dev:18443/i/dev',
+    id: devId,
     email: 'dev@example.com'
   },
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
-  id: 'urn:credential:test-3',
+  id: 'urn:credential:test-dev-2',
   type: ['Credential', 'EmailCredential'],
-  name: 'Test 3',
-  issued: '2015-03-04T05:06:07',
+  name: 'Test 2: .org email',
+  issued: '2015-01-02T01:02:03',
   issuer: 'urn:issuer:test',
-  recipient: 'https://bedrock.dev:18443/i/dev',
+  recipient: devId,
   claim: {
-    id: 'https://bedrock.dev:18443/i/dev',
-    email: 'dev@example.com'
+    id: devId,
+    email: 'dev@example.org'
+  },
+  sysState: 'claimed'
+});
+config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-dev-3',
+  type: ['Credential', 'VerifiedAddressCredential'],
+  name: 'Test 3: address',
+  issued: '2015-01-03T01:02:03',
+  issuer: 'urn:issuer:test',
+  recipient: devId,
+  claim: {
+    id: devId,
+    address: {
+      type: 'PostalAddress',
+      streetAddress: '123 Main St',
+      addressLocality: 'Somewhere',
+      addressRegion: 'XX',
+      postalCode: '12345-1234'
+    }
+  },
+  sysState: 'claimed'
+});
+config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-dev-4',
+  type: ['Credential', 'AgeOverCredential'],
+  name: 'Test 4: age over 21',
+  issued: '2015-01-04T01:02:03',
+  issuer: 'urn:issuer:test',
+  recipient: devId,
+  claim: {
+    id: devId,
+    ageOver: '21'
+  },
+  sysState: 'claimed'
+});
+config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-dev-5',
+  type: ['Credential', 'BirthDateCredential'],
+  name: 'Test 5: birth date',
+  issued: '2015-01-05T01:02:03',
+  issuer: 'urn:issuer:test',
+  recipient: devId,
+  claim: {
+    id: devId,
+    birthDate: '2001-02-03',
+    birthPlace: {
+      address: {
+        type: 'PostalAddress',
+        streetAddress: '1000 Birthing Center Rd',
+        addressLocality: 'Somewhere',
+        addressRegion: 'XX',
+        postalCode: '12345-1234'
+      }
+    }
   },
   sysState: 'claimed'
 });

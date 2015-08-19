@@ -68,18 +68,25 @@ roles['identity.registered'] = {
 };
 
 var devId = 'https://bedrock.dev:18443/i/dev';
+var devKey = devId + '/keys/1';
 
 config['credentials-mongodb'].provider.credentials.push({
   '@context': 'https://w3id.org/credentials/v1',
   id: 'urn:credential:test-recipient-1',
   type: ['Credential', 'EmailCredential'],
   name: 'Test 1: email',
-  issued: '2015-01-01T01:02:03',
+  issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: 'urn:recipient:test',
   claim: {
     id: 'urn:recipient:test',
     email: 'recipient-test@example.com'
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-01T01:02:03Z',
+    creator: 'urn:issuer:test:key:1',
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
   },
   sysState: 'claimed'
 });
@@ -88,12 +95,18 @@ config['credentials-mongodb'].provider.credentials.push({
   id: 'urn:credential:test-dev-1',
   type: ['Credential', 'EmailCredential'],
   name: 'Test 1: .com email',
-  issued: '2015-01-01T01:02:03',
+  issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
     email: 'dev@example.com'
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-01T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
   },
   sysState: 'claimed'
 });
@@ -102,12 +115,18 @@ config['credentials-mongodb'].provider.credentials.push({
   id: 'urn:credential:test-dev-2',
   type: ['Credential', 'EmailCredential'],
   name: 'Test 2: .org email',
-  issued: '2015-01-02T01:02:03',
+  issued: '2015-01-02T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
     email: 'dev@example.org'
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-02T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
   },
   sysState: 'claimed'
 });
@@ -116,7 +135,7 @@ config['credentials-mongodb'].provider.credentials.push({
   id: 'urn:credential:test-dev-3',
   type: ['Credential', 'VerifiedAddressCredential'],
   name: 'Test 3: address',
-  issued: '2015-01-03T01:02:03',
+  issued: '2015-01-03T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
@@ -129,6 +148,12 @@ config['credentials-mongodb'].provider.credentials.push({
       postalCode: '12345-1234'
     }
   },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-03T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
+  },
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
@@ -136,12 +161,18 @@ config['credentials-mongodb'].provider.credentials.push({
   id: 'urn:credential:test-dev-4',
   type: ['Credential', 'AgeOverCredential'],
   name: 'Test 4: age over 21',
-  issued: '2015-01-04T01:02:03',
+  issued: '2015-01-04T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
     ageOver: '21'
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-04T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
   },
   sysState: 'claimed'
 });
@@ -150,7 +181,7 @@ config['credentials-mongodb'].provider.credentials.push({
   id: 'urn:credential:test-dev-5',
   type: ['Credential', 'BirthDateCredential'],
   name: 'Test 5: birth date',
-  issued: '2015-01-05T01:02:03',
+  issued: '2015-01-05T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
@@ -165,6 +196,33 @@ config['credentials-mongodb'].provider.credentials.push({
         postalCode: '12345-1234'
       }
     }
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-05T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
+  },
+  sysState: 'claimed'
+});
+config['credentials-mongodb'].provider.credentials.push({
+  '@context': 'https://w3id.org/credentials/v1',
+  id: 'urn:credential:test-dev-6',
+  type: ['Credential', 'PhysicalExaminationCredential'],
+  name: 'Test 6: physical',
+  issued: '2015-01-06T01:02:03Z',
+  issuer: 'urn:issuer:test',
+  recipient: devId,
+  claim: {
+    id: devId,
+    height: '182 cm',
+    weight: '77 Kg'
+  },
+  signature: {
+    type: 'GraphSignature2012',
+    created: '2015-01-06T01:02:03Z',
+    creator: devKey,
+    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
   },
   sysState: 'claimed'
 });

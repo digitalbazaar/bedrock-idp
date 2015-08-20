@@ -83,10 +83,14 @@ config.views.vars['bedrock-angular-credential'].libraries.default = {
 
 var devId = 'https://bedrock.dev:18443/i/dev';
 var devKey = devId + '/keys/1';
+
+// FIXME: credentials *must* use the context that the insertion API is
+// expecting
 var context = [
+  'https://w3id.org/identity/v1',
   'https://w3id.org/credentials/v1',
   {
-    "test": "urn:test:"
+    'test': 'urn:test:'
   }
 ];
 
@@ -140,7 +144,7 @@ config['credentials-mongodb'].provider.credentials.push({
   recipient: devId,
   claim: {
     id: devId,
-    'schema:email': 'dev@example.org'
+    email: 'dev@example.org'
   },
   signature: {
     type: 'GraphSignature2012',
@@ -160,12 +164,12 @@ config['credentials-mongodb'].provider.credentials.push({
   recipient: devId,
   claim: {
     id: devId,
-    'schema:address': {
+    address: {
       type: 'PostalAddress',
-      'schema:streetAddress': '123 Main St',
-      'schema:addressLocality': 'Somewhere',
-      'schema:addressRegion': 'XX',
-      'schema:postalCode': '12345-1234'
+      streetAddress: '123 Main St',
+      addressLocality: 'Somewhere',
+      addressRegion: 'XX',
+      postalCode: '12345-1234'
     }
   },
   signature: {
@@ -206,15 +210,15 @@ config['credentials-mongodb'].provider.credentials.push({
   recipient: devId,
   claim: {
     id: devId,
-    'schema:birthDate': '2001-02-03',
+    'schema:birthDate': {'@value': '2001-02-03', '@type': 'xsd:dateTime'},
     'schema:birthPlace': {
       type: 'schema:Place',
       address: {
         type: 'PostalAddress',
-        'schema:streetAddress': '1000 Birthing Center Rd',
-        'schema:addressLocality': 'Somewhere',
-        'schema:addressRegion': 'XX',
-        'schema:postalCode': '12345-1234'
+        streetAddress: '1000 Birthing Center Rd',
+        addressLocality: 'Somewhere',
+        addressRegion: 'XX',
+        postalCode: '12345-1234'
       }
     }
   },

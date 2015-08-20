@@ -33,8 +33,8 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
-    "bedrock-credentials-mongodb": "^1.0.0",
-    "bedrock-credential-curator": "^1.0.0",
+    "bedrock-credentials-mongodb": "digitalbazaar/bedrock-credentials-mongodb#master",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "bedrock-docs": "^1.0.0",
     "bedrock-identity": "^1.0.2",
     "bedrock-mail": "^1.0.0",

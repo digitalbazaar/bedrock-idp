@@ -67,6 +67,20 @@ roles['identity.registered'] = {
   sysPermission: [].concat(roles['identity.manager'].sysPermission)
 };
 
+// serve contexts and vocabs
+config.express.static.push(path.join(__dirname, 'static'));
+
+// setup to load vocabs
+config.views.vars['bedrock-angular-credential'] =
+  config.views.vars['bedrock-angular-credential'] || {};
+config.views.vars['bedrock-angular-credential'].libraries =
+  config.views.vars['bedrock-angular-credential'].libraries || {};
+config.views.vars['bedrock-angular-credential'].libraries.default = {
+  vocabs: [
+    config.server.baseUri + '/vocabs/test-v1.jsonld'
+  ]
+};
+
 var devId = 'https://bedrock.dev:18443/i/dev';
 var devKey = devId + '/keys/1';
 

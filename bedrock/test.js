@@ -98,10 +98,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-recipient-1',
   type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 1: email',
+  name: 'Test 1: Email',
   issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: 'urn:recipient:test',
+  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
   claim: {
     id: 'urn:recipient:test',
     'schema:email': 'recipient-test@example.com'
@@ -118,10 +118,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-1',
   type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 1: .com email',
+  name: 'Test 1: Work Email',
   issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
   claim: {
     id: devId,
     'schema:email': 'dev@example.com'
@@ -138,10 +138,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-2',
   type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 2: .org email',
+  name: 'Test 2: Personal Email',
   issued: '2015-01-02T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
   claim: {
     id: devId,
     email: 'dev@example.org'
@@ -158,10 +158,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-3',
   type: ['Credential', 'test:VerifiedAddressCredential'],
-  name: 'Test 3: address',
+  name: 'Test 3: Address',
   issued: '2015-01-03T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/address-128x128.png',
   claim: {
     id: devId,
     address: {
@@ -184,10 +184,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-4',
   type: ['Credential', 'test:AgeOverCredential'],
-  name: 'Test 4: age over 21',
+  name: 'Test 4: Age Over 21',
   issued: '2015-01-04T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/beer1-128x128.png',
   claim: {
     id: devId,
     'test:ageOver': '21'
@@ -204,10 +204,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-5',
   type: ['Credential', 'test:BirthDateCredential'],
-  name: 'Test 5: birth date',
+  name: 'Test 5: Birth Date',
   issued: '2015-01-05T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/pestry_cake-128x128.png',
   claim: {
     id: devId,
     'schema:birthDate': {'@value': '2001-02-03', '@type': 'xsd:dateTime'},
@@ -234,10 +234,10 @@ config['credentials-mongodb'].provider.credentials.push({
   '@context': context,
   id: 'urn:credential:test-dev-6',
   type: ['Credential', 'test:PhysicalExaminationCredential'],
-  name: 'Test 6: physical',
+  name: 'Test 6: Physical',
   issued: '2015-01-06T01:02:03Z',
   issuer: 'urn:issuer:test',
-  recipient: devId,
+  image: 'http://simpleicon.com/wp-content/uploads/stethoscope1-128x128.png',
   claim: {
     id: devId,
     'schema:height': '182 cm',

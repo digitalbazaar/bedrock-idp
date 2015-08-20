@@ -102,13 +102,23 @@
       "id": "schema:address",
       "type": "Property",
       "label": "Address",
-      "range": "URL"
+      "range": "URL",
+      "collapsed": true
     },
     {
       "id": "test:VerifiedAddressCredential",
       "type": "PropertyGroup",
       "label": "Verified Address",
       "layout": [
+        {
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
+        },
+        {
+          "property": "cred:issued"
+        },
         {
           "property": "cred:claim",
           "propertyGroup": "test:PostalAddressPropertyGroup"
@@ -121,8 +131,17 @@
       "label": "Verified Age",
       "layout": [
         {
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
+        },
+        {
+          "property": "cred:issued"
+        },
+        {
           "property": "cred:claim",
-          "propertyGroup": "AgeOverPropertyGroup"
+          "propertyGroup": "test:AgeOverPropertyGroup"
         }
       ]
     },
@@ -132,14 +151,17 @@
       "label": "Physical Examination Results",
       "layout": [
         {
-          "property": "cred:claim",
-          "propertyGroup": "test:PhysicalExaminationPropertyGroup"
-        },
-        {
           "property": "schema:image"
         },
         {
+          "property": "cred:issuer"
+        },
+        {
           "property": "cred:issued"
+        },
+        {
+          "property": "cred:claim",
+          "propertyGroup": "test:PhysicalExaminationPropertyGroup"
         }
       ]
     },
@@ -149,11 +171,17 @@
       "label": "Verified Email",
       "layout": [
         {
-          "property": "cred:claim",
-          "propertyGroup": "test:EmailPropertyGroup"
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
         },
         {
           "property": "cred:issued"
+        },
+        {
+          "property": "cred:claim",
+          "propertyGroup": "test:EmailPropertyGroup"
         }
       ]
     },
@@ -163,11 +191,17 @@
       "label": "Blood Test Results",
       "layout": [
         {
-          "property": "cred:claim",
-          "propertyGroup": "test:BloodTestPropertyGroup"
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
         },
         {
           "property": "cred:issued"
+        },
+        {
+          "property": "cred:claim",
+          "propertyGroup": "test:BloodTestPropertyGroup"
         }
       ]
     },
@@ -177,8 +211,30 @@
       "label": "Birth Date Certification",
       "layout": [
         {
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
+        },
+        {
+          "property": "cred:issued"
+        },
+        {
           "property": "cred:claim",
           "propertyGroup": "test:BirthDatePropertyGroup"
+        }
+      ]
+    },
+    {
+      "id": "test:CredentialPropertyGroup",
+      "type": "PropertyGroup",
+      "label": "General",
+      "layout": [
+        {
+          "property": "schema:image"
+        },
+        {
+          "property": "cred:issuer"
         },
         {
           "property": "cred:issued"
@@ -224,6 +280,7 @@
     {
       "id": "test:AgeOverPropertyGroup",
       "type": "PropertyGroup",
+      "label": "Age Verification",
       "layout": [
         {
           "property": "test:ageOver"
@@ -246,6 +303,7 @@
     {
       "id": "test:PostalAddressPropertyGroup",
       "type": "PropertyGroup",
+      "label": "Address",
       "layout": [
         {
           "property": "schema:address",
@@ -256,6 +314,7 @@
     {
       "id": "test:AddressPropertyGroup",
       "type": "PropertyGroup",
+      "collapsed": true,
       "layout": [
         {
           "property": "schema:streetAddress"

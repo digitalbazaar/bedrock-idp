@@ -67,6 +67,12 @@
       "range": "Date"
     },
     {
+      "id": "schema:birthPlace",
+      "type": "Property",
+      "label": "Place of Birth",
+      "range": "URL"
+    },
+    {
       "id": "test:bloodType",
       "type": "Property",
       "label": "Blood Type",
@@ -89,12 +95,6 @@
       "id": "schema:address",
       "type": "Property",
       "label": "Address",
-      "range": "URL"
-    },
-    {
-      "id": "schema:birthPlace",
-      "type": "Property",
-      "label": "Place of Birth",
       "range": "URL"
     },
     {
@@ -140,7 +140,7 @@
       "layout": [
         {
           "property": "cred:claim",
-          "propertyGroup": "test:EmailClaimPropertyGroup"
+          "propertyGroup": "test:EmailPropertyGroup"
         },
         {
           "property": "cred:issued"
@@ -169,6 +169,9 @@
         {
           "property": "cred:claim",
           "propertyGroup": "test:BirthDatePropertyGroup"
+        },
+        {
+          "property": "cred:issued"
         }
       ]
     },
@@ -187,7 +190,7 @@
       ]
     },
     {
-      "id": "test:EmailClaimPropertyGroup",
+      "id": "test:EmailPropertyGroup",
       "type": "PropertyGroup",
       "collapsed": true,
       "layout": [

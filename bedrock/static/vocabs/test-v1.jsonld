@@ -55,6 +55,13 @@
       "range": "String"
     },
     {
+      "id": "schema:image",
+      "type": "Property",
+      "label": "Image",
+      "range": "URL",
+      "contentType": "image/*"
+    },
+    {
       "id": "schema:weight",
       "type": "Property",
       "label": "Weight",
@@ -127,6 +134,9 @@
         {
           "property": "cred:claim",
           "propertyGroup": "test:PhysicalExaminationPropertyGroup"
+        },
+        {
+          "property": "schema:image"
         },
         {
           "property": "cred:issued"

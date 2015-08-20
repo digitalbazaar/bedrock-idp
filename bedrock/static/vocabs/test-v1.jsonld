@@ -43,6 +43,12 @@
       "range": "Date"
     },
     {
+      "id": "cred:issuer",
+      "type": "Property",
+      "label": "Issuer",
+      "range": "URL"
+    },
+    {
       "id": "test:ageOver",
       "type": "Property",
       "label": "Age is Over",

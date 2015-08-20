@@ -83,18 +83,24 @@ config.views.vars['bedrock-angular-credential'].libraries.default = {
 
 var devId = 'https://bedrock.dev:18443/i/dev';
 var devKey = devId + '/keys/1';
+var context = [
+  'https://w3id.org/credentials/v1',
+  {
+    "test": "urn:test:"
+  }
+];
 
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-recipient-1',
-  type: ['Credential', 'EmailCredential'],
+  type: ['Credential', 'test:EmailCredential'],
   name: 'Test 1: email',
   issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: 'urn:recipient:test',
   claim: {
     id: 'urn:recipient:test',
-    email: 'recipient-test@example.com'
+    'schema:email': 'recipient-test@example.com'
   },
   signature: {
     type: 'GraphSignature2012',
@@ -105,16 +111,16 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-1',
-  type: ['Credential', 'EmailCredential'],
+  type: ['Credential', 'test:EmailCredential'],
   name: 'Test 1: .com email',
   issued: '2015-01-01T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    email: 'dev@example.com'
+    'schema:email': 'dev@example.com'
   },
   signature: {
     type: 'GraphSignature2012',
@@ -125,16 +131,16 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-2',
-  type: ['Credential', 'EmailCredential'],
+  type: ['Credential', 'test:EmailCredential'],
   name: 'Test 2: .org email',
   issued: '2015-01-02T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    email: 'dev@example.org'
+    'schema:email': 'dev@example.org'
   },
   signature: {
     type: 'GraphSignature2012',
@@ -145,21 +151,21 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-3',
-  type: ['Credential', 'VerifiedAddressCredential'],
+  type: ['Credential', 'test:VerifiedAddressCredential'],
   name: 'Test 3: address',
   issued: '2015-01-03T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    address: {
+    'schema:address': {
       type: 'PostalAddress',
-      streetAddress: '123 Main St',
-      addressLocality: 'Somewhere',
-      addressRegion: 'XX',
-      postalCode: '12345-1234'
+      'schema:streetAddress': '123 Main St',
+      'schema:addressLocality': 'Somewhere',
+      'schema:addressRegion': 'XX',
+      'schema:postalCode': '12345-1234'
     }
   },
   signature: {
@@ -171,16 +177,16 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-4',
-  type: ['Credential', 'AgeOverCredential'],
+  type: ['Credential', 'test:AgeOverCredential'],
   name: 'Test 4: age over 21',
   issued: '2015-01-04T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    ageOver: '21'
+    'test:ageOver': '21'
   },
   signature: {
     type: 'GraphSignature2012',
@@ -191,23 +197,24 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-5',
-  type: ['Credential', 'BirthDateCredential'],
+  type: ['Credential', 'test:BirthDateCredential'],
   name: 'Test 5: birth date',
   issued: '2015-01-05T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    birthDate: '2001-02-03',
-    birthPlace: {
+    'schema:birthDate': '2001-02-03',
+    'schema:birthPlace': {
+      type: 'schema:Place',
       address: {
         type: 'PostalAddress',
-        streetAddress: '1000 Birthing Center Rd',
-        addressLocality: 'Somewhere',
-        addressRegion: 'XX',
-        postalCode: '12345-1234'
+        'schema:streetAddress': '1000 Birthing Center Rd',
+        'schema:addressLocality': 'Somewhere',
+        'schema:addressRegion': 'XX',
+        'schema:postalCode': '12345-1234'
       }
     }
   },
@@ -220,17 +227,17 @@ config['credentials-mongodb'].provider.credentials.push({
   sysState: 'claimed'
 });
 config['credentials-mongodb'].provider.credentials.push({
-  '@context': 'https://w3id.org/credentials/v1',
+  '@context': context,
   id: 'urn:credential:test-dev-6',
-  type: ['Credential', 'PhysicalExaminationCredential'],
+  type: ['Credential', 'test:PhysicalExaminationCredential'],
   name: 'Test 6: physical',
   issued: '2015-01-06T01:02:03Z',
   issuer: 'urn:issuer:test',
   recipient: devId,
   claim: {
     id: devId,
-    height: '182 cm',
-    weight: '77 Kg'
+    'schema:height': '182 cm',
+    'schema:weight': '77 Kg'
   },
   signature: {
     type: 'GraphSignature2012',

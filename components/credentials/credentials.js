@@ -15,7 +15,7 @@ define([
 'use strict';
 
 var module = angular.module(
-  'bedrock.credentials', ['bedrock-credential-curator']);
+  'bedrock-idp.credentials', ['bedrock-credential-curator']);
 
 /* @ngInject */
 module.config(function($routeProvider) {

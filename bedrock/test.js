@@ -167,8 +167,8 @@ config['credentials-mongodb'].provider.credentials.push({
     address: {
       type: 'PostalAddress',
       streetAddress: '123 Main St',
-      addressLocality: 'Somewhere',
-      addressRegion: 'XX',
+      addressLocality: 'Sometown',
+      addressRegion: 'Somestate',
       postalCode: '12345-1234'
     }
   },
@@ -216,8 +216,8 @@ config['credentials-mongodb'].provider.credentials.push({
       address: {
         type: 'PostalAddress',
         streetAddress: '1000 Birthing Center Rd',
-        addressLocality: 'Somewhere',
-        addressRegion: 'XX',
+        addressLocality: 'Sometown',
+        addressRegion: 'Somestate',
         postalCode: '12345-1234'
       }
     }

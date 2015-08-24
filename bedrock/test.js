@@ -33,15 +33,15 @@ config.mongodb.host = 'localhost';
 config.mongodb.port = 27017;
 config.mongodb.local.collection = 'bedrock_idp_dev';
 
+// identity service
+config.idp.owner =
+config.server.baseUri + config.idp.identityBasePath + '/bedrock';
+config.idp.owner = 'did:291f1b71-de7f-45de-9b6d-9eecc335ecf3';
+
 // frontend vars
 config.views.vars.baseUri = config.server.baseUri;
 config.views.vars.aioBaseUri = 'https://authorization.dev:33443';
-config.views.vars.idpOwnerDid = config.idp.ownerDid;
-
-// identity service
-config.idp.owner =
-  config.server.baseUri + config.idp.identityBasePath + '/bedrock';
-config.idp.ownerDid = 'did:291f1b71-de7f-45de-9b6d-9eecc335ecf3';
+config.views.vars.idpOwner = config.idp.owner;
 
 var permissions = config.permission.permissions;
 var roles = config.permission.roles;

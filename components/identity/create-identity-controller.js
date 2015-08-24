@@ -34,7 +34,7 @@ function factory(
   self.identityToken = null;
   self.baseUri = config.data.baseUri;
   self.aioBaseUri = config.data.aioBaseUri;
-  self.idpOwnerDid = config.data.idpOwnerDid;
+  self.idpOwner = config.data.idpOwner;
 
   self.submit = function() {
     if(!self.agreementChecked) {
@@ -56,7 +56,7 @@ function factory(
   // FIXME: set all of these values based on config
   self.registerIdentity = function() {
     var options = {
-      idp: self.idpOwnerDid,
+      idp: self.idpOwner,
       registrationUrl: self.aioBaseUri + '/register',
       registrationCallback: self.baseUri + '/register/' + self.identityToken
     };

@@ -2,8 +2,6 @@
   "name": "bedrock-idp-test",
   "version": "0.0.0",
   "dependencies": {
-    "bedrock-angular-credential": "git@github.com:digitalbazaar/bedrock-angular-credential#master",
-    "bedrock-angular-identity-composer": "git@github.com:digitalbazaar/bedrock-angular-identity-composer#master",
     "bedrock-idp": "git@github.com:digitalbazaar/bedrock-idp#2.x",
     "forge": "~0.6.30",
     "angular-cookie": "~4.0.9",

@@ -8,9 +8,8 @@
  */
 define([
   'angular',
-  './credential-manager-controller',
   './credentials-routes'
-], function(angular, credentialManagerController, routes) {
+], function(angular, routes) {
 
 'use strict';
 
@@ -23,8 +22,6 @@ module.config(function($routeProvider) {
     $routeProvider.when(route.path, route.options);
   });
 });
-
-module.controller(credentialManagerController);
 
 return module.name;
 

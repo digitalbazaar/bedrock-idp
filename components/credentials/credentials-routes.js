@@ -18,14 +18,6 @@ return [{
     templateUrl: requirejs.toUrl(
       'bedrock-idp/components/credentials/credentials.html')
   }
-}/*, {
-  path: '/credentials',
-  options: {
-    title: 'Credentials',
-    session: 'required',
-    templateUrl: requirejs.toUrl(
-      'bedrock-idp/components/credentials/credentials.html')
-  }
-}*/];
+}];
 
 });

@@ -1,20 +1,18 @@
 /*!
- * Identity Creation Controller.
+ * Create Identity Controller.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author Manu Sporny
+ * @author Matt Collier
  */
-define([
-  'node-uuid'
-], function(uuid) {
+define(['node-uuid'], function(uuid) {
 
 'use strict';
 
 /* @ngInject */
-function factory(
-  $scope, $http, $window, brAlertService, config, ipCookie) {
+function factory(brAlertService, config, ipCookie) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -58,7 +56,7 @@ function factory(
     var options = {
       idp: self.idpOwner,
       registrationUrl: self.aioBaseUri + '/register',
-      registrationCallback: self.baseUri + '/register/' + self.identityToken
+      registrationCallback: self.baseUri + '/join/' + self.identityToken
     };
     return navigator.credentials.registerDid(options);
   };

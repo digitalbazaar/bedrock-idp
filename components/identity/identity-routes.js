@@ -26,6 +26,13 @@ return [{
     templateUrl: requirejs.toUrl(
       'bedrock-idp/components/identity/identity.html')
   }
+}, {
+  path: '/join',
+  options: {
+    title: 'Create Identity',
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/identity/create-identity.html')
+  }
 }];
 
 });

@@ -68,8 +68,9 @@ config.idp.owner.registerWithStrictSSL = false;
 
 // frontend vars
 config.views.vars.baseUri = config.server.baseUri;
-config.views.vars.aioBaseUri = 'https://authorization.dev:33443';
-config.views.vars.idpOwner = config.idp.owner.id;
+config.views.vars['authorization-io'] = {};
+config.views.vars['authorization-io'].baseUri =
+  'https://authorization.dev:33443';
 
 var permissions = config.permission.permissions;
 var roles = config.permission.roles;

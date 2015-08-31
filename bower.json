@@ -21,6 +21,7 @@
     "tests"
   ],
   "dependencies": {
+    "angular-cookie": "~4.0.9",
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
     "bedrock-angular-form": "digitalbazaar/bedrock-angular-form#master",

@@ -51,6 +51,7 @@
     "lib": "./lib"
   },
   "devDependencies": {
+    "node-uuid": "^1.4.3",
     "request": "^2.60.0",
     "supertest": "^1.0.1"
   }

@@ -15,6 +15,10 @@ function factory($rootScope, brRefreshService, brIdentityService, config) {
   self.session = config.data.idp.session;
   self.navbar = config.site.navbar;
   self.identity = brIdentityService.identity;
+  if(self.identity) {
+    self.localIdentityUri = config.data.idp.identityBaseUri + '/' +
+      self.identity.sysSlug;
+  }
 
   self.refreshData = function() {
     brRefreshService.refresh();

@@ -35,7 +35,8 @@ function factory($scope, $http, $compile, $window, brAlertService, config) {
         // if there's no queued request, go to dashboard
         var request = self.request;
         if(!request) {
-          $window.location = data.identity.id + '/dashboard';
+          $window.location = config.data.idp.identityBaseUri + '/' +
+            data.identity.sysSlug + '/dashboard';
           return;
         }
         if(request.method === 'GET') {

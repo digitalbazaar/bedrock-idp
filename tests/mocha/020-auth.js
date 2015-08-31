@@ -4,7 +4,7 @@
 
 'use strict';
 
-var brIdentity = require('../lib/auth');
+var brIdentity = require('../../lib/auth');
 
 var testPasswordHash =
   'bcrypt:$2a$10$hjp3zswzxnOV9A1gui//COzuM/.AG4hArsQEiAIA1nUION1hQ5W12';

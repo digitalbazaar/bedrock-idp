@@ -3,6 +3,7 @@ var expect = GLOBAL.expect;
 var should = GLOBAL.should;
 var describe = GLOBAL.describe;
 var it = GLOBAL.it;
+var uuid = require('node-uuid');
 
 // variables used throughout the tests
 var baseId = bedrock.randomString().toLowerCase();
@@ -12,36 +13,11 @@ identity.email = 'testuser';
 identity.passphrase = 'password';
 
 describe('session management', function() {
-  /*
-  it('should reject an invalid email for login', function() {
-    bedrock.pages.authio.navigateToLoginForm();
-    bedrock.pages.authio.login({
-      email: 'invalid-email@example.com',
-      passphrase: identity.passphrase,
-      expectFailure: true
-    });
+
+  after(function() {
+    bedrock.pages.idp.logout();
   });
 
-  it('should reject an invalid password for login', function() {
-    bedrock.pages.authio.navigateToLoginForm();
-    bedrock.pages.authio.login({
-      email: identity.email,
-      passphrase: 'invalid-passphrase',
-      expectFailure: true
-    });
-  });
-
-  it('should allow a valid login from a public computer', function() {
-    bedrock.pages.authio.navigateToLoginForm();
-    this.timeout(180000);
-    bedrock.pages.authio.login({
-      email: identity.email,
-      passphrase: identity.passphrase,
-      publicComputer: true
-    });
-    bedrock.pages.authio.logout();
-  });
-  */
   it('should allow a valid login', function() {
     bedrock.pages.idp.navigateToHomePage();
     bedrock.pages.idp.login({
@@ -57,30 +33,93 @@ describe('session management', function() {
       email: identity.email,
       passphrase: 'someWrongPassword1234'
     });
-    bedrock.pages.idp.logout();
   });
 });
 
 describe('credentials', function() {
-  it('should display existing credentials', function() {
+
+  before(function() {
     bedrock.pages.idp.navigateToHomePage();
     bedrock.pages.idp.login({
       email: identity.email,
       passphrase: identity.passphrase
     });
+  });
+
+  after(function() {
+    bedrock.pages.idp.logout();
+  });
+
+  it('should display existing credentials', function() {
     bedrock.pages.idp.viewCredentials();
   });
 });
 
 describe('credential operations', function() {
 
-  it.only('should accept a credential query', function() {
+  before(function() {
     bedrock.pages.idp.navigateToHomePage();
     bedrock.pages.idp.login({
       email: identity.email,
       passphrase: identity.passphrase
     });
+  });
+
+  after(function() {
+    bedrock.pages.idp.logout();
+  });
+
+  it('should accept a credential query', function() {
     bedrock.pages.idp.submitCredentialQuery();
   });
 
+  it('should accept a credential storage requests', function() {
+    bedrock.pages.idp.submitCredentialStorage(generateCredential());
+  });
+
+  it('should error on duplicate credential storage requests', function() {
+    var credential = generateCredential();
+    bedrock.pages.idp.navigateToHomePage();
+    bedrock.pages.idp.submitCredentialStorage(credential);
+    bedrock.pages.idp.navigateToHomePage();
+    bedrock.pages.idp.submitDuplicateCredentialStorage(credential);
+  });
+
 });
+
+function generateCredential() {
+  var mockCredential = {
+    "@context": [
+      "https://w3id.org/identity/v1",
+      "https://w3id.org/credentials/v1",
+      {
+        "br": "urn:bedrock:"
+      }
+    ],
+    "id": "did:27129b93-1188-4ef7-a5f2-519a98a5ca54",
+    "credential": [{
+      "@graph": {
+        "@context": "https://w3id.org/credentials/v1",
+        "id": "https://example.com/credentials/" + uuid.v4(),
+        "type": [
+          "Credential",
+          "br:test:EmailCredential"
+        ],
+        "name": "Test 1: Work Email",
+        "issued": "2015-01-01T01:02:03Z",
+        "issuer": "did:3c188385-d415-4ffc-ade9-32940f28c5a1",
+        "claim": {
+          "id": "did:27129b93-1188-4ef7-a5f2-519a98a5ca54",
+          "email": "individual@examplebusiness.com"
+        },
+        "signature": {
+          "type": "GraphSignature2012",
+          "created": "2015-01-01T01:02:03Z",
+          "creator": "https://staging-idp.truecred.com/i/demo/keys/1",
+          "signatureValue": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=="
+        }
+      }
+    }]
+  };
+  return mockCredential;
+};

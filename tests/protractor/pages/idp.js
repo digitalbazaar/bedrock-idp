@@ -14,6 +14,7 @@ module.exports = api;
 
 api.navigateToHomePage = function() {
   bedrock.get('/');
+  bedrock.waitForAngular();
 };
 
 api.login = function(options) {
@@ -57,7 +58,34 @@ api.submitCredentialQuery = function() {
     {query1234: ''}, '/tasks/credentials/compose-identity');
   bedrock.waitForAngular();
   element(by.buttonText('query1234')).isPresent().should.eventually.be.true;
-  browser.driver.sleep(5000);
+  //browser.driver.sleep(5000);
+};
+
+api.submitCredentialStorage = function(credential) {
+  browser.executeScript(postJsonData,
+    credential, '/tasks/credentials/request-credential-storage');
+  bedrock.waitForAngular();
+  var storeButton = element(by.buttonText('Store Credentials'));
+  storeButton.isPresent().should.eventually.be.true;
+  storeButton.click();
+  // NOTE: sleep is required here
+  browser.driver.sleep(500);
+  browser.driver.getCurrentUrl()
+    .should.eventually.contain('authorization.io/credential');
+  //browser.driver.sleep(5000);
+};
+
+api.submitDuplicateCredentialStorage = function(credential) {
+  browser.executeScript(postJsonData,
+    credential, '/tasks/credentials/request-credential-storage');
+  bedrock.waitForAngular();
+  var storeButton = element(by.buttonText('Store Credentials'));
+  storeButton.isPresent().should.eventually.be.true;
+  storeButton.click();
+  bedrock.waitForAngular();
+  var brError = element(by.css('.br-alert-area-fixed-show'));
+  brError.isPresent().should.eventually.be.true;
+  // browser.driver.sleep(15000);
 };
 
 /**

@@ -72,7 +72,6 @@ api.submitCredentialStorage = function(credential) {
   browser.driver.sleep(500);
   browser.driver.getCurrentUrl()
     .should.eventually.contain('authorization.io/credential');
-  //browser.driver.sleep(5000);
 };
 
 api.submitDuplicateCredentialStorage = function(credential) {

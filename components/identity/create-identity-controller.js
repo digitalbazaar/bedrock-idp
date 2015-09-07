@@ -31,8 +31,8 @@ function factory(brAlertService, config, ipCookie) {
   self.display.information = false;
   self.identityToken = null;
   self.baseUri = config.data.baseUri;
-  self.aioBaseUri = config.data.aioBaseUri;
-  self.idpOwner = config.data.idpOwner;
+  self.aioBaseUri = config.data['authorization-io'].baseUri;
+  self.idpOwner = config.data.idp.owner;
 
   self.submit = function() {
     if(!self.agreementChecked) {
@@ -53,6 +53,7 @@ function factory(brAlertService, config, ipCookie) {
 
   // FIXME: set all of these values based on config
   self.registerIdentity = function() {
+    console.log('IDPOWNER', config.data.idp);
     var options = {
       idp: self.idpOwner,
       registrationUrl: self.aioBaseUri + '/register',

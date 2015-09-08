@@ -18,6 +18,8 @@ api.navigateToHomePage = function() {
 };
 
 api.login = function(options) {
+  // FIXME: change variable name from options.email because a slug is what
+  // is required and an email would not work
   element(by.brModel('model.sysIdentifier')).sendKeys(options.email);
   element(by.brModel('model.password')).sendKeys(options.passphrase);
   element(by.buttonText('Sign In')).click();
@@ -28,6 +30,8 @@ api.login = function(options) {
 };
 
 api.loginExpectFail = function(options) {
+  // FIXME: change variable name from options.email because a slug is what
+  // is required and an email would not work
   element(by.brModel('model.sysIdentifier')).sendKeys(options.email);
   element(by.brModel('model.password')).sendKeys(options.passphrase);
   element(by.buttonText('Sign In')).click();

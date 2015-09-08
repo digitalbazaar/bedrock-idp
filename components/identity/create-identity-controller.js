@@ -28,7 +28,6 @@ function factory(brAlertService, config, ipCookie) {
   self.agreementChecked = false;
   self.display = {};
   self.display.form = true;
-  self.display.information = false;
   self.identityToken = null;
   self.baseUri = config.data.baseUri;
   self.aioBaseUri = config.data['authorization-io'].baseUri;
@@ -39,8 +38,6 @@ function factory(brAlertService, config, ipCookie) {
       return false;
     }
     brAlertService.clearFeedback();
-    self.display.form = false;
-    self.display.information = true;
     self.identityToken = uuid.v4();
     // FIXME: possibly bcrypt the password contained in self.identity
     var cookieOptions = {
@@ -49,11 +46,11 @@ function factory(brAlertService, config, ipCookie) {
       expires: 90
     };
     ipCookie(self.identityToken, self.identity, cookieOptions);
+    self.registerIdentity();
   };
 
   // FIXME: set all of these values based on config
   self.registerIdentity = function() {
-    console.log('IDPOWNER', config.data.idp);
     var options = {
       idp: self.idpOwner,
       registrationUrl: self.aioBaseUri + '/register',

@@ -73,7 +73,7 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
 
   $rootScope.$on('$locationChangeStart', locationChangeStart);
 
-  function locationChangeStart() {
+  function locationChangeStart(event) {
     if(config.data.queuedRequest) {
       // re-route to login if not already there
       if($location.path() !== '/session/login') {
@@ -92,13 +92,10 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     // redirect to login
     var route = util.getRouteFromPath($route, $location.path());
     if(route && route.session === 'required') {
-      $window.location.href = '/session/login';
       if(event) {
         event.preventDefault();
-      } else {
-        throw new Error('Session not found.');
       }
-      return;
+      $window.location.href = '/session/login';
     }
   }
 });

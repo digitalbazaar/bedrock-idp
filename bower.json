@@ -29,7 +29,9 @@
     "bedrock-angular-resource": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
+    "credentials-polyfill": "~0.5.0",
     "forge": "~0.6.30",
+    "node-uuid": "~1.4.3",
     "opencred-verifier": "~0.0.6"
   }
 }

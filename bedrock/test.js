@@ -10,13 +10,17 @@ require('bedrock-requirejs');
 require('bedrock-server');
 require('bedrock-session-mongodb');
 require('bedrock-views');
+require('../lib/idp');
 
 var config = bedrock.config;
+var testMode = false;
 
 // FIXME: this event is used to make sure that server.host is set properly
 // during tests.  If these values are set outside this function, server.host
 // is bedrock.dev during testing.
 bedrock.events.on('bedrock.test.configure', function() {
+  testMode = true;
+
   // server info
   config.server.port = 36443;
   config.server.httpPort = 36080;
@@ -27,12 +31,23 @@ bedrock.events.on('bedrock.test.configure', function() {
 
   // frontend vars
   config.views.vars.baseUri = config.server.baseUri;
+  config.views.vars['bedrock-angular-credential'].libraries.default = {
+    vocabs: [
+      config.server.baseUri + '/vocabs/test-v1.jsonld'
+    ]
+  };
 
-  // FIXME: move other config vars in here from below if they depend
-  // on the above changes
+  // remove DID document so that IdP to prevent registration
+  // with authorization-io
+  delete config.idp.owner.didDocument;
 });
 
-require('../lib/idp');
+bedrock.events.on('bedrock.configure', function() {
+  if(!testMode) {
+    return;
+  }
+  require('../configs/test.data.js');
+});
 
 // server info
 config.server.port = 36443;
@@ -155,213 +170,5 @@ config.views.vars['bedrock-angular-credential'].libraries.default = {
     config.server.baseUri + '/vocabs/test-v1.jsonld'
   ]
 };
-
-var devId = config.server.baseUri + config.idp.identityBasePath + '/dev';
-var devKey = devId + '/keys/1';
-
-// FIXME: credentials *must* use the context that the insertion API is
-// expecting
-var context = [
-  'https://w3id.org/identity/v1',
-  'https://w3id.org/credentials/v1',
-  {
-    'test': 'urn:test:'
-  }
-];
-
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-recipient-1',
-  type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 1: Email',
-  issued: '2015-01-01T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
-  claim: {
-    id: 'urn:recipient:test',
-    'schema:email': 'recipient-test@example.com'
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-01T01:02:03Z',
-    creator: 'urn:issuer:test:key:1',
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-1',
-  type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 1: Work Email',
-  issued: '2015-01-01T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
-  claim: {
-    id: devId,
-    'schema:email': 'dev@example.com'
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-01T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-2',
-  type: ['Credential', 'test:EmailCredential'],
-  name: 'Test 2: Personal Email',
-  issued: '2015-01-02T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
-  claim: {
-    id: devId,
-    email: 'dev@example.org'
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-02T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-3',
-  type: ['Credential', 'test:VerifiedAddressCredential'],
-  name: 'Test 3: Address',
-  issued: '2015-01-03T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/address-128x128.png',
-  claim: {
-    id: devId,
-    address: {
-      type: 'PostalAddress',
-      streetAddress: '123 Main St',
-      addressLocality: 'Sometown',
-      addressRegion: 'Somestate',
-      postalCode: '12345-1234'
-    }
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-03T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-4',
-  type: ['Credential', 'test:AgeOverCredential'],
-  name: 'Test 4: Age Over 21',
-  issued: '2015-01-04T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/beer1-128x128.png',
-  claim: {
-    id: devId,
-    'test:ageOver': '21'
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-04T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-5',
-  type: ['Credential', 'test:BirthDateCredential'],
-  name: 'Test 5: Birth Date',
-  issued: '2015-01-05T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/pestry_cake-128x128.png',
-  claim: {
-    id: devId,
-    'schema:birthDate': {'@value': '2001-02-03', '@type': 'xsd:dateTime'},
-    'schema:birthPlace': {
-      type: 'schema:Place',
-      address: {
-        type: 'PostalAddress',
-        streetAddress: '1000 Birthing Center Rd',
-        addressLocality: 'Sometown',
-        addressRegion: 'Somestate',
-        postalCode: '12345-1234'
-      }
-    }
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-05T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-config['credentials-mongodb'].provider.credentials.push({
-  '@context': context,
-  id: 'urn:credential:test-dev-6',
-  type: ['Credential', 'test:PhysicalExaminationCredential'],
-  name: 'Test 6: Physical',
-  issued: '2015-01-06T01:02:03Z',
-  issuer: 'urn:issuer:test',
-  image: 'http://simpleicon.com/wp-content/uploads/stethoscope1-128x128.png',
-  claim: {
-    id: devId,
-    'schema:height': '182 cm',
-    'schema:weight': '77 Kg'
-  },
-  signature: {
-    type: 'GraphSignature2012',
-    created: '2015-01-06T01:02:03Z',
-    creator: devKey,
-    signatureValue: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLM=='
-  },
-  sysState: 'claimed'
-});
-
-// idp config
-config.idp.defaults.identity.address = [];
-config.idp.defaults.identity.preferences = {
-  type: 'IdentityPreferences'
-};
-config.idp.defaults.identity.sysPublic = [];
-config.idp.defaults.identity.sysResourceRole = [{
-  sysRole: 'identity.registered',
-  generateResource: 'id'
-}];
-
-// identities
-config.idp.identities.push({
-  '@context': config.constants.IDENTITY_CONTEXT_V1_URL,
-  type: 'Identity',
-  sysSlug: 'bedrock',
-  label: 'Bedrock',
-  email: 'bedrock@bedrock.dev',
-  sysPassword: 'password',
-  sysResourceRole: [{
-    sysRole: 'identity.registered',
-    generateResource: 'id'
-  }]
-});
-config.idp.identities.push({
-  '@context': config.constants.IDENTITY_CONTEXT_V1_URL,
-  type: 'Identity',
-  sysSlug: 'dev',
-  label: 'Dev',
-  email: 'dev@bedrock.dev',
-  sysPassword: 'password',
-  sysResourceRole: [{
-    sysRole: 'identity.registered',
-    generateResource: 'id'
-  }]
-});
 
 bedrock.start();

@@ -30,7 +30,7 @@ config['credentials-mongodb'].provider.credentials.push({
   image: 'http://simpleicon.com/wp-content/uploads/mail_envalope-128x128.png',
   claim: {
     id: claimId,
-    'email': 'dev@example.com'
+    email: 'dev@example.com'
   },
   signature: {
     type: 'GraphSignature2012',

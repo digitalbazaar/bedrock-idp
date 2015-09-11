@@ -50,7 +50,8 @@ describe('credentials', function() {
     bedrock.pages.idp.logout();
   });
 
-  it('should display existing credentials', function() {
+  it.only('should display existing credentials', function() {
+    this.timeout(1800000);
     bedrock.pages.idp.viewCredentials();
   });
 });

@@ -45,31 +45,39 @@ api.viewCredentials = function(options) {
   var credentialsLink = element(by.linkText('Credentials'));
   credentialsLink.click();
   bedrock.waitForAngular();
-  // FIXME: add checks for credentials
-  // browser.driver.sleep(10000);
+  var links = [];
+  links.push(element(by.linkText('Test 1: Work Email')));
+  links.push(element(by.linkText('Test 2: Personal Email')));
+  links.push(element(by.linkText('Test 3: Address')));
+  links.push(element(by.linkText('Test 4: Age Over 21')));
+  links.push(element(by.linkText('Test 5: Birth Date')));
+  links.push(element(by.linkText('Test 6: Physical')));
+  for(var link in links) {
+    links[link].isPresent().should.eventually.be.true;
+  }
+  // browser.driver.sleep(600000);
 };
 
 api.logout = function() {
-  // browser.driver.manage().deleteCookie('session');
-  //bedrock.get('/session/logout');
+  // bedrock.get is not used here because it does not expect a redirect
   browser.driver.get(bedrock.baseUrl + '/session/logout');
   bedrock.waitForUrl('/');
-  //bedrock.waitForAngular();
 };
 
 api.submitCredentialQuery = function() {
-  browser.executeScript(postJsonData,
-    {query1234: ''}, '/tasks/credentials/compose-identity');
+  browser.executeScript(
+    postJsonData, {'@context': 'https://w3id.org/identity/v1', email: ''},
+    '/tasks/credentials/compose-identity');
   bedrock.waitForAngular();
-  element(by.buttonText('query1234')).isPresent().should.eventually.be.true;
-  //browser.driver.sleep(5000);
+  browser.driver.sleep(2500);
+  element(by.buttonText('email')).isPresent().should.eventually.be.true;
 };
 
 api.submitCredentialStorage = function(credential) {
   browser.executeScript(postJsonData,
     credential, '/tasks/credentials/request-credential-storage');
   bedrock.waitForAngular();
-  var storeButton = element(by.buttonText('Store Credentials'));
+  var storeButton = element(by.buttonText('Store Credential'));
   storeButton.isPresent().should.eventually.be.true;
   storeButton.click();
   // NOTE: sleep is required here
@@ -82,13 +90,12 @@ api.submitDuplicateCredentialStorage = function(credential) {
   browser.executeScript(postJsonData,
     credential, '/tasks/credentials/request-credential-storage');
   bedrock.waitForAngular();
-  var storeButton = element(by.buttonText('Store Credentials'));
+  var storeButton = element(by.buttonText('Store Credential'));
   storeButton.isPresent().should.eventually.be.true;
   storeButton.click();
   bedrock.waitForAngular();
   var brError = element(by.css('.br-alert-area-fixed-show'));
   brError.isPresent().should.eventually.be.true;
-  // browser.driver.sleep(15000);
 };
 
 /**

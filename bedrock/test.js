@@ -19,13 +19,18 @@ config.requirejs.bower.packages.push({
     path.join(dir, 'bower.json'), {encoding: 'utf8'}))
 });
 
-// server info
-config.server.port = 36443;
-config.server.httpPort = 36080;
-config.server.bindAddr = ['bedrock-idp.dev'];
-config.server.domain = 'bedrock-idp.dev';
-config.server.host = 'bedrock-idp.dev:36443';
-config.server.baseUri = 'https://' + config.server.host;
+// FIXME: this event is used to make sure that server.host is set properly
+// during tests.  If these values are set outside this function, server.host
+// is bedrock.dev during testing.
+// bedrock.events.on('bedrock.test.configure', function() {
+  // server info
+  config.server.port = 36443;
+  config.server.httpPort = 36080;
+  config.server.bindAddr = ['bedrock-idp.dev'];
+  config.server.domain = 'bedrock-idp.dev';
+  config.server.host = 'bedrock-idp.dev:36443';
+  config.server.baseUri = 'https://' + config.server.host;
+// });
 
 // mongodb config
 config.mongodb.name = 'bedrock_idp_dev';

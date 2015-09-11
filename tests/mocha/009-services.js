@@ -14,7 +14,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 describe('bedrock-idp unauthenticated', function() {
 
-  it('should allow an unauthenticated request to /i/:id', function(done) {
+  it.only('should allow an unauthenticated request to /i/:id', function(done) {
     var testIdentity = config.idp.test.testUser;
     var testService = bedrock.config.server.baseUri +
       bedrock.config.idp.identityBasePath + '/' + testIdentity;
@@ -26,6 +26,7 @@ describe('bedrock-idp unauthenticated', function() {
         body.should.have.property('@context');
         body.should.have.property('id');
         body.should.have.property('type');
+        console.log('%%%%%%%%%%%%%%%%%%%%%%%%% BODYID', body.id);
         body.id.should.equal(testService);
         body.type.should.equal('Identity');
         done(err);

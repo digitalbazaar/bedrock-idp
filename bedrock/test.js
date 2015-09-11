@@ -15,9 +15,6 @@ require('../lib/idp');
 var config = bedrock.config;
 var testMode = false;
 
-// FIXME: this event is used to make sure that server.host is set properly
-// during tests.  If these values are set outside this function, server.host
-// is bedrock.dev during testing.
 bedrock.events.on('bedrock.test.configure', function() {
   testMode = true;
 

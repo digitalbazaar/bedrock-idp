@@ -7,10 +7,9 @@ var uuid = require('node-uuid');
 
 // variables used throughout the tests
 var baseId = bedrock.randomString().toLowerCase();
-var identity = {};
-// identity.email = baseId + '@example.com';
-identity.email = 'testuser';
-identity.passphrase = 'password';
+var loginCredentials = {};
+loginCredentials.sysIdentifier = 'testuser';
+loginCredentials.passphrase = 'password';
 
 describe('session management', function() {
 
@@ -20,17 +19,14 @@ describe('session management', function() {
 
   it('should allow a valid login', function() {
     bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login({
-      email: identity.email,
-      passphrase: identity.passphrase
-    });
+    bedrock.pages.idp.login(loginCredentials);
     bedrock.pages.idp.logout();
   });
 
   it('should display error on bad password', function() {
     bedrock.pages.idp.navigateToHomePage();
     bedrock.pages.idp.loginExpectFail({
-      email: identity.email,
+      sysIdentifier: loginCredentials.sysIdentifier,
       passphrase: 'someWrongPassword1234'
     });
   });
@@ -40,18 +36,14 @@ describe('credentials', function() {
 
   before(function() {
     bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login({
-      email: identity.email,
-      passphrase: identity.passphrase
-    });
+    bedrock.pages.idp.login(loginCredentials);
   });
 
   after(function() {
     bedrock.pages.idp.logout();
   });
 
-  it.only('should display existing credentials', function() {
-    this.timeout(1800000);
+  it('should display existing credentials', function() {
     bedrock.pages.idp.viewCredentials();
   });
 });
@@ -60,10 +52,7 @@ describe('credential operations', function() {
 
   before(function() {
     bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login({
-      email: identity.email,
-      passphrase: identity.passphrase
-    });
+    bedrock.pages.idp.login(loginCredentials);
   });
 
   after(function() {

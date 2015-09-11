@@ -18,21 +18,17 @@ api.navigateToHomePage = function() {
 };
 
 api.login = function(options) {
-  // FIXME: change variable name from options.email because a slug is what
-  // is required and an email would not work
-  element(by.brModel('model.sysIdentifier')).sendKeys(options.email);
+  element(by.brModel('model.sysIdentifier')).sendKeys(options.sysIdentifier);
   element(by.brModel('model.password')).sendKeys(options.passphrase);
   element(by.buttonText('Sign In')).click();
-  bedrock.waitForUrl('/i/' + options.email + '/dashboard');
+  bedrock.waitForUrl('/i/' + options.sysIdentifier + '/dashboard');
   bedrock.waitForAngular();
   var credentialsLink = element(by.linkText('Credentials'));
   credentialsLink.isPresent().should.eventually.be.true;
 };
 
 api.loginExpectFail = function(options) {
-  // FIXME: change variable name from options.email because a slug is what
-  // is required and an email would not work
-  element(by.brModel('model.sysIdentifier')).sendKeys(options.email);
+  element(by.brModel('model.sysIdentifier')).sendKeys(options.sysIdentifier);
   element(by.brModel('model.password')).sendKeys(options.passphrase);
   element(by.buttonText('Sign In')).click();
   bedrock.waitForAngular();
@@ -55,7 +51,6 @@ api.viewCredentials = function(options) {
   for(var link in links) {
     links[link].isPresent().should.eventually.be.true;
   }
-  // browser.driver.sleep(600000);
 };
 
 api.logout = function() {
@@ -69,6 +64,7 @@ api.submitCredentialQuery = function() {
     postJsonData, {'@context': 'https://w3id.org/identity/v1', email: ''},
     '/tasks/credentials/compose-identity');
   bedrock.waitForAngular();
+  // required to wait while the identity composer processes credentials
   browser.driver.sleep(2500);
   element(by.buttonText('email')).isPresent().should.eventually.be.true;
 };

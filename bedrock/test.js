@@ -24,9 +24,23 @@ bedrock.events.on('bedrock.test.configure', function() {
   config.server.domain = 'bedrock-idp.dev';
   config.server.host = 'bedrock-idp.dev:36443';
   config.server.baseUri = 'https://' + config.server.host;
+
+  // frontend vars
+  config.views.vars.baseUri = config.server.baseUri;
+
+  // FIXME: move other config vars in here from below if they depend
+  // on the above changes
 });
 
 require('../lib/idp');
+
+// server info
+config.server.port = 36443;
+config.server.httpPort = 36080;
+config.server.bindAddr = ['bedrock-idp.dev'];
+config.server.domain = 'bedrock-idp.dev';
+config.server.host = 'bedrock-idp.dev:36443';
+config.server.baseUri = 'https://' + config.server.host;
 
 var dir = path.join(__dirname, '..');
 config.requirejs.bower.packages.push({

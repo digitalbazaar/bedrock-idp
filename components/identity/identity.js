@@ -8,6 +8,7 @@
 define([
   'angular',
   './create-identity-controller',
+  './passphrase-confirmation-directive',
   './identity-controller',
   './identity-routes',
   './identity-service',
@@ -17,9 +18,9 @@ define([
   './add-identity-modal-directive',
   './credential-verify-service'
 ], function(
-  angular, createIdentity, controller, routes, service, identityCredentials,
-  identitySelector, identitySettingsController, modalAddIdentity,
-  credentialVerifyService) {
+  angular, createIdentity, passphraseConfirmation, controller, routes,
+  service, identityCredentials, identitySelector, identitySettingsController,
+  modalAddIdentity, credentialVerifyService) {
 
 'use strict';
 
@@ -31,6 +32,7 @@ module.controller(identityCredentials.controller);
 module.controller(identitySettingsController);
 module.service(service);
 module.service(credentialVerifyService);
+module.directive(passphraseConfirmation);
 module.directive(identitySelector);
 module.directive(modalAddIdentity);
 

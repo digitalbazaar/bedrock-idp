@@ -32,6 +32,7 @@ function factory(brAlertService, config, ipCookie) {
   self.baseUri = config.data.baseUri;
   self.aioBaseUri = config.data['authorization-io'].baseUri;
   self.idpOwner = config.data.idp.owner.id;
+  self.passphraseConfirmation = '';
 
   self.submit = function() {
     if(!self.agreementChecked) {

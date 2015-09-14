@@ -5,27 +5,82 @@ var describe = GLOBAL.describe;
 var it = GLOBAL.it;
 var uuid = require('node-uuid');
 
-// variables used throughout the tests
-var baseId = bedrock.randomString().toLowerCase();
-var loginCredentials = {};
-loginCredentials.sysIdentifier = 'testuser';
-loginCredentials.passphrase = 'password';
+describe('IdP join form', function() {
+  var identity = {};
+  identity.sysIdentifier = bedrock.randomString().toLowerCase();
+  identity.id =
+    bedrock.baseUrl + bedrock.config.identityBasePath + identity.sysIdentifier;
+  identity.label = identity.sysIdentifier;
+  identity.email = identity.sysIdentifier + '@bedrock.dev';
+  identity.password = 'password';
+  var loginCredentials = {
+    sysIdentifier: identity.sysIdentifier,
+    passphrase: identity.password
+  };
+  var threeCharacters = 'abc';
+  var fortyCharacters = 'yA2NdBthMcnTqGYz3Eqe9uNHxM8u00TaooiuhIM';
 
-describe('session management', function() {
-
-  after(function() {
-    bedrock.pages.idp.logout();
+  beforeEach(function() {
+    bedrock.pages.join.get();
   });
 
-  it('should allow a valid login', function() {
-    bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login(loginCredentials);
-    bedrock.pages.idp.logout();
+  it('should contain the proper fields', function() {
+    bedrock.pages.join.checkFields();
+  });
+
+  it('should accept a valid form', function() {
+    bedrock.pages.join.createIdentity(identity);
+  });
+
+  // FIXME: write test for the various email related conditions
+  it('should warn on invalid email');
+
+  it('should warn on a short password', function() {
+    bedrock.pages.join.testField(
+      'model.identity.sysPassword', threeCharacters, 'minlength');
+  });
+
+  it('should warn on a long password', function() {
+    bedrock.pages.join.testField(
+      'model.identity.sysPassword', fortyCharacters, 'maxlength');
+  });
+
+  it('should warn if password confirmation does not match', function() {
+    bedrock.pages.join.testFieldsMatch(
+      'model.identity.sysPassword', 'model.passphraseConfirmation',
+      'goodPhraseA', 'nonMatchingPhraseB', 'inputMatch');
+  });
+
+});
+
+describe('Navbar session management', function() {
+  var loginCredentials = {
+    sysIdentifier: 'testuser',
+    passphrase: 'password'
+  };
+
+  after(function() {
+    bedrock.pages.navbar.logout();
+  });
+
+  it('should allow a valid slug login', function() {
+    bedrock.pages.home.get();
+    bedrock.pages.navbar.login(loginCredentials);
+    bedrock.pages.navbar.logout();
+  });
+
+  it('should allow a valid email login', function() {
+    bedrock.pages.home.get();
+    loginCredentials.slug = loginCredentials.sysIdentifier;
+    loginCredentials.sysIdentifier =
+      loginCredentials.sysIdentifier + '@bedrock.dev';
+    bedrock.pages.navbar.login(loginCredentials);
+    bedrock.pages.navbar.logout();
   });
 
   it('should display error on bad password', function() {
-    bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.loginExpectFail({
+    bedrock.pages.home.get();
+    bedrock.pages.navbar.loginExpectFail({
       sysIdentifier: loginCredentials.sysIdentifier,
       passphrase: 'someWrongPassword1234'
     });
@@ -33,14 +88,18 @@ describe('session management', function() {
 });
 
 describe('credentials', function() {
+  var loginCredentials = {
+    sysIdentifier: 'testuser',
+    passphrase: 'password'
+  };
 
   before(function() {
-    bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login(loginCredentials);
+    bedrock.pages.home.get();
+    bedrock.pages.navbar.login(loginCredentials);
   });
 
   after(function() {
-    bedrock.pages.idp.logout();
+    bedrock.pages.navbar.logout();
   });
 
   it('should display existing credentials', function() {
@@ -49,14 +108,18 @@ describe('credentials', function() {
 });
 
 describe('credential operations', function() {
+  var loginCredentials = {
+    sysIdentifier: 'testuser',
+    passphrase: 'password'
+  };
 
   before(function() {
-    bedrock.pages.idp.navigateToHomePage();
-    bedrock.pages.idp.login(loginCredentials);
+    bedrock.pages.home.get();
+    bedrock.pages.navbar.login(loginCredentials);
   });
 
   after(function() {
-    bedrock.pages.idp.logout();
+    bedrock.pages.navbar.logout();
   });
 
   it('should accept a credential query', function() {
@@ -69,9 +132,9 @@ describe('credential operations', function() {
 
   it('should error on duplicate credential storage requests', function() {
     var credential = generateCredential();
-    bedrock.pages.idp.navigateToHomePage();
+    bedrock.pages.home.get();
     bedrock.pages.idp.submitCredentialStorage(credential);
-    bedrock.pages.idp.navigateToHomePage();
+    bedrock.pages.home.get();
     bedrock.pages.idp.submitDuplicateCredentialStorage(credential);
   });
 

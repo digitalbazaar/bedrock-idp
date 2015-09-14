@@ -12,30 +12,6 @@ var should = GLOBAL.should;
 var api = {};
 module.exports = api;
 
-api.navigateToHomePage = function() {
-  bedrock.get('/');
-  bedrock.waitForAngular();
-};
-
-api.login = function(options) {
-  element(by.brModel('model.sysIdentifier')).sendKeys(options.sysIdentifier);
-  element(by.brModel('model.password')).sendKeys(options.passphrase);
-  element(by.buttonText('Sign In')).click();
-  bedrock.waitForUrl('/i/' + options.sysIdentifier + '/dashboard');
-  bedrock.waitForAngular();
-  var credentialsLink = element(by.linkText('Credentials'));
-  credentialsLink.isPresent().should.eventually.be.true;
-};
-
-api.loginExpectFail = function(options) {
-  element(by.brModel('model.sysIdentifier')).sendKeys(options.sysIdentifier);
-  element(by.brModel('model.password')).sendKeys(options.passphrase);
-  element(by.buttonText('Sign In')).click();
-  bedrock.waitForAngular();
-  var loginError = element(by.css('.br-alert-area-fixed-show'));
-  loginError.isPresent().should.eventually.be.true;
-};
-
 api.viewCredentials = function(options) {
   // user will already be logged in
   var credentialsLink = element(by.linkText('Credentials'));
@@ -51,12 +27,6 @@ api.viewCredentials = function(options) {
   for(var link in links) {
     links[link].isPresent().should.eventually.be.true;
   }
-};
-
-api.logout = function() {
-  // bedrock.get is not used here because it does not expect a redirect
-  browser.driver.get(bedrock.baseUrl + '/session/logout');
-  bedrock.waitForUrl('/');
 };
 
 api.submitCredentialQuery = function() {

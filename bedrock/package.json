@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node test.js",
-    "test": "node test.js test --framework protractor --protractor-suite bedrock-idp",
+    "test": "node test.js test test",
     "postinstall": "bower install && node test.js compile-less",
     "postupdate": "bower update",
     "bower-install": "bower install",

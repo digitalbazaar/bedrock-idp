@@ -1,7 +1,5 @@
 /*
- * Identity provider navbar.
- *
- * Copyright (c) 2015 The Open Payments Foundation. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  */
 var bedrock = GLOBAL.bedrock;
 
@@ -22,6 +20,7 @@ api.login = function(options) {
   bedrock.waitForAngular();
   var credentialsLink = element(by.linkText('Credentials'));
   credentialsLink.isPresent().should.eventually.be.true;
+  return api;
 };
 
 api.loginExpectFail = function(options) {
@@ -34,24 +33,16 @@ api.loginExpectFail = function(options) {
 };
 
 api.logout = function() {
-  // bedrock.get is not used here because it does not expect a redirect
-  browser.driver.get(bedrock.baseUrl + '/session/logout');
-  bedrock.waitForUrl('/');
-};
-
-// FIXME: fixup a function that interacts with the GUI to logout
-/*
-api.logout = function() {
   bedrock.get('/');
   element(by.trigger('model.hovercard')).click();
   bedrock.waitForModalTransition();
   element(by.linkText('Sign Out')).click();
+  browser.sleep(500);
   bedrock.get('/');
-  expect(element(by.brModel('model.sysIdentifier')).isPresent())
-    .to.eventually.be.true;
+  element(by.brModel('model.sysIdentifier')).isPresent()
+    .should.eventually.be.true;
   return api;
 };
-*/
 
 api.refresh = function() {
   element(by.binding('model.identity.label')).click();

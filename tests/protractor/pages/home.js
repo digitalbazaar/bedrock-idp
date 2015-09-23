@@ -1,7 +1,5 @@
 /*
- * Identity provider home page.
- *
- * Copyright (c) 2015 The Open Payments Foundation. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  */
 var bedrock = GLOBAL.bedrock;
 

@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
+ */
 var pages = GLOBAL.bedrock.pages || {};
 
 pages.home = require('./home');

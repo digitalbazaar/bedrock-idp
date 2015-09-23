@@ -446,7 +446,7 @@ function login(callback) {
     // console.log('LOGINBODY', body);
     callback(err);
   });
-};
+}
 
 function logout(callback) {
   var logoutService = config.server.baseUri + '/session/logout';
@@ -456,4 +456,4 @@ function logout(callback) {
   }, function(err, res, body) {
     callback(err);
   });
-};
+}

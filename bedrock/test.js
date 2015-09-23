@@ -154,6 +154,22 @@ roles['identity.registered'] = {
   sysPermission: [].concat(roles['identity.manager'].sysPermission)
 };
 
+// defaults for identities
+config.idp.defaults.identity = {
+  '@context': config.constants.IDENTITY_CONTEXT_V1_URL,
+  type: 'Identity',
+  address: [],
+  preferences: {
+    type: 'IdentityPreferences'
+  },
+  sysPublic: [],
+  sysResourceRole: [{
+    sysRole: 'identity.registered',
+    generateResource: 'id'
+  }],
+  sysStatus: 'active'
+};
+
 // serve contexts and vocabs
 config.express.static.push(path.join(__dirname, 'static'));
 

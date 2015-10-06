@@ -19,6 +19,7 @@
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "bedrock-idp": "digitalbazaar/bedrock-idp#2.x",
     "bootstrap": "~3.3.4",
+    "credentials-polyfill": "digitalbazaar/bedrock-credential-curator#credential-management-api",
     "es6-promise": "~2.1",
     "forge": "~0.6.30",
     "jquery": "~1.11.1",

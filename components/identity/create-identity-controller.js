@@ -38,9 +38,7 @@ function factory($http, $scope, $window, brAlertService, config) {
     }
     brAlertService.clearFeedback();
     self.loading = true;
-    $scope.$apply();
-
-    // FIXME: set all of these values based on config
+    // TODO: also support local account ID creation as a configurable feature
     navigator.credentials.registerDid({
       idp: self.idpOwner,
       agentUrl: self.aioBaseUri + '/register'
@@ -49,7 +47,8 @@ function factory($http, $scope, $window, brAlertService, config) {
       return Promise.resolve($http.post('/join', self.identity));
     }).then(function(response) {
       // redirect to new dashboard
-      $window.location = response.data.id + '/dashboard';
+      $window.location = config.data.idp.identityBaseUri + '/' +
+        response.data.sysSlug + '/dashboard';
     }).catch(function(err) {
       brAlertService.add('error', err);
       self.loading = false;

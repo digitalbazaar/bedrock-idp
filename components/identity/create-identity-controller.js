@@ -7,17 +7,18 @@
  * @author Manu Sporny
  * @author Matt Collier
  */
-define(['node-uuid'], function(uuid) {
+define([], function() {
 
 'use strict';
 
 /* @ngInject */
-function factory(brAlertService, config, ipCookie) {
+function factory($http, $scope, $window, brAlertService, config) {
   var self = this;
   self.data = config.data;
   self.loading = false;
   self.identity = {
     '@context': config.data.contextUrls.identity,
+    id: '',
     type: 'Identity',
     label: '',
     email: '',
@@ -26,9 +27,6 @@ function factory(brAlertService, config, ipCookie) {
     sysSlug: ''
   };
   self.agreementChecked = false;
-  self.display = {};
-  self.display.form = true;
-  self.identityToken = null;
   self.baseUri = config.data.baseUri;
   self.aioBaseUri = config.data['authorization-io'].baseUri;
   self.idpOwner = config.data.idp.owner.id;
@@ -39,25 +37,24 @@ function factory(brAlertService, config, ipCookie) {
       return false;
     }
     brAlertService.clearFeedback();
-    self.identityToken = uuid.v4();
-    // FIXME: possibly bcrypt the password contained in self.identity
-    var cookieOptions = {
-      secure: true,
-      expirationUnit: 'minutes',
-      expires: 90
-    };
-    ipCookie(self.identityToken, self.identity, cookieOptions);
-    self.registerIdentity();
-  };
+    self.loading = true;
+    $scope.$apply();
 
-  // FIXME: set all of these values based on config
-  self.registerIdentity = function() {
-    var options = {
+    // FIXME: set all of these values based on config
+    navigator.credentials.registerDid({
       idp: self.idpOwner,
-      registrationUrl: self.aioBaseUri + '/register',
-      registrationCallback: self.baseUri + '/join/' + self.identityToken
-    };
-    return navigator.credentials.registerDid(options);
+      agentUrl: self.aioBaseUri + '/register'
+    }).then(function(didDocument) {
+      self.identity.id = didDocument.id;
+      return Promise.resolve($http.post('/join', self.identity));
+    }).then(function(response) {
+      // redirect to new dashboard
+      $window.location = response.data.id + '/dashboard';
+    }).catch(function(err) {
+      brAlertService.add('error', err);
+      self.loading = false;
+      $scope.$apply();
+    });
   };
 }
 

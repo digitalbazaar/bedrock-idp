@@ -21,7 +21,6 @@
     "tests"
   ],
   "dependencies": {
-    "angular-cookie": "~4.0.9",
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
     "bedrock-angular-form": "digitalbazaar/bedrock-angular-form#master",
@@ -31,7 +30,6 @@
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "credentials-polyfill": "~0.5.0",
     "forge": "^0.6.35",
-    "node-uuid": "~1.4.3",
     "opencred-verifier": "~0.0.6"
   }
 }

@@ -16,7 +16,7 @@
     "bedrock-angular-model": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",
     "bedrock-angular-resource": "digitalbazaar/bedrock-angular-resource#master",
-    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#new-flow-api",
     "bedrock-idp": "digitalbazaar/bedrock-idp#2.x",
     "bootstrap": "~3.3.4",
     "credentials-polyfill": "digitalbazaar/bedrock-credential-curator#credential-management-api",

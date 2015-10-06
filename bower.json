@@ -27,7 +27,7 @@
     "bedrock-angular-modal": "^1.0.0",
     "bedrock-angular-resource": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",
-    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#new-flow-api",
     "credentials-polyfill": "digitalbazaar/credentials-polyfill#credential-management-api",
     "forge": "^0.6.35",
     "opencred-verifier": "~0.0.6"

@@ -23,7 +23,7 @@
   "dependencies": {
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
-    "bedrock-angular-form": "digitalbazaar/bedrock-angular-form#master",
+    "bedrock-angular-form": "^1.5.2",
     "bedrock-angular-modal": "^1.0.0",
     "bedrock-angular-resource": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",

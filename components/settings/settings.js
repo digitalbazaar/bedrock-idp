@@ -13,7 +13,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.settings', []);
+var module = angular.module('bedrock-idp.settings', []);
 
 module.controller(settings);
 

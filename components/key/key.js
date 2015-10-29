@@ -31,7 +31,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.key', []);
+var module = angular.module('bedrock-idp.key', []);
 
 module.directive(addKeyModalDirective);
 module.directive(editKeyModalDirective);

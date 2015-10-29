@@ -25,7 +25,7 @@ var curatorModulePath =
   requirejs.toUrl('bedrock-credential-curator/components/');
 
 var module = angular.module(
-  'bedrock.idp', Array.prototype.slice.call(arguments, 1));
+  'bedrock-idp', Array.prototype.slice.call(arguments, 1));
 
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {

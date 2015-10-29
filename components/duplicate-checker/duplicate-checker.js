@@ -12,7 +12,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock.duplicateChecker', []);
+var module = angular.module('bedrock-idp.duplicateChecker', []);
 
 module.directive(directive);
 

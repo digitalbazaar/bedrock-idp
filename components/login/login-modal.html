@@ -6,19 +6,32 @@
       </div>
       <div class="modal-body">
         <br-demo-warning></br-demo-warning>
-        <p class="alert alert-warning">
+        <p ng-if="!model.newLogin" class="alert alert-warning">
           Your session has expired, please sign back in to continue.
         </p>
+        <div class="well" ng-if="model.display.didLogin">
+          <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg"
+              ng-disabled="model.loading"
+              ng-click="model.didLogin()"><i class="fa fa-cloud"> </i>
+                Sign in with Decentralized Identity</button>
+          </div>
+        </div>
+        <h3>or</h3>
         <form class="well form-horizontal">
           <fieldset>
-            <br-input br-model="model.sysIdentifier"
-              ng-keypress="$event.which == 13 && model.login()"
+            <br-input ng-if="!model.newLogin" br-model="model.userName"
               br-options="{
-                name: 'sysIdentifier', label: 'Identity', disabled: true}">
+                name: 'userName', label: 'Identity', disabled: true}">
               You cannot change the identity here. If you need to log in
               using another identity, please refresh the page.
             </br-input>
-
+            <br-input ng-if="model.newLogin" br-model="model.userName"
+              ng-keypress="$event.which == 13 && model.login()"
+              br-options="{
+                name: 'userName', label: 'Identity'}">
+              Please enter your email address.
+            </br-input>
             <br-input br-model="model.password"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
@@ -36,6 +49,9 @@
         <button type="button" class="btn btn-primary"
           ng-disabled="model.loading"
           ng-click="model.login()"><i class="fa fa-sign-in"></i> Sign In</button>
+          <button ng-show="model.display.cancel" type="button" class="btn btn-default"
+            ng-disabled="model.loading"
+            ng-click="model.cancel()">Cancel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

@@ -1,7 +1,9 @@
 {
   "name": "bedrock-idp",
   "version": "1.0.4-dev",
-  "moduleType": ["amd"],
+  "moduleType": [
+    "amd"
+  ],
   "main": "./components/idp.js",
   "ignore": [
     "bedrock/bower.json",
@@ -31,6 +33,7 @@
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "credentials-polyfill": "~0.6.0",
     "forge": "^0.6.35",
-    "opencred-verifier": "~0.0.6"
+    "opencred-verifier": "~0.0.6",
+    "lodash": "~3.10.1"
   }
 }

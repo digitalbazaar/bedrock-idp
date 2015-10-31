@@ -59,6 +59,8 @@
         <!-- signed out -->
         <div ng-if="!app.services.identity.identity && !route.vars.hideNavbarLogin && !route.changing" ng-controller="LoginController as model"
           br-lazy-compile="!app.services.identity.identity && !route.vars.hideNavbarLogin && !route.changing" br-lazy-id="br-navbar-login">
+          <button class="btn btn-primary navbar-right navbar-form" ng-click="model.showLogin = true">
+            Login Modal</button>
           <form class="navbar-form navbar-right form-inline" ng-submit="model.submit()">
             <div class="form-group">
               <br-input ng-if="!model.multiple" br-model="model.sysIdentifier"
@@ -121,6 +123,11 @@
               </li>
             </ul>
           </stackable-popover>
+          <stackable-modal stackable="model.showLogin"
+            stackable-disable-escape="true"
+            br-lazy-compile="model.showLogin" br-lazy-id="br-login-modal">
+            <div br-login-modal br-options="{display: {cancel: true, didLogin: true}}"></div>
+          </stackable-modal>
         </div><!-- /signed out -->
 
         <!-- signed in -->

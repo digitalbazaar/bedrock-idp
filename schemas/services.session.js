@@ -96,6 +96,7 @@ var postLogin = {
   description: 'Login.',
   type: 'object',
   properties: {
+    sysSlug: schemas.slug({required: false}),
     sysIdentifier: {
       required: true,
       type: [schemas.slug(), schemas.email(), schemas.identifier()]

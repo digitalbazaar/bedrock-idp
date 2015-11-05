@@ -55,7 +55,7 @@ describe('bedrock-idp credential queries', function() {
 
 describe('bedrock-idp credential storage', function() {
 
-  it('should accept a request to store interactively', function(done) {
+  it.skip('should accept a request to store interactively', function(done) {
     var params = '?storageCallback=https://authio.com';
     var testService =
       bedrock.config.server.baseUri +

@@ -190,7 +190,7 @@ describe('bedrock-idp unauthenticated', function() {
   // this is proper request, it is not authenticated
   it('should not accept post to add a public key', function(done) {
     var keyService =
-      config.server.baseUri +   bedrock.config.idp.identityBasePath +
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
       '/' + config.idp.test.testUser + '/keys';
     var publicKey = config.idp.test.publicKeys[0];
     request.post({
@@ -223,7 +223,7 @@ describe('bedrock-idp authenticated', function() {
 
   it('should accept post to add a public key', function(done) {
     var keyService =
-      config.server.baseUri +   bedrock.config.idp.identityBasePath +
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
       '/' + config.idp.test.testUser + '/keys';
     var publicKey = config.idp.test.publicKeys[0];
     request.post({
@@ -248,7 +248,7 @@ describe('bedrock-idp authenticated', function() {
 
   it('should return 409 on post to add a duplicate public key', function(done) {
     var keyService =
-      config.server.baseUri +   bedrock.config.idp.identityBasePath +
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
       '/' + config.idp.test.testUser + '/keys';
     var publicKey = config.idp.test.publicKeys[1];
     async.series([
@@ -282,7 +282,7 @@ describe('bedrock-idp authenticated', function() {
   it(
     'should return 400 on post to add a malformed public key', function(done) {
       var keyService =
-        config.server.baseUri +   bedrock.config.idp.identityBasePath +
+        config.server.baseUri + bedrock.config.idp.identityBasePath +
         '/' + config.idp.test.testUser + '/keys';
       var publicKey = bedrock.util.clone(config.idp.test.publicKeys[2]);
       // remove @context to test validator
@@ -318,7 +318,7 @@ describe('bedrock-idp authenticated', function() {
 
   it('should revoke a public key', function(done) {
     var keyService =
-      config.server.baseUri +   bedrock.config.idp.identityBasePath +
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
       '/' + config.idp.test.testUser + '/keys';
     // NOTE: this key was referenced in the previous test but not inserted
     var publicKey = config.idp.test.publicKeys[2];
@@ -380,7 +380,7 @@ describe('bedrock-idp authenticated', function() {
 
   it('should modify label on a public key', function(done) {
     var keyService =
-      config.server.baseUri +   bedrock.config.idp.identityBasePath +
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
       '/' + config.idp.test.testUser + '/keys';
     // NOTE: this key was referenced in the previous test but not inserted
     var publicKey = config.idp.test.publicKeys[3];

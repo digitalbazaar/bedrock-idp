@@ -460,6 +460,95 @@ describe('bedrock-idp authenticated', function() {
     });
   });
 
+  it('should edit an identity property', function(done) {
+    var testIdentity =
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
+      '/' + config.idp.test.testUser;
+    var originalLabel = null;
+    var newLabel = null;
+    async.waterfall([
+      function(callback) {
+        // retrieve identity to get original label
+        request.get({
+          url: testIdentity,
+          json: true
+        }, function(err, res, body) {
+          res.statusCode.should.equal(200);
+          body.should.be.an('object');
+          body.should.have.property('label');
+          originalLabel = body.label;
+          newLabel = 'NEW ' + originalLabel;
+          callback(err);
+        });
+      },
+      function(callback) {
+        // update label
+        request.post({
+          url: testIdentity,
+          body: {
+            '@context': 'https://w3id.org/identity/v1',
+            id: testIdentity,
+            label: newLabel
+          },
+          json: true
+        }, function(err, res, body) {
+          res.statusCode.should.equal(204);
+          callback(err);
+        });
+      },
+      function(callback) {
+        // retrieve identity to get updated label
+        request.get({
+          url: testIdentity,
+          json: true
+        }, function(err, res, body) {
+          res.statusCode.should.equal(200);
+          body.should.be.an('object');
+          body.should.have.property('label');
+          body.label.should.equal(newLabel);
+          callback(err);
+        });
+      },
+      function(callback) {
+        // restore original label
+        request.post({
+          url: testIdentity,
+          body: {
+            '@context': 'https://w3id.org/identity/v1',
+            id: testIdentity,
+            label: originalLabel
+          },
+          json: true
+        }, function(err, res, body) {
+          res.statusCode.should.equal(204);
+          callback(err);
+        });
+      }
+    ], done);
+  });
+
+  it('should fail to edit unknown identity property', function(done) {
+    var testIdentity =
+      config.server.baseUri + bedrock.config.idp.identityBasePath +
+      '/' + config.idp.test.testUser;
+    async.waterfall([
+      function(callback) {
+        // bogus update
+        request.post({
+          url: testIdentity,
+          body: {
+            '@context': 'https://w3id.org/identity/v1',
+            id: testIdentity,
+            BOGUS: 'BOGUS'
+          },
+          json: true
+        }, function(err, res, body) {
+          res.statusCode.should.equal(400);
+          callback(err);
+        });
+      }
+    ], done);
+  });
 });
 
 function login(callback) {

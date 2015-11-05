@@ -33,6 +33,32 @@ describe('bedrock-idp unauthenticated', function() {
     );
   });
 
+  it('should return 200 for public /i/:id', function(done) {
+    var testIdentity = config.idp.test.publicTestUser;
+    var testService = bedrock.config.server.baseUri +
+      bedrock.config.idp.identityBasePath + '/' + testIdentity;
+    request.get(
+      testService,
+      function(err, res, body) {
+        res.statusCode.should.equal(200);
+        done(err);
+      }
+    );
+  });
+
+  it('should return 404 for private /i/:id', function(done) {
+    var testIdentity = config.idp.test.privateTestUser;
+    var testService = bedrock.config.server.baseUri +
+      bedrock.config.idp.identityBasePath + '/' + testIdentity;
+    request.get(
+      testService,
+      function(err, res, body) {
+        res.statusCode.should.equal(404);
+        done(err);
+      }
+    );
+  });
+
   it('should allow an unauthenticated request to /i/:id/keys', function(done) {
     var testIdentity = config.idp.test.testUser;
     var idPath = config.server.baseUri +

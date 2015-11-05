@@ -197,9 +197,23 @@ config.idp.identities.push({
 
 // test account
 config.idp.test = {};
-config.idp.test.testUser = 'testuser';
 
-config.idp.identities.push(createIdentity(config.idp.test.testUser));
+config.idp.test.testUser = 'testuser';
+config.idp.identities.push(createIdentity({
+  userName: config.idp.test.testUser
+}));
+
+config.idp.test.publicTestUser = 'public-test-user';
+config.idp.identities.push(createIdentity({
+  userName: config.idp.test.publicTestUser,
+  isPrivate: false
+}));
+
+config.idp.test.privateTestUser = 'private-test-user';
+config.idp.identities.push(createIdentity({
+  userName: config.idp.test.privateTestUser,
+  isPrivate: true
+}));
 
 var testKeyPair = createKeyPair({
   userName: config.idp.test.testUser,
@@ -352,7 +366,8 @@ function createKeyPair(options) {
   return newKeyPair;
 }
 
-function createIdentity(userName) {
+function createIdentity(options) {
+  var userName = options.userName;
   var newIdentity = {
     id: baseIdPath + '/' + userName,
     type: 'Identity',
@@ -360,7 +375,7 @@ function createIdentity(userName) {
     label: userName,
     email: userName + '@bedrock.dev',
     sysPassword: 'password',
-    sysPublic: ['label', 'url', 'description'],
+    sysPublic: options.isPrivate ? [] : ['label', 'url', 'description'],
     sysResourceRole: [{
       sysRole: 'identity.registered',
       generateResource: 'id'

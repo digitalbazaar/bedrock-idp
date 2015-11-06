@@ -8,13 +8,11 @@
 define([
   'angular',
   './login-controller',
-  './login-modal-directive',
-  './login-routes'
+  './login-modal-directive'
 ], function(
   angular,
   loginController,
-  loginModalDirective,
-  loginRoutes
+  loginModalDirective
 ) {
 
 'use strict';
@@ -26,9 +24,15 @@ module.directive(loginModalDirective);
 
 /* @ngInject */
 module.config(function($routeProvider) {
-  angular.forEach(loginRoutes, function(route) {
-    $routeProvider.when(route.path, route.options);
-  });
+  $routeProvider
+    .when('/session/login', {
+      vars: {
+        title: 'Login',
+        // avoid login entry form on login page
+        hideNavbarLogin: true
+      },
+      templateUrl: requirejs.toUrl('bedrock-idp/components/login/login.html')
+    });
 });
 
 return module.name;

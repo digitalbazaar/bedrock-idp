@@ -105,6 +105,10 @@ config.views.vars.baseUri = config.server.baseUri;
 config.views.vars['authorization-io'] = {};
 config.views.vars['authorization-io'].baseUri =
   'https://authorization.dev:33443';
+config.views.vars['authorization-io'].agentUrl =
+  config.views.vars['authorization-io'].baseUri + '/agent';
+config.views.vars['authorization-io'].registerUrl =
+  config.views.vars['authorization-io'].baseUri + '/register';
 
 var permissions = config.permission.permissions;
 var roles = config.permission.roles;

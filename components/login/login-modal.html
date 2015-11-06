@@ -13,30 +13,34 @@
           <div class="text-center">
             <button type="button" class="btn btn-primary btn-lg"
               ng-disabled="model.loading"
-              ng-click="model.didLogin()"><i class="fa fa-cloud"> </i>
+              ng-click="model.didLogin()"><i class="fa fa-cloud"></i>
                 Sign in with Decentralized Identity</button>
           </div>
         </div>
-        <h3>or</h3>
+        <hr/>
         <form class="well form-horizontal">
           <fieldset>
-            <br-input ng-if="!model.newLogin" br-model="model.userName"
+            <br-input ng-if="!model.newLogin" br-model="model.sysIdentifier"
               br-options="{
-                name: 'userName', label: 'Identity', disabled: true}">
-              You cannot change the identity here. If you need to log in
+                name: 'sysIdentifier', label: 'Identity', disabled: true
+              }">
+              You cannot change your identity here. If you need to sign in
               using another identity, please refresh the page.
             </br-input>
-            <br-input ng-if="model.newLogin" br-model="model.userName"
+            <br-input ng-if="model.newLogin" br-model="model.sysIdentifier"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
-                name: 'userName', label: 'Identity'}">
+                name: 'sysIdentifier', label: 'Email', placeholder: 'Email',
+                disabled: {{model.loading}}, autofocus: true
+              }">
               Please enter your email address.
             </br-input>
             <br-input br-model="model.password"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
-                name: 'password', type: 'password',
-                label: 'Password', disabled: {{model.loading}}}">
+                name: 'password', placeholder: 'Password', type: 'password',
+                label: 'Password', disabled: {{model.loading}}
+              }">
               Please enter your password.
             </br-input>
           </fieldset>
@@ -49,9 +53,9 @@
         <button type="button" class="btn btn-primary"
           ng-disabled="model.loading"
           ng-click="model.login()"><i class="fa fa-sign-in"></i> Sign In</button>
-          <button ng-show="model.display.cancel" type="button" class="btn btn-default"
-            ng-disabled="model.loading"
-            ng-click="model.cancel()">Cancel</button>
+        <button ng-if="model.display.cancel"
+          type="button" class="btn btn-default stackable-cancel"
+          ng-disabled="model.loading">Cancel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

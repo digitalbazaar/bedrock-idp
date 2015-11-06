@@ -25,16 +25,17 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
   };
 
   function Link(scope, element, attrs, stackable) {
+    // TODO: document why $timeout is used
     // clear existing feedback when showing this modal
     $timeout(function() {
       brAlertService.clearFeedback();
     });
 
     var model = scope.model = {};
-    model.userName = null;
+    model.sysIdentifier = null;
     model.newLogin = true;
     if('identity' in config.data.idp.session) {
-      model.sysIdentifier = config.data.idp.session.identity.id;
+      model.id = config.data.idp.session.identity.id;
       model.newLogin = false;
     }
     model.password = '';
@@ -47,47 +48,39 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
     // apply option
     _.assign(model.display, scope.brOptions.display);
 
-    model.cancel = function() {
-      stackable.close(null);
-    };
-
     model.login = function() {
       scope.loading = true;
       brAlertService.clearFeedback();
 
       var authData = {
-        password: model.password
+        password: model.password,
+        sysIdentifier: model.sysIdentifier
       };
       if(scope.sysIdentifier) {
-        authData.sysIdentifier = scope.sysIdentifier;
-        authData.usernameField = model.userName;
-      } else {
-        authData.sysIdentifier = model.userName;
+        authData.id = scope.sysIdentifier;
       }
 
       Promise.resolve($http.post('/session/login', authData))
-          .then(function(response) {
+        .then(function(response) {
           // success, close modal
           stackable.close(null);
-          brRefreshService.refresh();
-          // scope.$apply();
+          // refresh session information
           return brSessionService.get();
         }).then(function(session) {
+          // refresh services
+          brRefreshService.refresh();
+          // FIXME: remove hack to set current identity
           config.data.idp.session.identity = session.identity;
           $location.url(
             config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
             '/dashboard');
         }).catch(function(err) {
-          model.loading = false;
           if(err.type === 'ValidationError') {
-            brAlertService.add(
-              'error',
-              'The password you entered was incorrect. Please try again.',
-              {scope: scope});
-          } else {
-            brAlertService.add('error', err, {scope: scope});
+            err = 'The password you entered was incorrect. Please try again.';
           }
+          brAlertService.add('error', err, {scope: scope});
         }).then(function() {
+          model.loading = false;
           scope.$apply();
         });
     };
@@ -96,7 +89,7 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
       navigator.credentials.get({
         query: {
           '@context': 'https://w3id.org/identity/v1',
-          id: '',
+          id: scope.sysIdentifier || '',
           publicKey: ''
         },
         agentUrl: config.data['authorization-io'].agentUrl

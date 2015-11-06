@@ -13,7 +13,8 @@ define(['angular', 'lodash'], function(angular, _) {
 function factory($http, $timeout, $location, brAlertService, brRefreshService,
   config, brAuthenticationService, brSessionService) {
   return {
-    restrict: 'A',
+    // TODO: change to just 'E'
+    restrict: 'EA',
     scope: {
       sysIdentifier: '@brSysIdentifier',
       brOptions: '=?'

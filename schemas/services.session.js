@@ -91,19 +91,14 @@ var postJoin = {
   additionalProperties: false
 };
 
-// FIXME: either sysIdentifier or userNameField should be required
 var postLogin = {
   title: 'Login',
   description: 'Login.',
   type: 'object',
   properties: {
-    sysSlug: schemas.slug({required: false}),
+    id: schemas.identifier({required: false}),
     sysIdentifier: {
-      required: false,
-      type: 'string'
-    },
-    usernameField: {
-      required: false,
+      required: true,
       type: [schemas.slug(), schemas.email(), schemas.identifier()]
     },
     password: password()

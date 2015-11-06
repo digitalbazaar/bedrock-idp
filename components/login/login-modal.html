@@ -27,15 +27,35 @@
               You cannot change your identity here. If you need to sign in
               using another identity, please refresh the page.
             </br-input>
-            <br-input ng-if="model.newLogin" br-model="model.sysIdentifier"
+            <br-input ng-if="model.newLogin && !model.multiple"
+              br-model="model.sysIdentifier"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
                 name: 'sysIdentifier', label: 'Email', placeholder: 'Email',
                 disabled: {{model.loading}}, autofocus: true
               }">
-              Please enter your email address.
+              Please enter the email address that you used when you registered
+              with this website.
             </br-input>
-            <br-input br-model="model.password"
+            <div ng-if="model.multiple">
+              <div class="form-group">
+                <p class="alert alert-info">
+                  <strong>Note:</strong>
+                  Your email address (<strong>{{model.email}}</strong>) is
+                  associated with multiple identities. Please select the
+                  identity you'd like to sign in with.
+                </p>
+              </div>
+              <br-select ng-if="model.multiple" br-model="model.sysIdentifier"
+                br-items="model.choices" br-display-item="item.label"
+                br-options="{
+                  name: 'sysIdentifier', label: 'Identity',
+                  placeholder: 'Choose...', key: 'id',
+                  disabled: {{model.loading}}
+                }">
+              </br-select>
+            </div>
+            <br-input ng-show="!model.multiple" br-model="model.password"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
                 name: 'password', placeholder: 'Password', type: 'password',

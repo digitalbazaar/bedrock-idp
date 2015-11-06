@@ -5,7 +5,7 @@
  *
  * @author Dave Longley
  */
-define(['lodash'], function(_) {
+define(['angular', 'lodash'], function(angular, _) {
 
 'use strict';
 
@@ -32,14 +32,15 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
     });
 
     var model = scope.model = {};
-    model.sysIdentifier = null;
+    model.loading = false;
     model.newLogin = true;
     if('identity' in config.data.idp.session) {
       model.id = config.data.idp.session.identity.id;
       model.newLogin = false;
     }
+    model.email = '';
     model.password = '';
-    model.loading = false;
+    model.sysIdentifier = null;
 
     model.display = {
       didLogin: false,
@@ -62,11 +63,29 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
 
       Promise.resolve($http.post('/session/login', authData))
         .then(function(response) {
-          // success, close modal
-          stackable.close(null);
-          // refresh session information
-          return brSessionService.get();
+          // if a single 'identity' is returned, login was successful
+          var data = response.data;
+          if(data.identity) {
+            // success, close modal
+            stackable.close(null);
+            // refresh session information
+            return brSessionService.get();
+          }
+
+          // show multiple identities
+          console.log('model', model);
+          model.multiple = true;
+          model.email = data.email;
+          model.choices = [];
+          angular.forEach(data.identities, function(identity, identityId) {
+            model.choices.push({id: identityId, label: identity.label});
+          });
+          model.sysIdentifier = model.choices[0].id;
+          model.loading = false;
         }).then(function(session) {
+          if(!session) {
+            return;
+          }
           // refresh services
           brRefreshService.refresh();
           // FIXME: remove hack to set current identity

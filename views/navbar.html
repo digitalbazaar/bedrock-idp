@@ -57,10 +57,32 @@
 
         {% raw %}
         <!-- signed out -->
+        <!-- TODO: use br-angular-navbar -->
         <div ng-if="!app.services.identity.identity && !route.vars.hideNavbarLogin && !route.changing" ng-controller="LoginController as model"
           br-lazy-compile="!app.services.identity.identity && !route.vars.hideNavbarLogin && !route.changing" br-lazy-id="br-navbar-login">
-          <button class="btn btn-primary navbar-right navbar-form" ng-click="model.showLogin = true">
-            Login Modal</button>
+          <div class="navbar-form navbar-right">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-primary"
+                  type="button" ng-click="model.showLogin=true"><i class="fa fa-sign-in"></i>
+                  Sign In
+                </button>
+                <button class="btn btn-primary" type="button"
+                  stackable-trigger="model.navbarActionMenu"
+                  stackable-toggle="'active'">
+                  <i class="caret"></i>
+                </button>
+              </div>
+              {% endraw %}
+              {% if flags.enableCreateIdentity %}
+              <div class="btn-group">
+                <a class="btn br-btn-navbar-inverse" href="/join">Join</a>
+              </div>
+              {% endif %}
+              {% raw %}
+            </div>
+          </div>
+          <!--
           <form class="navbar-form navbar-right form-inline" ng-submit="model.submit()">
             <div class="form-group">
               <br-input ng-if="!model.multiple" br-model="model.sysIdentifier"
@@ -93,7 +115,7 @@
               <div class="btn-toolbar">
                 <div class="btn-group">
                   <button class="btn btn-primary"
-                    type="submit"><i class="fa fa-sign-in"></i> Sign In</button>
+                    type="button" ng-click="model.showLogin=true"><i class="fa fa-sign-in"></i> Sign In</button>
                   <button class="btn btn-primary" type="button"
                     stackable-trigger="model.navbarActionMenu"
                     stackable-toggle="'active'">
@@ -109,7 +131,8 @@
                 {% raw %}
               </div>
             </div>
-          </form>
+          </form> -->
+          <!-- move password reset/dropdown to login modal -->
           <stackable-popover stackable="model.navbarActionMenu"
             stackable-hide-arrow="true"
             stackable-placement="bottom"

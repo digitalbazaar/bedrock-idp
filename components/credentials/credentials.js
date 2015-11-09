@@ -6,7 +6,10 @@
  * @author Dave Longley
  * @author David I. Lehn
  */
-define(['angular'], function(angular) {
+define([
+  'angular',
+  './credential-task-controller'
+], function(angular, credentialTaskController) {
 
 'use strict';
 
@@ -15,7 +18,9 @@ var credentialsBasePath =
 
 var module = angular.module(
   'bedrock-idp.credentials',
-  ['bedrock-credential-curator', 'bedrock.credential']);
+  ['bedrock-credential-curator', 'bedrock.alert', 'bedrock.credential']);
+
+module.controller(credentialTaskController);
 
 /* @ngInject */
 module.config(function($routeProvider) {
@@ -33,11 +38,6 @@ module.config(function($routeProvider) {
     })
     .when('/credential-task', {
       title: 'Credential Task',
-      // TODO: if session is invalid, we'd need to queue the request for
-      // handling after login -- we should make session authentication optional
-      // here and handle authentication from the page instead (use some
-      // login directives, etc.)
-      session: 'required',
       templateUrl: requirejs.toUrl(
         'bedrock-idp/components/credentials/credential-task.html')
     });

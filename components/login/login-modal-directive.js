@@ -10,14 +10,16 @@ define(['angular', 'lodash'], function(angular, _) {
 'use strict';
 
 /* @ngInject */
-function factory($http, $timeout, $location, brAlertService, brRefreshService,
-  config, brAuthenticationService, brSessionService) {
+function factory(
+  $http, $location, $timeout, brAlertService, brAuthenticationService,
+  brRefreshService, brSessionService, config) {
   return {
     // TODO: change to just 'E'
     restrict: 'EA',
     scope: {
-      sysIdentifier: '@brSysIdentifier',
-      brOptions: '=?'
+      sysIdentifier: '@brIdentity',
+      options: '=?brOptions',
+      callback: '&?brCallback'
     },
     require: '^stackable',
     templateUrl: requirejs.toUrl(
@@ -48,7 +50,7 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
       cancel: false
     };
     // apply option
-    _.assign(model.display, scope.brOptions.display);
+    _.assign(model.display, scope.options.display);
 
     model.login = function() {
       scope.loading = true;
@@ -74,7 +76,6 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
           }
 
           // show multiple identities
-          console.log('model', model);
           model.multiple = true;
           model.email = data.email;
           model.choices = [];
@@ -83,6 +84,11 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
           });
           model.sysIdentifier = model.choices[0].id;
           model.loading = false;
+        }).catch(function(err) {
+          if(err.type === 'ValidationError') {
+            err = 'The password you entered was incorrect. Please try again.';
+          }
+          brAlertService.add('error', err, {scope: scope});
         }).then(function(session) {
           if(!session) {
             return;
@@ -91,14 +97,12 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
           brRefreshService.refresh();
           // FIXME: remove hack to set current identity
           config.data.idp.session.identity = session.identity;
+          if(angular.isDefined(attrs.brCallback)) {
+            return scope.callback({identity: session.identity});
+          }
           $location.url(
             config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
             '/dashboard');
-        }).catch(function(err) {
-          if(err.type === 'ValidationError') {
-            err = 'The password you entered was incorrect. Please try again.';
-          }
-          brAlertService.add('error', err, {scope: scope});
         }).then(function() {
           model.loading = false;
           scope.$apply();
@@ -106,6 +110,7 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
     };
 
     model.didLogin = function() {
+      scope.loading = true;
       navigator.credentials.get({
         query: {
           '@context': 'https://w3id.org/identity/v1',
@@ -120,14 +125,22 @@ function factory($http, $timeout, $location, brAlertService, brRefreshService,
         return brAuthenticationService.login(identity);
       }).then(function() {
         return brSessionService.get();
+      }).catch(function(err) {
+        brAlertService.add('error', err);
       }).then(function(session) {
+        if(!session) {
+          return;
+        }
+        // FIXME: remove hack to set current identity
         config.data.idp.session.identity = session.identity;
+        if(angular.isDefined(attrs.brCallback)) {
+          return scope.callback({identity: session.identity});
+        }
         $location.url(
           config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
           '/dashboard');
-      }).catch(function(err) {
-        brAlertService.add('error', err);
       }).then(function() {
+        scope.loading = false;
         scope.$apply();
       });
     };

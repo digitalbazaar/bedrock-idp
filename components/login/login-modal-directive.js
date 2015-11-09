@@ -50,7 +50,8 @@ function factory(
       cancel: false
     };
     // apply option
-    _.assign(model.display, scope.options.display);
+    var options = scope.options || {};
+    _.assign(model.display, options.display || {});
 
     model.login = function() {
       scope.loading = true;

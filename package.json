@@ -44,7 +44,7 @@
     "bedrock-identity": "digitalbazaar/bedrock-identity#didLogin",
     "bedrock-mail": "^1.0.0",
     "bedrock-mongodb": "^1.0.0",
-    "bedrock-passport": "^1.0.0",
+    "bedrock-passport": "digitalbazaar/bedrock-passport#2.x",
     "bedrock-rest": "^1.0.0",
     "bedrock-server": "^1.0.2",
     "bedrock-session-mongodb": "^1.0.0",

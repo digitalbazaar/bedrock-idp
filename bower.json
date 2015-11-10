@@ -29,7 +29,7 @@
     "bedrock-angular-form": "^1.5.2",
     "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#master",
     "bedrock-angular-modal": "^1.0.0",
-    "bedrock-angular-resource": "^1.0.1",
+    "bedrock-angular-resource": "^1.0.2",
     "bedrock-angular-session": "^1.1.0",
     "bedrock-angular-ui": "^1.0.0",
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",

@@ -4,10 +4,9 @@
 var config = require('bedrock').config;
 
 // common demo cred vars
-var claimId = config.server.baseUri + config.idp.identityBasePath + '/testuser';
-var sigKey = claimId + '/keys/1';
-
 var baseIdPath = config.server.baseUri + config.idp.identityBasePath;
+var claimId = baseIdPath + '/test-identity';
+var sigKey = claimId + '/keys/1';
 
 // FIXME: credentials *must* use the context that the insertion API is
 // expecting
@@ -198,25 +197,31 @@ config.idp.identities.push({
 // test account
 config.idp.test = {};
 
-config.idp.test.testUser = 'testuser';
-config.idp.identities.push(createIdentity({
-  userName: config.idp.test.testUser
-}));
+config.idp.test.testIdentity = createIdentity({
+  slug: 'test-identity'
+});
+config.idp.identities.push(config.idp.test.testIdentity);
 
-config.idp.test.publicTestUser = 'public-test-user';
-config.idp.identities.push(createIdentity({
-  userName: config.idp.test.publicTestUser,
+config.idp.test.nonHttpTestIdentity = createIdentity({
+  id: 'did:non-http-test-identity',
+  slug: 'non-http-test-identity'
+});
+config.idp.identities.push(config.idp.test.nonHttpTestIdentity);
+
+config.idp.test.publicTestIdentity = createIdentity({
+  slug: 'public-test-user',
   isPrivate: false
-}));
+});
+config.idp.identities.push(config.idp.test.publicTestIdentity);
 
-config.idp.test.privateTestUser = 'private-test-user';
-config.idp.identities.push(createIdentity({
-  userName: config.idp.test.privateTestUser,
+config.idp.test.privateTestIdentity = createIdentity({
+  slug: 'private-test-user',
   isPrivate: true
-}));
+});
+config.idp.identities.push(config.idp.test.privateTestIdentity);
 
 var testKeyPair = createKeyPair({
-  userName: config.idp.test.testUser,
+  identity: config.idp.test.testIdentity,
   publicKey: '-----BEGIN PUBLIC KEY-----\n' +
     'MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAxBTbcgMr6WY74XoUkXBg\n' +
     'n+0PUP2XE4fbcvALoBSBIlMcWep8TUl4/BGM2FBwbgeEgp9ZRJ8dObiK+ZqQjFOh\n' +
@@ -344,22 +349,22 @@ config.idp.test.publicKeys.push({
 });
 
 function createKeyPair(options) {
-  var userName = options.userName;
+  var identity = options.identity;
   var publicKey = options.publicKey;
   var privateKey = options.privateKey;
   var newKeyPair = {
     publicKey: {
       '@context': 'someContextURL',
       type: 'CryptographicKey',
-      owner: baseIdPath + '/' + userName,
+      owner: identity.id,
       label: 'Signing Key 1',
       publicKeyPem: publicKey
     },
     privateKey: {
       type: 'CryptographicKey',
-      owner: baseIdPath + '/' + userName,
+      owner: identity.id,
       label: 'Signing Key 1',
-      publicKey: baseIdPath + '/' + userName + '/keys/1',
+      publicKey: identity.id + '/keys/1',
       privateKeyPem: privateKey
     }
   };
@@ -367,13 +372,14 @@ function createKeyPair(options) {
 }
 
 function createIdentity(options) {
-  var userName = options.userName;
-  var newIdentity = {
-    id: baseIdPath + '/' + userName,
+  var slug = options.slug;
+  var id = options.id ? options.id : baseIdPath + '/' + slug;
+  var identity = {
+    id: id,
     type: 'Identity',
-    sysSlug: userName,
-    label: userName,
-    email: userName + '@bedrock.dev',
+    sysSlug: slug,
+    label: slug,
+    email: slug + '@bedrock.dev',
     sysPassword: 'password',
     sysPublic: options.isPrivate ? [] : ['label', 'url', 'description'],
     sysResourceRole: [{
@@ -381,7 +387,7 @@ function createIdentity(options) {
       generateResource: 'id'
     }],
     url: config.server.baseUri,
-    description: userName
+    description: slug
   };
-  return newIdentity;
+  return identity;
 }

@@ -15,18 +15,16 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 describe('bedrock-idp unauthenticated', function() {
 
   it('should allow an unauthenticated request to /i/:id', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var testService = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity;
+    var identity = config.idp.test.testIdentity;
     request.get(
-      testService,
+      identity.id,
       function(err, res, body) {
         res.headers['set-cookie'].should.exist;
         res.statusCode.should.equal(200);
         body.should.have.property('@context');
         body.should.have.property('id');
+        body.id.should.equal(identity.id);
         body.should.have.property('type');
-        body.id.should.equal(testService);
         body.type.should.equal('Identity');
         done(err);
       }
@@ -34,24 +32,22 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should return 200 for public /i/:id', function(done) {
-    var testIdentity = config.idp.test.publicTestUser;
-    var testService = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity;
+    var identity = config.idp.test.publicTestIdentity;
     request.get(
-      testService,
+      identity.id,
       function(err, res, body) {
         res.statusCode.should.equal(200);
+        body.should.have.property('id');
+        body.id.should.equal(identity.id);
         done(err);
       }
     );
   });
 
   it('should return 404 for private /i/:id', function(done) {
-    var testIdentity = config.idp.test.privateTestUser;
-    var testService = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity;
+    var identity = config.idp.test.privateTestIdentity;
     request.get(
-      testService,
+      identity.id,
       function(err, res, body) {
         res.statusCode.should.equal(404);
         done(err);
@@ -60,12 +56,10 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should allow an unauthenticated request to /i/:id/keys', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var idPath = config.server.baseUri +
-      config.idp.identityBasePath + '/' + testIdentity + '/keys';
-    var testService = idPath;
+    var identity = config.idp.test.testIdentity;
+    var keysService = identity.id + '/keys';
     request.get(
-      testService,
+      keysService,
       function(err, res, body) {
         res.statusCode.should.equal(200);
         body.should.be.an('array');
@@ -82,13 +76,11 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should allow an unauthenticated request /i/:id/keys/#', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var idPath = config.server.baseUri +
-      config.idp.identityBasePath + '/' + testIdentity + '/keys';
-    var testService = idPath;
+    var identity = config.idp.test.testIdentity;
+    var keysService = identity.id + '/keys';
     async.waterfall([
       function(callback) {
-        request.get(testService, function(err, res, body) {
+        request.get(keysService, function(err, res, body) {
           callback(err, body[0].id);
         });
       },
@@ -109,12 +101,12 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should return 404 on unknown id request to /i/:id', function(done) {
-    var testIdentity = 'someUnknownIdentity';
-    var idPath = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity;
-    var testService = idPath;
+    var identity = {
+      id: bedrock.config.server.baseUri + bedrock.config.idp.identityBasePath +
+        '/someUnknownIdentity'
+    };
     request.get(
-      testService,
+      identity.id,
       function(err, res, body) {
         res.statusCode.should.equal(404);
         body.should.be.an('object');
@@ -129,12 +121,13 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should return 404 on unknown id request to /i/:id/keys', function(done) {
-    var testIdentity = 'someUnknownIdentity';
-    var idPath = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity + '/keys';
-    var testService = idPath;
+    var identity = {
+      id: bedrock.config.server.baseUri + bedrock.config.idp.identityBasePath +
+        '/someUnknownIdentity'
+    };
+    var keysService = identity.id + '/keys';
     request.get(
-      testService,
+      keysService,
       function(err, res, body) {
         res.statusCode.should.equal(404);
         body.should.be.an('object');
@@ -149,12 +142,10 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should return 404 on request to /i/:id/badendpoint', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var idPath = bedrock.config.server.baseUri +
-      bedrock.config.idp.identityBasePath + '/' + testIdentity + '/badendpoint';
-    var testService = idPath;
+    var identity = config.idp.test.testIdentity;
+    var badService = identity.id + '/badendpoint';
     request.get(
-      testService,
+      badService,
       function(err, res, body) {
         // console.log('STATUS', res.statusCode);
         // console.log('body', body);
@@ -166,11 +157,9 @@ describe('bedrock-idp unauthenticated', function() {
   });
 
   it('should return 404 on an unknown key /i/:id/keys/#', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var idPath = config.server.baseUri +
-      config.idp.identityBasePath + '/' + testIdentity + '/keys/999';
-    var testService = idPath;
-    request.get(idPath, function(err, res, body) {
+    var identity = config.idp.test.testIdentity;
+    var keyId = identity.id + '/keys/999';
+    request.get(keyId, function(err, res, body) {
       res.statusCode.should.equal(404);
       body.should.be.an('object');
       body.should.have.property('message');
@@ -181,7 +170,7 @@ describe('bedrock-idp unauthenticated', function() {
       body.details.should.have.property('key');
       body.details.key.should.be.an('object');
       body.details.key.should.have.property('id');
-      body.details.key.id.should.equal(idPath);
+      body.details.key.id.should.equal(keyId);
       body.should.have.property('cause');
       done(err);
     });
@@ -189,12 +178,11 @@ describe('bedrock-idp unauthenticated', function() {
 
   // this is proper request, it is not authenticated
   it('should not accept post to add a public key', function(done) {
-    var keyService =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser + '/keys';
+    var identity = config.idp.test.testIdentity;
+    var keysService = identity.id + '/keys';
     var publicKey = config.idp.test.publicKeys[0];
     request.post({
-      url: keyService,
+      url: keysService,
       body: publicKey,
       json: true
     }, function(err, res, body) {
@@ -209,12 +197,82 @@ describe('bedrock-idp unauthenticated', function() {
       done(err);
     });
   });
-
 });
 
+// help function for identity editing checks
+function _editIdentityProperty(identity, url, done) {
+  var originalLabel = null;
+  var newLabel = null;
+  async.waterfall([
+    function(callback) {
+      // retrieve identity to get original label
+      request.get({
+        url: url,
+        json: true
+      }, function(err, res, body) {
+        res.statusCode.should.equal(200);
+        body.should.be.an('object');
+        body.should.have.property('id');
+        body.id.should.equal(identity.id);
+        body.should.have.property('label');
+        originalLabel = body.label;
+        newLabel = 'NEW ' + originalLabel;
+        callback(err);
+      });
+    },
+    function(callback) {
+      // update label
+      request.post({
+        url: url,
+        body: {
+          '@context': 'https://w3id.org/identity/v1',
+          id: identity.id,
+          label: newLabel
+        },
+        json: true
+      }, function(err, res, body) {
+        res.statusCode.should.equal(204);
+        callback(err);
+      });
+    },
+    function(callback) {
+      // retrieve identity to get updated label
+      request.get({
+        url: url,
+        json: true
+      }, function(err, res, body) {
+        res.statusCode.should.equal(200);
+        body.should.be.an('object');
+        body.should.have.property('id');
+        body.id.should.equal(identity.id);
+        body.should.have.property('label');
+        body.label.should.equal(newLabel);
+        callback(err);
+      });
+    },
+    function(callback) {
+      // restore original label
+      request.post({
+        url: url,
+        body: {
+          '@context': 'https://w3id.org/identity/v1',
+          id: identity.id,
+          label: originalLabel
+        },
+        json: true
+      }, function(err, res, body) {
+        res.statusCode.should.equal(204);
+        callback(err);
+      });
+    }
+  ], done);
+}
+
 describe('bedrock-idp authenticated', function() {
+  var identity = config.idp.test.testIdentity;
+
   before(function(done) {
-    login(done);
+    login(identity, done);
   });
 
   after(function(done) {
@@ -222,12 +280,10 @@ describe('bedrock-idp authenticated', function() {
   });
 
   it('should accept post to add a public key', function(done) {
-    var keyService =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser + '/keys';
+    var keysService = identity.id + '/keys';
     var publicKey = config.idp.test.publicKeys[0];
     request.post({
-      url: keyService,
+      url: keysService,
       body: publicKey,
       json: true
     }, function(err, res, body) {
@@ -247,21 +303,19 @@ describe('bedrock-idp authenticated', function() {
   });
 
   it('should return 409 on post to add a duplicate public key', function(done) {
-    var keyService =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser + '/keys';
+    var keysService = identity.id + '/keys';
     var publicKey = config.idp.test.publicKeys[1];
     async.series([
       function(callback) {
         request.post({
-          url: keyService,
+          url: keysService,
           body: publicKey,
           json: true
         }, callback);
       },
       function(callback) {
         request.post({
-          url: keyService,
+          url: keysService,
           body: publicKey,
           json: true
         }, function(err, res, body) {
@@ -281,14 +335,12 @@ describe('bedrock-idp authenticated', function() {
 
   it(
     'should return 400 on post to add a malformed public key', function(done) {
-      var keyService =
-        config.server.baseUri + bedrock.config.idp.identityBasePath +
-        '/' + config.idp.test.testUser + '/keys';
+      var keysService = identity.id + '/keys';
       var publicKey = bedrock.util.clone(config.idp.test.publicKeys[2]);
       // remove @context to test validator
       delete publicKey['@context'];
       request.post({
-        url: keyService,
+        url: keysService,
         body: publicKey,
         json: true
       }, function(err, res, body) {
@@ -317,15 +369,13 @@ describe('bedrock-idp authenticated', function() {
     });
 
   it('should revoke a public key', function(done) {
-    var keyService =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser + '/keys';
+    var keysService = identity.id + '/keys';
     // NOTE: this key was referenced in the previous test but not inserted
     var publicKey = config.idp.test.publicKeys[2];
     async.waterfall([
       function(callback) {
         request.post({
-          url: keyService,
+          url: keysService,
           body: publicKey,
           json: true
         }, function(err, res, body) {
@@ -379,15 +429,13 @@ describe('bedrock-idp authenticated', function() {
   });
 
   it('should modify label on a public key', function(done) {
-    var keyService =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser + '/keys';
+    var keysService = identity.id + '/keys';
     // NOTE: this key was referenced in the previous test but not inserted
     var publicKey = config.idp.test.publicKeys[3];
     async.waterfall([
       function(callback) {
         request.post({
-          url: keyService,
+          url: keysService,
           body: publicKey,
           json: true
         }, function(err, res, body) {
@@ -431,16 +479,14 @@ describe('bedrock-idp authenticated', function() {
   });
 
   it('should return 404 on attempt to modify unknown key', function(done) {
-    var testIdentity = config.idp.test.testUser;
-    var keyService = config.server.baseUri +
-      config.idp.identityBasePath + '/' + testIdentity + '/keys/999';
+    var badKeyService = identity.id + '/keys/999';
     var keyInfo = {
       '@context': 'https://w3id.org/identity/v1',
-      id: keyService,
+      id: badKeyService,
       label: 'newLabel3'
     };
     request.post({
-      url: keyService,
+      url: badKeyService,
       body: keyInfo,
       json: true
     }, function(err, res, body) {
@@ -454,91 +500,26 @@ describe('bedrock-idp authenticated', function() {
       body.details.should.have.property('key');
       body.details.key.should.be.an('object');
       body.details.key.should.have.property('id');
-      body.details.key.id.should.equal(keyService);
+      body.details.key.id.should.equal(badKeyService);
       body.should.have.property('cause');
       done(err);
     });
   });
 
+
   it('should edit an identity property', function(done) {
-    var testIdentity =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser;
-    var originalLabel = null;
-    var newLabel = null;
-    async.waterfall([
-      function(callback) {
-        // retrieve identity to get original label
-        request.get({
-          url: testIdentity,
-          json: true
-        }, function(err, res, body) {
-          res.statusCode.should.equal(200);
-          body.should.be.an('object');
-          body.should.have.property('label');
-          originalLabel = body.label;
-          newLabel = 'NEW ' + originalLabel;
-          callback(err);
-        });
-      },
-      function(callback) {
-        // update label
-        request.post({
-          url: testIdentity,
-          body: {
-            '@context': 'https://w3id.org/identity/v1',
-            id: testIdentity,
-            label: newLabel
-          },
-          json: true
-        }, function(err, res, body) {
-          res.statusCode.should.equal(204);
-          callback(err);
-        });
-      },
-      function(callback) {
-        // retrieve identity to get updated label
-        request.get({
-          url: testIdentity,
-          json: true
-        }, function(err, res, body) {
-          res.statusCode.should.equal(200);
-          body.should.be.an('object');
-          body.should.have.property('label');
-          body.label.should.equal(newLabel);
-          callback(err);
-        });
-      },
-      function(callback) {
-        // restore original label
-        request.post({
-          url: testIdentity,
-          body: {
-            '@context': 'https://w3id.org/identity/v1',
-            id: testIdentity,
-            label: originalLabel
-          },
-          json: true
-        }, function(err, res, body) {
-          res.statusCode.should.equal(204);
-          callback(err);
-        });
-      }
-    ], done);
+    _editIdentityProperty(identity, identity.id, done);
   });
 
   it('should fail to edit unknown identity property', function(done) {
-    var testIdentity =
-      config.server.baseUri + bedrock.config.idp.identityBasePath +
-      '/' + config.idp.test.testUser;
     async.waterfall([
       function(callback) {
         // bogus update
         request.post({
-          url: testIdentity,
+          url: identity.id,
           body: {
             '@context': 'https://w3id.org/identity/v1',
-            id: testIdentity,
+            id: identity.id,
             BOGUS: 'BOGUS'
           },
           json: true
@@ -551,14 +532,40 @@ describe('bedrock-idp authenticated', function() {
   });
 });
 
-function login(callback) {
+describe('bedrock-idp non-http authenticated', function() {
+  var identity = config.idp.test.nonHttpTestIdentity;
+
+  before(function(done) {
+    login(identity, done);
+  });
+
+  after(function(done) {
+    logout(done);
+  });
+
+  it('should edit an identity property', function(done) {
+    var identity = config.idp.test.nonHttpTestIdentity;
+    var url = config.server.baseUri + bedrock.config.idp.identityBasePath +
+      '/' + identity.sysSlug;
+    _editIdentityProperty(identity, url, done);
+  });
+});
+
+function login(identity, callback) {
   var loginService = config.server.baseUri + '/session/login';
   request.post({
     url: loginService,
-    body: {sysIdentifier: config.idp.test.testUser, password: 'password'},
+    body: {
+      sysIdentifier: identity.sysSlug,
+      password: 'password'},
     json: true
   }, function(err, res, body) {
-    // console.log('LOGINBODY', body);
+    res.statusCode.should.equal(200);
+    body.should.be.an('object');
+    body.should.have.property('identity');
+    body.identity.should.be.an('object');
+    body.identity.should.have.property('id');
+    body.identity.id.should.equal(identity.id);
     callback(err);
   });
 };
@@ -569,6 +576,7 @@ function logout(callback) {
     url: logoutService,
     json: true
   }, function(err, res, body) {
+    res.statusCode.should.equal(200);
     callback(err);
   });
 };

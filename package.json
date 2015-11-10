@@ -41,7 +41,7 @@
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "bedrock-docs": "^1.0.0",
     "bedrock-express": "^1.4.1",
-    "bedrock-identity": "digitalbazaar/bedrock-identity#didLogin",
+    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x",
     "bedrock-mail": "^1.0.0",
     "bedrock-mongodb": "^1.0.0",
     "bedrock-passport": "digitalbazaar/bedrock-passport#2.x",

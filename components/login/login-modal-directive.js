@@ -70,8 +70,6 @@ function factory(
           // if a single 'identity' is returned, login was successful
           var data = response.data;
           if(data.identity) {
-            // success, close modal
-            stackable.close(null);
             // refresh session information
             return brSessionService.get();
           }
@@ -99,6 +97,8 @@ function factory(
           // FIXME: remove hack to set current identity
           config.data.idp.session.identity = session.identity;
           if(angular.isDefined(attrs.brCallback)) {
+            // success, close modal
+            stackable.close(null);
             return scope.callback({identity: session.identity});
           }
           $location.url(
@@ -135,6 +135,8 @@ function factory(
         // FIXME: remove hack to set current identity
         config.data.idp.session.identity = session.identity;
         if(angular.isDefined(attrs.brCallback)) {
+          // success, close modal
+          stackable.close(null);
           return scope.callback({identity: session.identity});
         }
         $location.url(

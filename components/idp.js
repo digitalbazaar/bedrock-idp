@@ -13,7 +13,6 @@ define([
   './identity/identity',
   './key/key',
   './login/login',
-  './navbar/navbar',
   './passcode/passcode',
   './settings/settings'
 ], function(angular) {
@@ -30,30 +29,14 @@ var module = angular.module(
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {
   config.site = config.site || {};
-  config.site.navbar = {
-    private: [
-      {
-        slug: 'dashboard',
-        icon: 'fa fa-dashboard',
-        label: 'Dashboard',
-        pageTitle: 'Dashboard'
-      },
-      {
-        slug: 'credentials',
-        icon: 'fa fa-trophy',
-        label: 'Credentials',
-        pageTitle: 'Credentials'
-      },
-      {
-        slug: 'settings',
-        icon: 'fa fa-wrench',
-        label: 'Settings',
-        pageTitle: 'Settings'
-      }
-    ],
-    public: []
-  };
-
+  config.site.navbar = config.site.navbar || {};
+  config.site.navbar.templates = config.site.navbar.templates || [];
+  // config.site.navbar.templates.push(requirejs.toUrl(
+  //   'bedrock-idp/components/navbar/logout.html'));
+  config.site.navbar.templates.push(requirejs.toUrl(
+    'bedrock-idp/components/navbar/login.html'));
+  config.site.navbar.templates.push(requirejs.toUrl(
+    'bedrock-idp/components/navbar/hover-card.html'));
   config.settings = config.settings || {};
   config.settings.panes = [
     {

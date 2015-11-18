@@ -24,6 +24,32 @@ module.config(function($routeProvider) {
   });
 });
 
+/* @ngInject */
+module.run(function(brNavbarService, brSessionService, config) {
+  brNavbarService.menus.push({
+    slug: '/dashboard',
+    icon: 'fa fa-dashboard',
+    label: 'Dashboard',
+    pageTitle: 'Dashboard',
+    visible: 'false',
+    weight: 10,
+    init: function(scope, menu) {
+      scope.$watch(function() {
+          return brSessionService.session;
+        }, function(session) {
+          if(session && session.identity) {
+            menu.visible = true;
+            menu.url = config.data.idp.identityBaseUri + '/' +
+              session.identity.sysSlug + menu.slug;
+          } else {
+            menu.visible = false;
+          }
+        }, true);
+      brSessionService.get();
+    }
+  });
+});
+
 return module.name;
 
 });

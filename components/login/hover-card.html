@@ -1,0 +1,35 @@
+
+<div ng-if="model.loggedIn">
+  <ul class="nav navbar-nav navbar-hovercard-link">
+    <li>
+      <a ng-click="model.hovercard.show=!model.hovercard.show;model.hovercard.triggerClicked=true">{{model.identity.label || '-'}}</a>
+    </li>
+  </ul>
+  <a class="btn navbar-btn navbar-link pull-right" stackable-trigger="model.hovercard" stackable-toggle="'active'"><i class="fa fa-user"></i></a>
+  <stackable-popover stackable="model.hovercard"
+    stackable-placement="bottom"
+    stackable-alignment="right"
+    br-lazy-compile="model.hovercard.show" br-lazy-id="br-navbar-hovercard">
+    <h3 class="stackable-popover-title">{{model.identity.label}}</h3>
+    <div class="stackable-popover-body">
+      <table class="table table-condensed hovercard">
+        <tbody>
+          <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{model.identity.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div ng-show="model.identity" class="divider"></div>
+      <ul class="dropdown-menu stackable-menu">
+        <li>
+          <a class="stackable-cancel" style="padding-left: 3px"
+            ng-click="model.refreshData()"><i class="fa fa-refresh"></i> Refresh</a>
+        </li>
+        <li>
+          <a href="/session/logout" style="padding-left: 3px"><i class="fa fa-sign-out"></i> Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </stackable-popover>
+</div>

@@ -13,7 +13,7 @@ function factory(brAuthenticationService, brSessionService) {
     restrict: 'E',
     scope: {},
     templateUrl: requirejs.toUrl(
-      'bedrock-idp/components/login/hover-card.html'),
+      'bedrock-idp/components/login/identity-hovercard.html'),
     link: Link
   };
 
@@ -30,6 +30,6 @@ function factory(brAuthenticationService, brSessionService) {
   }
 }
 
-return {brHoverCard: factory};
+return {brIdentityHovercard: factory};
 
 });

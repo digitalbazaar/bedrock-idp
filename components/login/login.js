@@ -10,13 +10,15 @@ define([
   './login-controller',
   './login-modal-directive',
   './idp-login-directive',
-  './hover-card-directive'
+  './identity-hovercard-directive',
+  './idp-join-directive'
 ], function(
   angular,
   loginController,
   loginModalDirective,
   idpLoginDirective,
-  hoverCardDirective
+  identityHovercardDirective,
+  idpJoinDirective
 ) {
 
 'use strict';
@@ -26,7 +28,8 @@ var module = angular.module('bedrock-idp.login', []);
 module.controller(loginController);
 module.directive(loginModalDirective);
 module.directive(idpLoginDirective);
-module.directive(hoverCardDirective);
+module.directive(idpJoinDirective);
+module.directive(identityHovercardDirective);
 
 /* @ngInject */
 module.config(function($routeProvider) {

@@ -30,7 +30,7 @@ module.run(function(brNavbarService, brSessionService, config) {
     icon: 'fa fa-wrench',
     label: 'Settings',
     pageTitle: 'Settings',
-    visible: 'false',
+    visible: false,
     weight: 30,
     init: function(scope) {
       var menu = this;

@@ -96,9 +96,9 @@ function factory(
           brRefreshService.refresh();
           // FIXME: remove hack to set current identity
           config.data.idp.session.identity = session.identity;
+          // success, close modal
+          stackable.close(null);
           if(angular.isDefined(attrs.brCallback)) {
-            // success, close modal
-            stackable.close(null);
             return scope.callback({identity: session.identity});
           }
           $location.url(
@@ -134,9 +134,9 @@ function factory(
         }
         // FIXME: remove hack to set current identity
         config.data.idp.session.identity = session.identity;
+        // success, close modal
+        stackable.close(null);
         if(angular.isDefined(attrs.brCallback)) {
-          // success, close modal
-          stackable.close(null);
           return scope.callback({identity: session.identity});
         }
         $location.url(

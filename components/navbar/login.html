@@ -1,5 +1,7 @@
 <br-navbar-plugin br-operation="append">
-  <br-idp-login br-slot="br-navbar-toolbar-button" display-login="model.showLogin"></br-idp-login>
+  <div class="btn-group" br-slot="br-navbar-button-toolbar">
+    <br-idp-login display-login="model.showLogin"></br-idp-login>
+  </div>
 </br-navbar-plugin>
 <stackable-modal stackable="model.showLogin"
   br-lazy-compile="model.showLogin">

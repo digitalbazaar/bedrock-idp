@@ -49,20 +49,23 @@ module.run(function(brNavbarService, brSessionService, config) {
     icon: 'fa fa-trophy',
     label: 'Credentials',
     pageTitle: 'Credentials',
-    visible: 'false',
+    visible: false,
     weight: 20,
-    init: function(scope, menu) {
+    init: function(scope) {
+      var menu = this;
       scope.$watch(function() {
-          return brSessionService.session;
-        }, function(session) {
-          if(session && session.identity) {
-            menu.visible = true;
-            menu.url = config.data.idp.identityBaseUri + '/' +
-              session.identity.sysSlug + menu.slug;
-          } else {
-            menu.visible = false;
-          }
-        }, true);
+        return brSessionService.session;
+      }, function(session) {
+        if(session && session.identity) {
+          menu.visible = true;
+          menu.url = config.data.idp.identityBaseUri + '/' +
+            session.identity.sysSlug + menu.slug;
+        } else {
+          menu.visible = false;
+        }
+      }, true);
+      // TODO: should be done elsewhere once
+      // get latest session information
       brSessionService.get();
     }
   });

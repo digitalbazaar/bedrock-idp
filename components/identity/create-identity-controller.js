@@ -12,7 +12,8 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory($http, $scope, $window, brAlertService, config) {
+function factory(
+  $http, $location, $scope, brAlertService, brSessionService, config) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -27,9 +28,6 @@ function factory($http, $scope, $window, brAlertService, config) {
     sysSlug: ''
   };
   self.agreementChecked = false;
-  self.baseUri = config.data.baseUri;
-  self.aioBaseUri = config.data['authorization-io'].baseUri;
-  self.idpOwner = config.data.idp.owner.id;
   self.passphraseConfirmation = '';
 
   self.submit = function() {
@@ -40,18 +38,23 @@ function factory($http, $scope, $window, brAlertService, config) {
     self.loading = true;
     // TODO: also support local account ID creation as a configurable feature
     navigator.credentials.registerDid({
-      idp: self.idpOwner,
-      agentUrl: self.aioBaseUri + '/register'
+      idp: config.data.idp.owner.id,
+      agentUrl: config.data['authorization-io'].registerUrl
     }).then(function(didDocument) {
       self.identity.id = didDocument.id;
       return Promise.resolve($http.post('/join', self.identity));
     }).then(function(response) {
+      return brSessionService.get();
+    }).then(function(session) {
+      // FIXME: remove after config...session is no longer used to track session
+      config.data.idp.session.identity = session.identity;
       // redirect to new dashboard
-      $window.location = config.data.idp.identityBaseUri + '/' +
-        response.data.sysSlug + '/dashboard';
+      $location.url(config.data.idp.identityBasePath + '/' +
+        session.identity.sysSlug + '/dashboard');
     }).catch(function(err) {
       brAlertService.add('error', err);
       self.loading = false;
+    }).then(function() {
       $scope.$apply();
     });
   };

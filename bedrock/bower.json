@@ -23,7 +23,7 @@
     "es6-promise": "~2.1",
     "forge": "~0.6.30",
     "jquery": "~1.11.1",
-    "opencred-verifier": "~0.0.6",
+    "opencred-verifier": "^0.1.0",
     "requirejs": "~2.1.15"
   },
   "resolutions": {

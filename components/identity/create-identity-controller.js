@@ -13,7 +13,7 @@ define([], function() {
 
 /* @ngInject */
 function factory(
-  $http, $scope, $location, brAlertService, config, brSessionService) {
+  $http, $location, $scope, $window, brAlertService, brSessionService, config) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -45,12 +45,17 @@ function factory(
       return Promise.resolve($http.post('/join', self.identity));
     }).then(function(response) {
       return brSessionService.get();
-    }).then(function(response) {
+    }).then(function(session) {
       // FIXME: remove after config...session is no longer used to track session
-      config.data.idp.session.identity = response.identity;
+      config.data.idp.session.identity = session.identity;
       // redirect to new dashboard
-      $location.url(config.data.idp.identityBasePath + '/' +
-        response.identity.sysSlug + '/dashboard');
+      // FIXME: Use location.url after services have been updated to
+      // refresh after session state change
+      // $location.url(config.data.idp.identityBasePath + '/' +
+      //   session.identity.sysSlug + '/dashboard');
+      $window.location =
+        config.data.idp.identityBaseUri + '/' + session.identity.sysSlug +
+        '/dashboard';
     }).catch(function(err) {
       brAlertService.add('error', err);
       self.loading = false;

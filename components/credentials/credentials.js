@@ -18,7 +18,8 @@ var credentialsBasePath =
 
 var module = angular.module(
   'bedrock-idp.credentials',
-  ['bedrock-credential-curator', 'bedrock.alert', 'bedrock.credential']);
+  ['bedrock.alert', 'bedrock.credential', 'bedrock-credential-curator',
+  'bedrock-idp.resolver']);
 
 module.controller(credentialTaskController);
 

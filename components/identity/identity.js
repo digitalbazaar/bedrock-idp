@@ -24,7 +24,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock-idp.identity', []);
+var module = angular.module('bedrock-idp.identity', ['bedrock-idp.resolver']);
 
 module.controller(createIdentity);
 module.controller(controller);

@@ -14,6 +14,7 @@ define([
   './key/key',
   './login/login',
   './passcode/passcode',
+  './resolver/resolver',
   './settings/settings'
 ], function(angular) {
 

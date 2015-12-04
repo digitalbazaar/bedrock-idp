@@ -13,12 +13,13 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock-idp.dashboard', []);
+var module = angular.module('bedrock-idp.dashboard', ['bedrock-idp.resolver']);
 
 module.controller(controller);
 
 /* @ngInject */
 module.config(function($routeProvider) {
+  console.log('IN DASHBOARD ROUTE CONFIG');
   angular.forEach(routes, function(route) {
     $routeProvider.when(route.path, route.options);
   });

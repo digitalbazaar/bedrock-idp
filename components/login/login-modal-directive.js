@@ -11,7 +11,7 @@ define(['angular', 'lodash'], function(angular, _) {
 
 /* @ngInject */
 function factory(
-  $http, $location, $timeout, brAlertService, brAuthenticationService,
+  $http, $location, $timeout, $window, brAlertService, brAuthenticationService,
   brRefreshService, brSessionService, config) {
   return {
     // TODO: change to just 'E'
@@ -101,9 +101,14 @@ function factory(
           if(angular.isDefined(attrs.brCallback)) {
             return scope.callback({identity: session.identity});
           }
-          $location.url(
-            config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
-            '/dashboard');
+          // FIXME: Use location.url after services have been updated to
+          // refresh after session state change
+          // $location.url(
+            // config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
+            // '/dashboard');
+          $window.location =
+            config.data.idp.identityBaseUri + '/' + session.identity.sysSlug +
+            '/dashboard';
         }).then(function() {
           model.loading = false;
           scope.$apply();
@@ -139,9 +144,14 @@ function factory(
         if(angular.isDefined(attrs.brCallback)) {
           return scope.callback({identity: session.identity});
         }
-        $location.url(
-          config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
-          '/dashboard');
+        // FIXME: Use location.url after services have been updated to
+        // refresh after session state change
+        // $location.url(
+        //   config.data.idp.identityBasePath + '/' + session.identity.sysSlug +
+        //   '/dashboard');
+        $window.location =
+          config.data.idp.identityBaseUri + '/' + session.identity.sysSlug +
+          '/dashboard';
       }).then(function() {
         scope.loading = false;
         scope.$apply();

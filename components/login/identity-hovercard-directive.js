@@ -8,7 +8,7 @@ define(['angular'], function(angular) {
 'use strict';
 
 /* @ngInject */
-function factory(brAuthenticationService, brSessionService) {
+function factory(brRefreshService, brSessionService) {
   return {
     restrict: 'E',
     scope: {},
@@ -27,6 +27,9 @@ function factory(brAuthenticationService, brSessionService) {
       model.loggedIn = !!identity;
       model.identity = identity;
     });
+    model.refreshData = function() {
+      brRefreshService.refresh();
+    };
   }
 }
 

@@ -31,6 +31,7 @@
     "lodash": "~3.10.1",
     "node-forge": "^0.6.35",
     "passport-local": "~1.0.0",
+    "request": "^2.60.0",
     "superagent": "~0.21.0",
     "underscore": "~1.7.0"
   },
@@ -58,7 +59,6 @@
   "devDependencies": {
     "bedrock-protractor": "^1.0.0",
     "node-uuid": "^1.4.3",
-    "request": "^2.60.0",
     "supertest": "^1.0.1"
   }
 }

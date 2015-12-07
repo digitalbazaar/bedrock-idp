@@ -30,6 +30,10 @@ function factory(brRefreshService, brSessionService) {
     model.refreshData = function() {
       brRefreshService.refresh();
     };
+    // FIXME: refresh session data automatically elsewhere?
+    brSessionService.get().catch(function() {}).then(function() {
+      scope.$apply();
+    });
   }
 }
 

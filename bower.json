@@ -30,6 +30,7 @@
     "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#master",
     "bedrock-angular-modal": "^1.0.0",
     "bedrock-angular-navbar": "^1.0.2",
+    "bedrock-angular-resolver": "^1.0.0",
     "bedrock-angular-resource": "^1.0.2",
     "bedrock-angular-session": "^1.1.0",
     "bedrock-angular-ui": "^1.0.0",

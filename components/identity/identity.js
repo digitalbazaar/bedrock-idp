@@ -1,7 +1,7 @@
 /*!
  * Identity module.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
@@ -10,7 +10,6 @@ define([
   './create-identity-controller',
   './passphrase-confirmation-directive',
   './identity-controller',
-  './identity-routes',
   './identity-service',
   './identity-credentials-controller',
   './identity-selector-directive',
@@ -18,13 +17,13 @@ define([
   './add-identity-modal-directive',
   './credential-verify-service'
 ], function(
-  angular, createIdentity, passphraseConfirmation, controller, routes,
+  angular, createIdentity, passphraseConfirmation, controller,
   service, identityCredentials, identitySelector, identitySettingsController,
   modalAddIdentity, credentialVerifyService) {
 
 'use strict';
 
-var module = angular.module('bedrock-idp.identity', ['bedrock-idp.resolver']);
+var module = angular.module('bedrock-idp.identity', []);
 
 module.controller(createIdentity);
 module.controller(controller);
@@ -35,13 +34,6 @@ module.service(credentialVerifyService);
 module.directive(passphraseConfirmation);
 module.directive(identitySelector);
 module.directive(modalAddIdentity);
-
-/* @ngInject */
-module.config(function($routeProvider) {
-  angular.forEach(routes, function(route) {
-    $routeProvider.when(route.path, route.options);
-  });
-});
 
 return module.name;
 

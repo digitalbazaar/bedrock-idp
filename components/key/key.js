@@ -1,7 +1,7 @@
 /*!
  * Key module.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
@@ -11,7 +11,6 @@ define([
   './edit-key-modal-directive',
   './generate-key-pair-modal-directive',
   './key-controller',
-  './key-routes',
   './key-selector-directive',
   './key-service',
   './keys-controller',
@@ -22,7 +21,6 @@ define([
   editKeyModalDirective,
   generateKeyPairModalDirective,
   keyController,
-  keyRoutes,
   keySelectorDirective,
   keyService,
   keysController,
@@ -31,7 +29,7 @@ define([
 
 'use strict';
 
-var module = angular.module('bedrock-idp.key', ['bedrock-idp.resolver']);
+var module = angular.module('bedrock-idp.key', []);
 
 module.directive(addKeyModalDirective);
 module.directive(editKeyModalDirective);
@@ -41,13 +39,6 @@ module.directive(keySelectorDirective);
 module.service(keyService);
 module.controller(keysController);
 module.directive(keysDirective);
-
-/* @ngInject */
-module.config(function($routeProvider) {
-  angular.forEach(keyRoutes, function(route) {
-    $routeProvider.when(route.path, route.options);
-  });
-});
 
 return module.name;
 

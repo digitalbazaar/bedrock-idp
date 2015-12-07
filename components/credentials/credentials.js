@@ -13,36 +13,11 @@ define([
 
 'use strict';
 
-var credentialsBasePath =
-  window.data['bedrock-angular-credential'].credentialsBasePath;
-
 var module = angular.module(
   'bedrock-idp.credentials',
-  ['bedrock.alert', 'bedrock.credential', 'bedrock-credential-curator',
-  'bedrock-idp.resolver']);
+  ['bedrock.alert', 'bedrock.credential', 'bedrock-credential-curator']);
 
 module.controller(credentialTaskController);
-
-/* @ngInject */
-module.config(function($routeProvider) {
-  $routeProvider
-    .when(window.data.idp.identityBasePath + '/:identity/credentials', {
-      title: 'Credentials',
-      session: 'required',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credentials.html')
-    })
-    .when(credentialsBasePath, {
-      title: 'Credentials',
-      templateUrl: requirejs.toUrl(
-        'bedrock-angular-credential/credential-viewer.html')
-    })
-    .when('/credential-task', {
-      title: 'Credential Task',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credential-task.html')
-    });
-});
 
 module.run(function(brNavbarService, brSessionService, config) {
   brNavbarService.menus.push({

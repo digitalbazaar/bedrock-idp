@@ -1,29 +1,20 @@
 /*!
  * Dashboard module.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
 define([
   'angular',
-  './dashboard-controller',
-  './dashboard-routes'
-], function(angular, controller, routes) {
+  './dashboard-controller'
+], function(angular, controller) {
 
 'use strict';
 
-var module = angular.module('bedrock-idp.dashboard', ['bedrock-idp.resolver']);
+var module = angular.module('bedrock-idp.dashboard', []);
 
 module.controller(controller);
-
-/* @ngInject */
-module.config(function($routeProvider) {
-  console.log('IN DASHBOARD ROUTE CONFIG');
-  angular.forEach(routes, function(route) {
-    $routeProvider.when(route.path, route.options);
-  });
-});
 
 /* @ngInject */
 module.run(function(brNavbarService, brSessionService, config) {

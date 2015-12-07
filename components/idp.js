@@ -31,8 +31,10 @@ var module = angular.module(
 
 /* @ngInject */
 module.config(function($routeProvider, routeResolverProvider) {
-  routeResolverProvider.add(
-    'bedrock-idp', 'session', function($window, $route) {
+  routeResolverProvider.add('bedrock-idp', 'session', resolve);
+
+  /* @ngInject */
+  function resolve($window, $route) {
     // return early if session is present
     var session = $route.current.locals.session;
     if(session && session.identity) {
@@ -45,7 +47,7 @@ module.config(function($routeProvider, routeResolverProvider) {
       $window.location.href = '/session/login';
       throw new Error('Not authenticated.');
     }
-  });
+  }
 
   var basePath = window.data.idp.identityBasePath;
   $routeProvider

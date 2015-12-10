@@ -160,14 +160,14 @@ function factory($scope, config, brAlertService, brIdentityService) {
 
     self.loading = true;
     brAlertService.clear();
-    brIdentityService.collection.update(update)
-      .catch(function(err) {
-        brAlertService.add('error', err);
-      })
-      .then(function() {
-        self.loading = false;
-        $scope.$apply();
-      });
+    brIdentityService.collection.update(update, {
+      url: config.data.idp.identityBaseUri + '/' + self.identity.sysSlug
+    }).catch(function(err) {
+      brAlertService.add('error', err);
+    }).then(function() {
+      self.loading = false;
+      $scope.$apply();
+    });
   };
 
   // reset

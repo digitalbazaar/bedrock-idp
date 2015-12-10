@@ -1,13 +1,20 @@
 {
   "name": "bedrock-idp",
   "version": "1.0.4-dev",
-  "moduleType": ["amd"],
+  "moduleType": [
+    "amd"
+  ],
   "main": "./components/idp.js",
   "ignore": [
+    "bedrock/bower.json",
+    "bedrock/bower_components",
+    "bedrock/package.json",
     "bedrock/pages",
     "bedrock/prepare",
+    "bedrock/node_modules",
     "bedrock/selectors",
     "bedrock/tests",
+    "bedrock/test.js",
     "bower_components",
     "lib",
     "node_modules",
@@ -18,8 +25,19 @@
   "dependencies": {
     "bedrock-angular": "^1.0.0",
     "bedrock-angular-alert": "^1.0.0",
-    "bedrock-angular-form": "^1.0.0",
+    "bedrock-angular-credential": "digitalbazaar/bedrock-angular-credential#master",
+    "bedrock-angular-form": "^1.5.2",
+    "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#master",
+    "bedrock-angular-modal": "^1.0.0",
+    "bedrock-angular-navbar": "^1.0.2",
+    "bedrock-angular-resolver": "^1.0.0",
+    "bedrock-angular-resource": "^1.0.2",
+    "bedrock-angular-session": "^1.1.0",
     "bedrock-angular-ui": "^1.0.0",
-    "forge": "~0.6.30"
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
+    "credentials-polyfill": "~0.7.5",
+    "forge": "^0.6.35",
+    "opencred-verifier": "^0.1.0",
+    "lodash": "~3.10.1"
   }
 }

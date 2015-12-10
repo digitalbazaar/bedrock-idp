@@ -12,7 +12,7 @@ define([], function() {
 /* @ngInject */
 function factory(
   $http, $rootScope, $routeParams, brRefreshService, brResourceService,
-  config) {
+  brSessionService, config) {
   var service = {};
 
   var idp = config.data.idp;
@@ -116,7 +116,9 @@ function factory(
 
   // register for system-wide refreshes
   brRefreshService.register(function() {
-    if(service.identity) {
+    service.identity = brSessionService.session.identity || null;
+    if(service.identity && service.identity.id &&
+      service.identity.id.indexOf('https:') === 0) {
       service.collection.get(service.identity.id);
     }
   });

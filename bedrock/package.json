@@ -1,0 +1,42 @@
+{
+  "name": "bedrock-idp-test",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node test.js",
+    "test": "node test.js test --framework protractor --protractor-suite bedrock-idp",
+    "postinstall": "bower install && node test.js compile-less",
+    "postupdate": "bower update",
+    "bower-install": "bower install",
+    "bower-update": "bower update"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitalbazaar/bedrock-idp"
+  },
+  "dependencies": {
+    "bedrock": "^1.0.0",
+    "bedrock-consumer": "digitalbazaar/bedrock-consumer#master",
+    "bedrock-credentials-mongodb": "digitalbazaar/bedrock-credentials-mongodb#master",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
+    "bedrock-docs": "^1.0.0",
+    "bedrock-express": "^1.4.1",
+    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x",
+    "bedrock-identity-rest": "digitalbazaar/bedrock-identity-rest",
+    "bedrock-mail": "^1.0.0",
+    "bedrock-mongodb": "^1.0.0",
+    "bedrock-passport": "digitalbazaar/bedrock-passport#2.x",
+    "bedrock-rest": "^1.0.0",
+    "bedrock-server": "^1.0.2",
+    "bedrock-session-mongodb": "^1.0.0",
+    "bedrock-session-rest": "^1.0.0",
+    "bedrock-validation": "^1.0.0",
+    "bedrock-views": "^1.5.1",
+    "bower": "^1.5.2"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "directories": {},
+  "main": "test.js"
+}

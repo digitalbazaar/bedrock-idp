@@ -60,11 +60,12 @@ var postPasswordReset = {
 };
 
 var postJoin = {
-  title: 'Create Identity',
+  title: 'Join',
   description: 'Create an Identity',
   type: 'object',
   properties: {
     '@context': schemas.jsonldContext(constants.IDENTITY_CONTEXT_V1_URL),
+    id: schemas.identifier({required: false}),
     type: {
       required: true,
       type: 'string',
@@ -95,6 +96,7 @@ var postLogin = {
   description: 'Login.',
   type: 'object',
   properties: {
+    id: schemas.identifier({required: false}),
     sysIdentifier: {
       required: true,
       type: [schemas.slug(), schemas.email(), schemas.identifier()]

@@ -7,12 +7,12 @@
  */
 define([
   'angular',
+  './credentials/credentials',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
   './key/key',
   './login/login',
-  './navbar/navbar',
   './passcode/passcode',
   './settings/settings'
 ], function(angular) {
@@ -20,31 +20,101 @@ define([
 'use strict';
 
 var modulePath = requirejs.toUrl('bedrock-idp/components/');
+var curatorModulePath =
+  requirejs.toUrl('bedrock-credential-curator/components/');
+var credentialsBasePath =
+  window.data['bedrock-angular-credential'].credentialsBasePath;
 
 var module = angular.module(
-  'bedrock.idp', Array.prototype.slice.call(arguments, 1));
+  'bedrock-idp', Array.prototype.slice.call(arguments, 1).concat([
+    'bedrock.resolver']));
+
+/* @ngInject */
+module.config(function($routeProvider, routeResolverProvider) {
+  routeResolverProvider.add('bedrock-idp', 'session', resolve);
+
+  /* @ngInject */
+  function resolve($window, $route) {
+    // return early if session is present
+    var session = $route.current.locals.session;
+    if(session && session.identity) {
+      return;
+    }
+
+    // if route requires a session, redirect to login
+    if($route.current.session === 'required') {
+      // FIXME: use $location only once any SPA state issues are resolved
+      $window.location.href = '/session/login';
+      throw new Error('Not authenticated.');
+    }
+  }
+
+  var basePath = window.data.idp.identityBasePath;
+  $routeProvider
+    .when(basePath + '/:identity/credentials', {
+      title: 'Credentials',
+      session: 'required',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/credentials/credentials.html')
+    })
+    .when(credentialsBasePath, {
+      title: 'Credentials',
+      templateUrl: requirejs.toUrl(
+        'bedrock-angular-credential/credential-viewer.html')
+    })
+    .when('/credential-task', {
+      title: 'Credential Task',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/credentials/credential-task.html')
+    })
+    .when(basePath + '/:identity/dashboard', {
+      title: 'Dashboard',
+      session: 'required',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/dashboard/dashboard.html')
+    })
+    .when(basePath, {
+      title: 'Identity Credentials',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/identity/identity-credentials.html')
+    })
+    .when(basePath + '/:identity', {
+      title: 'Identity',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/identity/identity.html')
+    })
+    .when('/join', {
+      title: 'Create Identity',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/identity/create-identity.html')
+    })
+    .when(basePath + '/:identity/keys', {
+      title: 'Keys',
+      templateUrl: requirejs.toUrl('bedrock-idp/components/key/keys.html')
+    })
+    .when(basePath + '/:identity/keys/:keyId', {
+      title: 'Key',
+      templateUrl: requirejs.toUrl('bedrock-idp/components/key/key.html')
+    })
+    .when(basePath + '/:identity/settings', {
+      title: 'Settings',
+      session: 'required',
+      templateUrl: requirejs.toUrl(
+        'bedrock-idp/components/settings/settings.html')
+    });
+});
 
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {
   config.site = config.site || {};
-  config.site.navbar = {
-    private: [
-      {
-        slug: 'dashboard',
-        icon: 'fa fa-dashboard',
-        label: 'Dashboard',
-        pageTitle: 'Dashboard'
-      },
-      {
-        slug: 'settings',
-        icon: 'fa fa-wrench',
-        label: 'Settings',
-        pageTitle: 'Settings'
-      }
-    ],
-    public: []
-  };
-
+  config.site.navbar = config.site.navbar || {};
+  config.site.navbar.templates = config.site.navbar.templates || [];
+  config.site.navbar.templates.push(requirejs.toUrl(
+    'bedrock-idp/components/navbar/login.html'));
+  config.site.navbar.templates.push(requirejs.toUrl(
+    'bedrock-idp/components/navbar/join.html'));
+  config.site.navbar.templates.push(requirejs.toUrl(
+    'bedrock-idp/components/navbar/identity-hovercard.html'));
   config.settings = config.settings || {};
   config.settings.panes = [
     {
@@ -52,8 +122,14 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     },
     {
       templateUrl: modulePath + 'key/key-settings.html'
-    }
+    }/*,
+    {
+      templateUrl: curatorModulePath + 'key/key-settings.html'
+    }*/
   ];
+
+  // FIXME: remove `locationChangeStart` (everything below; replaced with
+  // route resolver above) once `queuedRequest` no longer supported
 
   // do immediate initial location change prior to loading any page content
   // in case a redirect is necessary
@@ -61,7 +137,7 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
 
   $rootScope.$on('$locationChangeStart', locationChangeStart);
 
-  function locationChangeStart() {
+  function locationChangeStart(event) {
     if(config.data.queuedRequest) {
       // re-route to login if not already there
       if($location.path() !== '/session/login') {
@@ -80,13 +156,10 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     // redirect to login
     var route = util.getRouteFromPath($route, $location.path());
     if(route && route.session === 'required') {
-      $window.location.href = '/session/login';
       if(event) {
         event.preventDefault();
-      } else {
-        throw new Error('Session not found.');
       }
-      return;
+      $window.location.href = '/session/login';
     }
   }
 });

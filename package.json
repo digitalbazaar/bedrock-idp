@@ -23,23 +23,42 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-idp",
   "dependencies": {
-    "async": "~0.9.0",
+    "async": "^1.4.2",
+    "bcrypt": "~0.8.1",
     "cors": "~2.4.2",
+    "did-io": "^0.6.1",
+    "jsonld-signatures": "^1.1.3",
+    "lodash": "~3.10.1",
+    "node-forge": "^0.6.35",
+    "passport-local": "~1.0.0",
+    "request": "^2.60.0",
     "superagent": "~0.21.0",
     "underscore": "~1.7.0"
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
+    "bedrock-consumer": "digitalbazaar/bedrock-consumer#master",
+    "bedrock-credentials-mongodb": "digitalbazaar/bedrock-credentials-mongodb#master",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#master",
     "bedrock-docs": "^1.0.0",
-    "bedrock-identity": "^1.0.2",
+    "bedrock-express": "^1.4.1",
+    "bedrock-identity": "digitalbazaar/bedrock-identity#2.x",
+    "bedrock-identity-rest": "digitalbazaar/bedrock-identity-rest",
     "bedrock-mail": "^1.0.0",
     "bedrock-mongodb": "^1.0.0",
-    "bedrock-passport": "^1.0.0",
+    "bedrock-passport": "digitalbazaar/bedrock-passport#2.x",
     "bedrock-rest": "^1.0.0",
+    "bedrock-session-mongodb": "^1.0.0",
+    "bedrock-session-rest": "^1.0.0",
     "bedrock-validation": "^1.0.0",
     "bedrock-views": "^1.0.4"
   },
   "directories": {
     "lib": "./lib"
+  },
+  "devDependencies": {
+    "bedrock-protractor": "^1.0.0",
+    "node-uuid": "^1.4.3",
+    "supertest": "^1.0.1"
   }
 }

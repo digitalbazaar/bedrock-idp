@@ -6,24 +6,61 @@
       </div>
       <div class="modal-body">
         <br-demo-warning></br-demo-warning>
-        <p class="alert alert-warning">
+        <p ng-if="!model.newLogin" class="alert alert-warning">
           Your session has expired, please sign back in to continue.
         </p>
+        <div class="well" ng-if="model.display.didLogin">
+          <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg"
+              ng-disabled="model.loading"
+              ng-click="model.didLogin()"><i class="fa fa-cloud"></i>
+                Sign in with Decentralized Identity</button>
+          </div>
+        </div>
+        <hr/>
         <form class="well form-horizontal">
           <fieldset>
-            <br-input br-model="model.sysIdentifier"
-              ng-keypress="$event.which == 13 && model.login()"
+            <br-input ng-if="!model.newLogin" br-model="model.sysIdentifier"
               br-options="{
-                name: 'sysIdentifier', label: 'Identity', disabled: true}">
-              You cannot change the identity here. If you need to log in
+                name: 'sysIdentifier', label: 'Identity', disabled: true
+              }">
+              You cannot change your identity here. If you need to sign in
               using another identity, please refresh the page.
             </br-input>
-
-            <br-input br-model="model.password"
+            <br-input ng-if="model.newLogin && !model.multiple"
+              br-model="model.sysIdentifier"
               ng-keypress="$event.which == 13 && model.login()"
               br-options="{
-                name: 'password', type: 'password',
-                label: 'Password', disabled: {{model.loading}}}">
+                name: 'sysIdentifier', label: 'Email', placeholder: 'Email',
+                disabled: {{model.loading}}, autofocus: true
+              }">
+              Please enter the email address that you used when you registered
+              with this website.
+            </br-input>
+            <div ng-if="model.multiple">
+              <div class="form-group">
+                <p class="alert alert-info">
+                  <strong>Note:</strong>
+                  Your email address (<strong>{{model.email}}</strong>) is
+                  associated with multiple identities. Please select the
+                  identity you'd like to sign in with.
+                </p>
+              </div>
+              <br-select ng-if="model.multiple" br-model="model.sysIdentifier"
+                br-items="model.choices" br-display-item="item.label"
+                br-options="{
+                  name: 'sysIdentifier', label: 'Identity',
+                  placeholder: 'Choose...', key: 'id',
+                  disabled: {{model.loading}}
+                }">
+              </br-select>
+            </div>
+            <br-input ng-show="!model.multiple" br-model="model.password"
+              ng-keypress="$event.which == 13 && model.login()"
+              br-options="{
+                name: 'password', placeholder: 'Password', type: 'password',
+                label: 'Password', disabled: {{model.loading}}
+              }">
               Please enter your password.
             </br-input>
           </fieldset>
@@ -36,6 +73,9 @@
         <button type="button" class="btn btn-primary"
           ng-disabled="model.loading"
           ng-click="model.login()"><i class="fa fa-sign-in"></i> Sign In</button>
+        <button ng-if="model.display.cancel"
+          type="button" class="btn btn-default stackable-cancel"
+          ng-disabled="model.loading">Cancel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

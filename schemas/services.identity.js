@@ -136,6 +136,7 @@ var postIdentities = {
     type: 'object',
     properties: {
       '@context': schemas.jsonldContext(constants.IDENTITY_CONTEXT_V1_URL),
+      id: schemas.identifier({required: false}),
       type: {
         required: true,
         type: 'string',

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+- Add credentials menu tab and UI.
+- Add test credentials for test mode.
+
 ## [1.0.3] - 2015-07-16
 
 ### Changed

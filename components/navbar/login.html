@@ -1,0 +1,9 @@
+<br-navbar-plugin br-operation="append">
+  <div class="btn-group" br-slot="br-navbar-button-toolbar">
+    <br-idp-login display-login="model.showLogin"></br-idp-login>
+  </div>
+</br-navbar-plugin>
+<stackable-modal stackable="model.showLogin"
+  br-lazy-compile="model.showLogin">
+  <br-login-modal br-options="{display: {cancel: true, didLogin: true}}"></br-login-modal>
+</stackable-modal>

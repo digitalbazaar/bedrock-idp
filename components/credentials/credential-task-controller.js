@@ -26,8 +26,8 @@ function factory($scope, brAlertService, brAuthenticationService) {
 
     // inspect public key credential
     // TODO: `credential` should be an @set
-    var credential = identity.credential['@graph'].claim.publicKey;
-    if(jsonld.hasValue(credential, 'type', 'EphemeralCryptographicKey')) {
+    var publicKey = identity.credential['@graph'].claim.publicKey;
+    if(jsonld.hasValue(publicKey, 'type', 'EphemeralCryptographicKey')) {
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;

@@ -188,4 +188,12 @@ config.views.vars['bedrock-angular-credential'].libraries.default = {
   ]
 };
 
+// setup to load dev contexts
+config.views.vars.contextMap['https://w3id.org/security/v1'] =
+  config.server.baseUri + '/contexts/security-v1.jsonld';
+config.views.vars.contextMap['https://w3id.org/identity/v1'] =
+  config.server.baseUri + '/contexts/identity-v1.jsonld';
+config.views.vars.contextMap['https://w3id.org/credentials/v1'] =
+  config.server.baseUri + '/contexts/credentials-v1.jsonld';
+
 bedrock.start();

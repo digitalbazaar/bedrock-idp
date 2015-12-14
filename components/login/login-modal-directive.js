@@ -92,10 +92,10 @@ function factory(
           if(!session) {
             return;
           }
-          // refresh services
-          brRefreshService.refresh();
           // FIXME: remove hack to set current identity
           config.data.idp.session.identity = session.identity;
+          // refresh services
+          brRefreshService.refresh();
           // success, close modal
           stackable.close(null);
           if(angular.isDefined(attrs.brCallback)) {
@@ -139,6 +139,8 @@ function factory(
         }
         // FIXME: remove hack to set current identity
         config.data.idp.session.identity = session.identity;
+        // refresh services
+        brRefreshService.refresh();
         // success, close modal
         stackable.close(null);
         if(angular.isDefined(attrs.brCallback)) {

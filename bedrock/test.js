@@ -75,8 +75,12 @@ config.mongodb.local.collection = 'bedrock_idp_dev';
 config.idp.owner = {
   id: 'did:291f1b71-de7f-45de-9b6d-9eecc335ecf3'
 };
+config['credential-curator'].credentialSigningPublicKey.id =
+  config.idp.owner.id + '/keys/1';
+
 // FIXME: store this securely
-config.idp.owner.privateKey = config.idp.credentialSigningPrivateKey;
+config.idp.owner.privateKey =
+  config['credential-curator'].credentialSigningPrivateKey;
 config.idp.owner.didRegistrationUrl = 'https://authorization.dev:33443/dids';
 config.idp.owner.didDocument = {
   '@context': 'https://w3id.org/identity/v1',
@@ -85,16 +89,16 @@ config.idp.owner.didDocument = {
   url: config.server.baseUri,
   accessControl: {
     writePermission: [{
-      id: config.idp.credentialSigningPublicKey.id,
+      id: config['credential-curator'].credentialSigningPublicKey.id,
       type: 'CryptographicKey'
     }]
   },
   publicKey: [{
-    // TODO: change to use DID URI
-    id: config.idp.credentialSigningPublicKey.id,
+    id: config['credential-curator'].credentialSigningPublicKey.id,
     type: 'CryptographicKey',
     owner: config.idp.owner.id,
-    publicKeyPem: config.idp.credentialSigningPublicKey.publicKeyPem
+    publicKeyPem:
+      config['credential-curator'].credentialSigningPublicKey.publicKeyPem
   }]
 };
 // TODO: use some other global flag?

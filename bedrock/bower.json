@@ -11,6 +11,7 @@
     "bedrock-angular-credential": "digitalbazaar/bedrock-angular-credential#master",
     "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#master",
     "bedrock-angular-form": "^1.5.2",
+    "bedrock-angular-key": "digitalbazaar/bedrock-angular-key#master",
     "bedrock-angular-modal": "^1.0.0",
     "bedrock-angular-model": "^1.0.0",
     "bedrock-angular-ui": "^1.0.0",

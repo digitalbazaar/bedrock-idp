@@ -24,6 +24,7 @@ var curatorModulePath =
   requirejs.toUrl('bedrock-credential-curator/components/');
 var credentialsBasePath =
   window.data['bedrock-angular-credential'].credentialsBasePath;
+var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
   'bedrock-idp', Array.prototype.slice.call(arguments, 1).concat([
@@ -92,9 +93,14 @@ module.config(function($routeProvider, routeResolverProvider) {
       title: 'Keys',
       templateUrl: requirejs.toUrl('bedrock-idp/components/key/keys.html')
     })
+    .when(keyBasePath + '/:keyId', {
+      title: 'Key',
+      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
+    })
+    // FIXME: deprecated endpoint support for old keys
     .when(basePath + '/:identity/keys/:keyId', {
       title: 'Key',
-      templateUrl: requirejs.toUrl('bedrock-idp/components/key/key.html')
+      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
     })
     .when(basePath + '/:identity/settings', {
       title: 'Settings',

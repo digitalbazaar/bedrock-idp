@@ -17,7 +17,7 @@
         <strong>Error!</strong> Identity not found or access not allowed.
       </div>
 
-      <dl ng-show="model.identity" class="dl-horizontal" about="" typeof="bed:{{model.identity.type}}">
+      <dl ng-show="model.identity" class="dl-horizontal" about="{{model.identity.id}}" typeof="bed:{{model.identity.type}}">
         <dt ng-show="model.identity.label">Label</dt>
         <dd ng-show="model.identity.label">
           <ul class="list-unstyled">

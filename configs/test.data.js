@@ -354,13 +354,14 @@ function createKeyPair(options) {
   var privateKey = options.privateKey;
   var newKeyPair = {
     publicKey: {
-      '@context': 'someContextURL',
+      '@context': 'https://w3id.org/security/v1',
       type: 'CryptographicKey',
       owner: identity.id,
       label: 'Signing Key 1',
       publicKeyPem: publicKey
     },
     privateKey: {
+      '@context': 'https://w3id.org/security/v1',
       type: 'CryptographicKey',
       owner: identity.id,
       label: 'Signing Key 1',

@@ -181,6 +181,16 @@ config.idp.defaults.identity = {
 // serve contexts and vocabs
 config.express.static.push(path.join(__dirname, 'static'));
 
+/**
+ * Load a local copy of credentials v1 context.
+ */
+var constants = config.constants;
+constants.CREDENTIALS_CONTEXT_V1_URL = 'https://w3id.org/credentials/v1';
+constants.CONTEXTS[constants.CREDENTIALS_CONTEXT_V1_URL] = JSON.parse(
+  fs.readFileSync(
+    path.join(__dirname, '/static/contexts/credentials-v1.jsonld'),
+    {encoding: 'utf8'}));
+
 // setup to load vocabs
 config.views.vars['bedrock-angular-credential'] =
   config.views.vars['bedrock-angular-credential'] || {};

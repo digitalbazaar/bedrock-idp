@@ -104,6 +104,10 @@ config.idp.owner.didDocument = {
 // TODO: use some other global flag?
 config.idp.owner.registerWithStrictSSL = false;
 
+// credential curator
+config['credential-curator']['authorization-io'].baseUrl =
+  'https://authorization.dev:33443/dids/';
+
 // frontend vars
 config.views.vars.baseUri = config.server.baseUri;
 config.views.vars['authorization-io'] = {};

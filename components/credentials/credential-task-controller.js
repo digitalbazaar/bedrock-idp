@@ -25,9 +25,15 @@ function factory($scope, brAlertService, brAuthenticationService) {
     // FIXME: validate identity format
 
     // inspect public key credential
-    // TODO: `credential` should be an @set
-    var publicKey = identity.credential['@graph'].claim.publicKey;
-    if(jsonld.hasValue(publicKey, 'type', 'EphemeralCryptographicKey')) {
+    // TODO: `credential` should be an @set; find public key credential in
+    // the set
+    var credentials = jsonld.getValues(identity, 'credential');
+    var publicKey;
+    if(credentials.length === 1) {
+      publicKey = credentials[0]['@graph'].claim.publicKey;
+    }
+    if(publicKey && publicKey.id.indexOf('did:') !== 0 ||
+      jsonld.hasValue(publicKey, 'type', 'EphemeralCryptographicKey')) {
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;

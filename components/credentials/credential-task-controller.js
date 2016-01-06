@@ -38,6 +38,7 @@ function factory($scope, brAlertService, brAuthenticationService) {
     }
     // auto-login w/DID
     return new Promise(function(resolve) {
+      var sysIdentifier = identity.id;
       brAuthenticationService.login(identity).catch(function(err) {
         brAlertService.add('error', err);
         $scope.$apply();
@@ -49,7 +50,7 @@ function factory($scope, brAlertService, brAuthenticationService) {
         // this may happen and implement better handling)
         // show login modal on DID-based failure
         self.display.login = true;
-        self.sysIdentifier = identity.id;
+        self.sysIdentifier = sysIdentifier;
         $scope.$apply();
       });
     });

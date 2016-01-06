@@ -24,6 +24,9 @@ function factory($scope, brAlertService, brAuthenticationService) {
   self.createSession = function(identity) {
     // FIXME: validate identity format
 
+    var needsLogin = false;
+    self.display = {login: false};
+
     // inspect public key credential
     // TODO: `credential` should be an @set; find public key credential in
     // the set
@@ -32,8 +35,15 @@ function factory($scope, brAlertService, brAuthenticationService) {
     if(credentials.length === 1) {
       publicKey = credentials[0]['@graph'].claim.publicKey;
     }
-    if(publicKey && publicKey.id.indexOf('did:') !== 0 ||
-      jsonld.hasValue(publicKey, 'type', 'EphemeralCryptographicKey')) {
+    if(publicKey && jsonld.hasValue(
+      publicKey, 'type', 'EphemeralCryptographicKey')) {
+      needsLogin = true;
+      self.display.temporaryDevice = true;
+    } else if(publicKey && publicKey.id.indexOf('did:') !== 0) {
+      needsLogin = true;
+      self.display.newDevice = true;
+    }
+    if(needsLogin) {
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;

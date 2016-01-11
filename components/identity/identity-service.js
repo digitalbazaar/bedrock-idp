@@ -100,8 +100,12 @@ function factory(
    *          id full identity id to use for 'id' method (optional)
    */
   service.generateUrl = function(options) {
+    options = options || {};
     if(options.identityMethod === 'current' && service.identity) {
       return service.identity.id;
+    }
+    if(options.identityMethod === 'relative' && service.identity) {
+      return idp.identityBasePath + '/' + service.identity.sysSlug;
     }
     if(options.identityMethod === 'route') {
       return idp.identityBaseUri + '/' + $routeParams.identity;

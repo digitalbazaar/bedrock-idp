@@ -112,15 +112,6 @@ module.config(function($routeProvider, routeResolverProvider) {
 
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {
-  config.site = config.site || {};
-  config.site.navbar = config.site.navbar || {};
-  config.site.navbar.templates = config.site.navbar.templates || [];
-  config.site.navbar.templates.push(requirejs.toUrl(
-    'bedrock-idp/components/navbar/login.html'));
-  config.site.navbar.templates.push(requirejs.toUrl(
-    'bedrock-idp/components/navbar/join.html'));
-  config.site.navbar.templates.push(requirejs.toUrl(
-    'bedrock-idp/components/navbar/identity-hovercard.html'));
   config.settings = config.settings || {};
   config.settings.panes = [
     {

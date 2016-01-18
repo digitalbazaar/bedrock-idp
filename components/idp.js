@@ -112,8 +112,10 @@ module.config(function($routeProvider, routeResolverProvider) {
 
 /* @ngInject */
 module.run(function($location, $rootScope, $route, $window, config, util) {
+  // FIXME: need a mechanism for display order on the tabs
   config.settings = config.settings || {};
-  config.settings.panes = [
+  config.settings.panes = config.settings.panes || [];
+  config.settings.panes.push(
     {
       templateUrl: modulePath + 'identity/identity-settings.html'
     },
@@ -123,7 +125,7 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
     {
       templateUrl: curatorModulePath + 'key/key-settings.html'
     }*/
-  ];
+  );
 
   // FIXME: remove `locationChangeStart` (everything below; replaced with
   // route resolver above) once `queuedRequest` no longer supported

@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "1.0.4-dev",
+  "version": "2.0.0-dev",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/digitalbazaar/bedrock-idp",
   "dependencies": {
-    "async": "^1.4.2",
+    "async": "^1.5.2",
     "bcrypt": "~0.8.1",
     "cors": "~2.4.2",
     "did-io": "^0.6.1",

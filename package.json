@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
-    "bedrock-consumer": "digitalbazaar/bedrock-consumer#master",
+    "bedrock-consumer": "^1.0.0",
     "bedrock-credentials-mongodb": "^1.0.0",
     "bedrock-credential-curator": "^0.1.1",
     "bedrock-docs": "^1.0.0",

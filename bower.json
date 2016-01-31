@@ -35,7 +35,7 @@
     "bedrock-angular-resource": "^1.0.2",
     "bedrock-angular-session": "^1.1.0",
     "bedrock-angular-ui": "^1.0.0",
-    "bedrock-credential-curator": "^1.0.0",
+    "bedrock-credential-curator": "^0.1.0",
     "credentials-polyfill": "~0.7.5",
     "forge": "^0.6.35",
     "opencred-verifier": "^0.1.0",

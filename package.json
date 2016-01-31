@@ -42,7 +42,7 @@
     "bedrock-docs": "^1.0.0",
     "bedrock-express": "^1.4.1",
     "bedrock-identity": "^2.0.0",
-    "bedrock-identity-rest": "digitalbazaar/bedrock-identity-rest",
+    "bedrock-identity-rest": "^0.1.0",
     "bedrock-key": "^1.0.0",
     "bedrock-key-http": "digitalbazaar/bedrock-key-http#master",
     "bedrock-mail": "^1.0.0",

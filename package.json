@@ -44,7 +44,7 @@
     "bedrock-identity": "^2.0.0",
     "bedrock-identity-rest": "^0.1.0",
     "bedrock-key": "^1.0.0",
-    "bedrock-key-http": "digitalbazaar/bedrock-key-http#master",
+    "bedrock-key-http": "^1.0.0",
     "bedrock-mail": "^1.0.0",
     "bedrock-mongodb": "^1.0.0",
     "bedrock-passport": "^2.0.0",

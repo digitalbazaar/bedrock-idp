@@ -6,7 +6,7 @@
  * @author Dave Longley
  */
 define([
-  'forge/js/md', 'forge/js/pki', 'forge/js/util', 'jsonld', 'underscore',
+  'forge/js/md', 'forge/js/pki', 'forge/js/util', 'jsonld', 'lodash',
   'opencred-verifier'],
 function(md, pki, util, jsonld, _, verifierFactory) {
 

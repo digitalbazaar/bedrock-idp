@@ -39,6 +39,6 @@
     "credentials-polyfill": "~0.7.5",
     "forge": "^0.6.35",
     "opencred-verifier": "^0.1.0",
-    "lodash": "~3.10.1"
+    "lodash": "^4.0.0"
   }
 }

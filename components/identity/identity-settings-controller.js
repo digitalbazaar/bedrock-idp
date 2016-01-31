@@ -9,7 +9,7 @@
 define([
   'angular',
   'forge',
-  'underscore'
+  'lodash'
 ], function(angular, forge, _) {
 
 'use strict';

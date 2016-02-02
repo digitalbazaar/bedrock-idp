@@ -6,14 +6,18 @@
  * @author Dave Longley
  */
 define([
-  'angular'
+  'angular',
+  './identity-keys-controller'
 ], function(
-  angular
+  angular,
+  identityKeysController
 ) {
 
 'use strict';
 
 var module = angular.module('bedrock-idp.key', []);
+
+module.controller(identityKeysController);
 
 return module.name;
 

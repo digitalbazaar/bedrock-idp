@@ -95,8 +95,9 @@ function factory(
    *            'route': base id on current route
    *            'shortId': base id on shortId param
    *            'id': use passed identity
-   *        identityShortId short id to use for 'shortId' method (optional)
-   *        id full identity id to use for 'id' method (optional)
+   *            'none': no identity
+   *          identityShortId short id to use for 'shortId' method (optional)
+   *          id full identity id to use for 'id' method (optional)
    */
   service.generateUrl = function(options) {
     if(options.identityMethod === 'current' && service.identity) {
@@ -110,6 +111,9 @@ function factory(
     }
     if(options.identityMethod === 'id' && options.id) {
       return options.id;
+    }
+    if(options.identityMethod === 'none') {
+      return null;
     }
     throw Error('Identity URL generation error.');
   };

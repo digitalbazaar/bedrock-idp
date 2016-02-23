@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
 var bedrock = require('bedrock');
 var fs = require('fs');
@@ -213,5 +213,12 @@ config.views.vars.contextMap['https://w3id.org/identity/v1'] =
   config.server.baseUri + '/contexts/identity-v1.jsonld';
 config.views.vars.contextMap['https://w3id.org/credentials/v1'] =
   config.server.baseUri + '/contexts/credentials-v1.jsonld';
+
+// angular-basic pseudo bower package
+var rootPath = path.join(__dirname);
+config.requirejs.bower.packages.push({
+  path: path.join(rootPath, 'components'),
+  manifest: path.join(rootPath, 'bower.json')
+});
 
 bedrock.start();

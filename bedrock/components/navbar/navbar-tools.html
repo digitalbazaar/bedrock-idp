@@ -8,6 +8,8 @@
     </div>
     <div class="btn-group" br-slot="br-navbar-button-toolbar">
       <br-idp-join ng-if="!model.loggedIn"></br-idp-join>
+    </div>
+    <div class="btn-group" br-slot="br-navbar-button-toolbar">
       <br-idp-login ng-if="!model.loggedIn" display-login="model.showLogin"></br-idp-login>
     </div>
   </br-navbar-plugin>

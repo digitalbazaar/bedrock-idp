@@ -29,7 +29,7 @@
     "bedrock-angular-form": "^1.5.2",
     "bedrock-angular-identity-composer": "digitalbazaar/bedrock-angular-identity-composer#master",
     "bedrock-angular-key": "digitalbazaar/bedrock-angular-key#master",
-    "bedrock-angular-messages": "digitalbazaar/bedrock-angular-messages#master",
+    "bedrock-angular-messages": "digitalbazaar/bedrock-angular-messages#messagingInterface",
     "bedrock-angular-modal": "^1.0.0",
     "bedrock-angular-navbar": "^1.0.2",
     "bedrock-angular-resolver": "^1.0.0",

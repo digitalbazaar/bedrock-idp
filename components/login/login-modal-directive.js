@@ -12,7 +12,7 @@ define(['angular', 'lodash'], function(angular, _) {
 /* @ngInject */
 function factory(
   $http, $location, $timeout, $window, brAlertService, brAuthenticationService,
-  brRefreshService, brSessionService, config) {
+  brPasswordService, brRefreshService, brSessionService, config) {
   return {
     // TODO: change to just 'E'
     restrict: 'EA',
@@ -65,10 +65,9 @@ function factory(
         authData.id = scope.sysIdentifier;
       }
 
-      Promise.resolve($http.post('/session/login', authData))
-        .then(function(response) {
+      brPasswordService.login(authData)
+        .then(function(data) {
           // if a single 'identity' is returned, login was successful
-          var data = response.data;
           if(data.identity) {
             // refresh session information
             return brSessionService.get();

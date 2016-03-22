@@ -1,26 +1,33 @@
 /*
- * Copyright (c) 2014-2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
 'use strict';
 
 var bedrock = require('bedrock');
+var config = bedrock.config;
+var helpers = require('./helpers');
 var request = require('request');
-var jar = request.jar();
-request = request.defaults({jar: jar, json: true});
+request = request.defaults({jar: true, json: true});
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
-describe('bedrock-idp.login', function() {
-  it('should reject bad cookie-based login as dev', function(done) {
-    var loginService = bedrock.config.server.baseUri + '/session/login';
+describe('bedrock-idp password login', function() {
+  after(function(done) {
+    helpers.logout(request, done);
+  });
+
+  var loginService =
+    config.server.baseUri + config['authn-password'].routes.login;
+  it('should reject bad cookie-based login', function(done) {
     request.post(
       {
         url: loginService,
         body: {sysIdentifier: 'INVALID_LOGIN', password: 'password'}
       },
       function(err, res, body) {
-        res.headers['set-cookie'].should.exist;
+        should.exist(res.headers['set-cookie']);
         res.statusCode.should.equal(400);
         res.body.should.not.have.property('identity');
         done(err);
@@ -29,7 +36,6 @@ describe('bedrock-idp.login', function() {
   });
 
   it('should accept good cookie-based login as dev', function(done) {
-    var loginService = bedrock.config.server.baseUri + '/session/login';
     request.post(
       {
         url: loginService,

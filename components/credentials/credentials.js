@@ -22,13 +22,12 @@ module.controller(credentialsController);
 module.controller(credentialTaskController);
 
 module.run(function(brNavbarService, brSessionService, config) {
-  brNavbarService.menus.push({
+  brNavbarService.registerMenu('brCredential', {
     slug: '/credentials',
     icon: 'fa fa-trophy',
     label: 'Credentials',
     pageTitle: 'Credentials',
     visible: false,
-    weight: 20,
     init: function(scope) {
       var menu = this;
       scope.$watch(function() {

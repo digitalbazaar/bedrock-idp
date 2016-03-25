@@ -39,7 +39,7 @@
     "bedrock-passport": "^3.0.0",
     "bedrock-rest": "^2.0.0",
     "bedrock-session-mongodb": "^2.0.0",
-    "bedrock-session-rest": "^2.0.0",
+    "bedrock-session-http": "^2.0.0",
     "bedrock-validation": "^2.0.0",
     "bedrock-views": "^2.0.0",
     "bcrypt": "~0.8.1",
@@ -66,7 +66,7 @@
     "bedrock-passport": "^3.0.0",
     "bedrock-rest": "^2.0.0",
     "bedrock-session-mongodb": "^2.0.0",
-    "bedrock-session-rest": "^2.0.0",
+    "bedrock-session-http": "^2.0.0",
     "bedrock-validation": "^2.0.0",
     "bedrock-views": "^2.0.0"
   },

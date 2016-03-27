@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [3.0.3] - 2016-03-27
+
+### Changed
+- Use credentials-polyfill 0.8.x.
+
 ## [3.0.2] - 2016-03-26
 
 ### Changed
@@ -75,7 +80,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.2...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.3...HEAD
+[3.0.3]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.3...3.0.0

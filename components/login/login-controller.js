@@ -25,7 +25,7 @@ function factory($scope, $http, $compile, $window, brAlertService, config) {
     // do login
     brAlertService.clearFeedback();
     self.loading = true;
-    Promise.resolve($http.post('/session/login', {
+    Promise.resolve($http.post('/authn-password/login', {
       sysIdentifier: self.sysIdentifier,
       password: self.password
     })).then(function(response) {

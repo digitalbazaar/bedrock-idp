@@ -34,6 +34,8 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
+    "bedrock-authn-did": "digitalbazaar/bedrock-authn-did#master",
+    "bedrock-authn-password": "digitalbazaar/bedrock-authn-password#master",
     "bedrock-consumer": "^2.0.0",
     "bedrock-credentials-mongodb": "^2.0.0",
     "bedrock-credential-curator": "^0.3.0",

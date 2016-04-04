@@ -35,7 +35,7 @@ module.config(function($routeProvider, routeResolverProvider) {
   routeResolverProvider.add('bedrock-idp', 'session', resolve);
 
   /* @ngInject */
-  function resolve($window, $route) {
+  function resolve($location, $window, $route) {
     // return early if session is present
     var session = $route.current.locals.session;
     if(session && session.identity) {
@@ -45,7 +45,11 @@ module.config(function($routeProvider, routeResolverProvider) {
     // if route requires a session, redirect to login
     if($route.current.session === 'required') {
       // FIXME: use $location only once any SPA state issues are resolved
-      $window.location.href = '/session/login';
+      // FIXME: where do we want to go today?
+      // NOTE: attempting to use $location instead of window.  If issues arise
+      // return to using $window
+      // $window.location.href = '/session/login';
+      $location.url('/');
       throw new Error('Not authenticated.');
     }
   }
@@ -111,7 +115,9 @@ module.config(function($routeProvider, routeResolverProvider) {
 });
 
 /* @ngInject */
-module.run(function($location, $rootScope, $route, $window, config, util) {
+module.run(function(
+  $location, $rootScope, $route, $window, brAuthnService, config, util) {
+  brAuthnService.displayOrder = ['authn-did', 'authn-password'];
   // FIXME: need a mechanism for display order on the tabs
   config.settings = config.settings || {};
   config.settings.panes = config.settings.panes || [];
@@ -158,7 +164,11 @@ module.run(function($location, $rootScope, $route, $window, config, util) {
       if(event) {
         event.preventDefault();
       }
-      $window.location.href = '/session/login';
+      // FIXME: attemping to use $location, switch back to $window if issues
+      // arise
+      // $window.location.href = '/session/login';
+      // FIXME: where do we want to go?
+      $location.url('/');
     }
   }
 });

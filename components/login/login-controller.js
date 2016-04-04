@@ -1,7 +1,7 @@
 /*!
  * Login Support.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */

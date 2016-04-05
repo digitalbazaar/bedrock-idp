@@ -8,10 +8,10 @@ var schema = {
   title: 'Passcode',
   description: 'An auto-generated security code.',
   type: 'string',
-  minLength: 8,
-  maxLength: 8,
+  minLength: 40,
+  maxLength: 40,
   errors: {
-    invalid: 'The passcode must be 8 characters in length.',
+    invalid: 'The passcode must be 40 characters in length.',
     missing: 'Please enter a passcode.',
     masked: true
   }

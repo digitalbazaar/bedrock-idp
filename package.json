@@ -24,24 +24,6 @@
   "homepage": "https://github.com/digitalbazaar/bedrock-idp",
   "dependencies": {
     "async": "^1.5.2",
-    "bedrock": "^1.0.0",
-    "bedrock-consumer": "^2.0.0",
-    "bedrock-credentials-mongodb": "^2.0.0",
-    "bedrock-credential-curator": "^0.2.0",
-    "bedrock-docs": "^2.0.0",
-    "bedrock-express": "^2.0.0",
-    "bedrock-identity": "^3.0.0",
-    "bedrock-identity-rest": "^0.2.0",
-    "bedrock-key": "^2.0.0",
-    "bedrock-key-http": "^2.0.0",
-    "bedrock-mail": "^2.0.0",
-    "bedrock-mongodb": "^2.0.0",
-    "bedrock-passport": "^3.0.0",
-    "bedrock-rest": "^2.0.0",
-    "bedrock-session-mongodb": "^2.0.0",
-    "bedrock-session-http": "^2.0.0",
-    "bedrock-validation": "^2.0.0",
-    "bedrock-views": "^2.0.0",
     "bcrypt": "~0.8.1",
     "cors": "^2.7.1",
     "did-io": "^0.6.1",
@@ -68,7 +50,7 @@
     "bedrock-session-mongodb": "^2.0.0",
     "bedrock-session-http": "^2.0.0",
     "bedrock-validation": "^2.0.0",
-    "bedrock-views": "^2.0.0"
+    "bedrock-views": "^4.0.0"
   },
   "directories": {
     "lib": "./lib"

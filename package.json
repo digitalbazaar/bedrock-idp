@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "3.0.4-dev",
+  "version": "4.0.0",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
@@ -28,7 +28,7 @@
     "cors": "^2.7.1",
     "did-io": "^0.6.1",
     "jsonld-signatures": "^1.1.3",
-    "lodash": "^3.10.1",
+    "lodash": "^4.0.0",
     "passport-local": "~1.0.0",
     "request": "^2.60.0"
   },

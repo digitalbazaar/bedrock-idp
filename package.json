@@ -36,7 +36,7 @@
     "bedrock": "^1.0.0",
     "bedrock-consumer": "^2.0.0",
     "bedrock-credentials-mongodb": "^2.0.0",
-    "bedrock-credential-curator": "^0.2.0",
+    "bedrock-credential-curator": "^0.3.0",
     "bedrock-docs": "^2.0.0",
     "bedrock-express": "^2.0.0",
     "bedrock-identity": "^3.0.0",

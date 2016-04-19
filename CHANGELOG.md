@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+## [4.0.1] - 2016-04-19
+
+### Changed
+- Render identity page using AngularJS.
+
 ## [4.0.0] - 2016-03-15
 
 ### Changed
@@ -86,7 +91,8 @@
 
 - See git history for changes.
 
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/4.0.1...HEAD
+[4.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/4.0.0...4.0.1
 [4.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.3...4.0.0
 [3.0.3]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.1...3.0.2

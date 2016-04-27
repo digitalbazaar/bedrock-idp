@@ -32,7 +32,7 @@
     "bedrock-angular-key": "^1.0.0",
     "bedrock-angular-messages": "^1.0.0",
     "bedrock-angular-modal": "^3.0.0",
-    "bedrock-angular-navbar": "^2.0.0",
+    "bedrock-angular-navbar": "^3.0.0",
     "bedrock-angular-resolver": "^2.0.0",
     "bedrock-angular-resource": "^2.0.0",
     "bedrock-angular-session": "^2.0.0",

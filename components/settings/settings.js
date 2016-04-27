@@ -17,13 +17,12 @@ var module = angular.module('bedrock-idp.settings', []);
 module.controller(settings);
 
 module.run(function(brNavbarService, brSessionService, config) {
-  brNavbarService.menus.push({
+  brNavbarService.registerMenu('brSettings', {
     slug: '/settings',
     icon: 'fa fa-wrench',
     label: 'Settings',
     pageTitle: 'Settings',
     visible: false,
-    weight: 30,
     init: function(scope) {
       var menu = this;
       scope.$watch(function() {

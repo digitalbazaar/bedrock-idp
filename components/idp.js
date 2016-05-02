@@ -35,7 +35,7 @@ module.config(function($routeProvider, routeResolverProvider) {
   routeResolverProvider.add('bedrock-idp', 'session', resolve);
 
   /* @ngInject */
-  function resolve($location, $window, $route) {
+  function resolve($window, $route) {
     // return early if session is present
     var session = $route.current.locals.session;
     if(session && session.identity) {
@@ -45,11 +45,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     // if route requires a session, redirect to login
     if($route.current.session === 'required') {
       // FIXME: use $location only once any SPA state issues are resolved
-      // FIXME: where do we want to go today?
-      // NOTE: attempting to use $location instead of window.  If issues arise
-      // return to using $window
-      // $window.location.href = '/session/login';
-      $location.url('/');
+      $window.location.href = '/session/login';
       throw new Error('Not authenticated.');
     }
   }
@@ -164,11 +160,7 @@ module.run(function(
       if(event) {
         event.preventDefault();
       }
-      // FIXME: attemping to use $location, switch back to $window if issues
-      // arise
-      // $window.location.href = '/session/login';
-      // FIXME: where do we want to go?
-      $location.url('/');
+      $window.location.href = '/session/login';
     }
   }
 });

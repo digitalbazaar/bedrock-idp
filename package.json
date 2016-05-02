@@ -4,7 +4,7 @@
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
-    "test": "node test.js"
+    "test": "node ./bedrock/test.js test"
   },
   "repository": {
     "type": "git",

@@ -25,7 +25,7 @@
   "dependencies": {
     "bedrock-angular": "^2.0.0",
     "bedrock-angular-alert": "^2.0.0",
-    "bedrock-angular-authn": "digitalbazaar/bedrock-angular-authn#master",
+    "bedrock-angular-authn": "^1.0.0",
     "bedrock-angular-credential": "^1.0.0",
     "bedrock-angular-form": "^2.0.0",
     "bedrock-angular-identity-composer": "^1.0.0",

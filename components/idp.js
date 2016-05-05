@@ -111,7 +111,9 @@ module.config(function($routeProvider, routeResolverProvider) {
 });
 
 /* @ngInject */
-module.run(function($location, $rootScope, $route, $window, config, util) {
+module.run(function(
+  $location, $rootScope, $route, $window, brAuthnService, config, util) {
+  brAuthnService.displayOrder = ['authn-did', 'authn-password'];
   // FIXME: need a mechanism for display order on the tabs
   config.settings = config.settings || {};
   config.settings.panes = config.settings.panes || [];

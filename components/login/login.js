@@ -1,23 +1,17 @@
 /*!
  * Login module.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
 define([
   'angular',
   './login-controller',
-  './login-modal-directive',
-  './idp-login-directive',
-  './identity-hovercard-directive',
   './idp-join-directive'
 ], function(
   angular,
   loginController,
-  loginModalDirective,
-  idpLoginDirective,
-  identityHovercardDirective,
   idpJoinDirective
 ) {
 
@@ -26,10 +20,7 @@ define([
 var module = angular.module('bedrock-idp.login', []);
 
 module.controller(loginController);
-module.directive(loginModalDirective);
-module.directive(idpLoginDirective);
 module.directive(idpJoinDirective);
-module.directive(identityHovercardDirective);
 
 /* @ngInject */
 module.config(function($routeProvider) {

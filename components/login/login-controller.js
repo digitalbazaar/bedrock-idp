@@ -1,7 +1,7 @@
 /*!
  * Login Support.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2016 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
@@ -25,7 +25,7 @@ function factory($scope, $http, $compile, $window, brAlertService, config) {
     // do login
     brAlertService.clearFeedback();
     self.loading = true;
-    Promise.resolve($http.post('/session/login', {
+    Promise.resolve($http.post('/authn-password/login', {
       sysIdentifier: self.sysIdentifier,
       password: self.password
     })).then(function(response) {

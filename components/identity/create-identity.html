@@ -167,27 +167,16 @@
           </div>
         </div>
       </fieldset>
-
       <br />
-
-      <fieldset>
-        <legend>Service Agreement</legend>
-
-        <div class="form-group" br-property-path="agreementChecked">
-          <div class="col-md-offset-3 col-md-7">
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" ng-model="model.agreementChecked"> I agree to the <a target="_blank" href="/legal#tos">Terms of Service</a> and <a target="_blank" href="/legal#pp">Privacy Policy</a>.
-              </label>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-
+      <br-agreement
+        br-on-accept="model.agreementAccepted = true"
+        br-on-cancel="model.agreementAccepted = false">
+      </br-agreement>
+      <hr>
       <div class="form-group">
         <div class="col-md-offset-3">
           <button type="submit"
-            ng-disabled="model.loading || model.identitySlugAvailable != 'available' || (model.emailAvailable != 'available' && model.emailAvailable != 'unavailable') || !model.agreementChecked || regForm.$invalid"
+            ng-disabled="model.loading || model.identitySlugAvailable != 'available' || (model.emailAvailable != 'available' && model.emailAvailable != 'unavailable') || !model.agreementAccepted || regForm.$invalid"
             class="btn btn-primary btn-lg">Create Identity</button>
           <span ng-show="model.loading">
             <i class="fa fa-refresh fa-spin fa-lg"></i>

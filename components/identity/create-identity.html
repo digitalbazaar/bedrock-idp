@@ -62,11 +62,11 @@
               help: 'col-md-offset-3 col-md-7'
             }
           }" ng-minlength="6" ng-maxlength="32" required>
-          <div name="br-input-help">
+          <br-input-help>
             Please enter a secure password that is between 6 and 32 characters long. The best passwords are
             lengthy, memorable phrases like: the<strong>lemurs</strong>ride<strong>on</strong>the<strong>fortnight</strong>
-          </div>
-          <div name="br-input-validation-errors">
+          </br-input-help>
+          <br-input-validation-errors>
             <p ng-show="regForm.sysPassword.$error.required">
               Password is required.
             </p>
@@ -76,7 +76,7 @@
             <p ng-show="regForm.sysPassword.$error.maxlength">
               Password must not be longer than 32 characters.
             </p>
-          </div>
+          </br-input-validation-errors>
         </br-input>
 
         <br-input br-model="model.passphraseConfirmation"
@@ -90,14 +90,14 @@
               help: 'col-md-offset-3 col-md-7'
             }
           }" br-input-br-passphrase-confirmation="model.identity.sysPassword">
-          <div name="br-input-help">
+          <br-input-help>
             Please confirm your password.
-          </div>
-          <div name="br-input-validation-errors">
+          </br-input-help>
+          <br-input-validation-errors>
             <p ng-show="regForm.passphraseConfirmation.$error.inputMatch">
               Password and Confirm Password must match.
             </p>
-          </div>
+          </br-input-validation-errors>
         </br-input>
       </fieldset>
 

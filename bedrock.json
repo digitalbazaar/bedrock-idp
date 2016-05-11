@@ -1,8 +1,4 @@
 {
   "config": "./bedrock/config.js",
-  "dependencies": {
-    "bedrock-angular-form": "~0.0.1",
-    "bedrock-angular-selector": "~0.0.1",
-    "bedrock-angular-ui": "~0.0.1"
-  }
+  "dependencies": {}
 }

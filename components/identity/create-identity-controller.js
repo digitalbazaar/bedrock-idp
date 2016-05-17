@@ -13,7 +13,8 @@ define([], function() {
 
 /* @ngInject */
 function factory(
-  $http, $location, $scope, $window, brAlertService, brSessionService, config) {
+  $http, $location, $scope, $window, $routeParams,
+  brAlertService, brSessionService, config) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -29,6 +30,11 @@ function factory(
   };
   self.agreementAccepted = false;
   self.passphraseConfirmation = '';
+
+  // Setting ?referral=true will trigger a prompt to for the user
+  // to go back to the page that linked here once they are done.
+  var shouldRedirect = ($routeParams.referral === 'true');
+  var shouldRedirectAuto = ($routeParams.auto === 'true');
 
   self.submit = function() {
     if(!self.agreementAccepted) {
@@ -49,13 +55,16 @@ function factory(
       // FIXME: remove after config...session is no longer used to track session
       config.data.idp.session.identity = session.identity;
       // redirect to new dashboard
-      // FIXME: Use location.url after services have been updated to
-      // refresh after session state change
-      // $location.url(config.data.idp.identityBasePath + '/' +
-      //   session.identity.sysSlug + '/dashboard');
-      $window.location =
-        config.data.idp.identityBaseUri + '/' + session.identity.sysSlug +
-        '/dashboard';
+      // FIXME: Investigate how service state updates when we don't
+      // directly refresh the page after session state change
+      // (we've had issues around session state not updating correctly
+      // unless explicitly refreshing the app)
+      var referred = shouldRedirect ? '?referral=true' : '';
+      if(referred && shouldRedirectAuto) {
+        referred = referred + '&auto=true';
+      }
+      $location.url(config.data.idp.identityBasePath + '/' +
+        session.identity.sysSlug + '/dashboard' + referred);
     }).catch(function(err) {
       brAlertService.add('error', err);
       self.loading = false;

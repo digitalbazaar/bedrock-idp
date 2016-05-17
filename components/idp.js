@@ -33,7 +33,6 @@ var module = angular.module(
 /* @ngInject */
 module.config(function($routeProvider, routeResolverProvider) {
   routeResolverProvider.add('bedrock-idp', 'session', resolve);
-
   /* @ngInject */
   function resolve($window, $route) {
     // return early if session is present
@@ -48,6 +47,25 @@ module.config(function($routeProvider, routeResolverProvider) {
       $window.location.href = '/session/login';
       throw new Error('Not authenticated.');
     }
+  }
+  /* @ngInject */
+  function redirectIfReferred(
+    $location, $window, $route, brSessionService, config) {
+    // return early if session is present
+    var wasReferred = ($location.search().referral === 'true');
+    var redirectAuto = ($location.search().auto === 'true');
+    return brSessionService.get()
+      .then(function(session) {
+        if(session.identity) {
+          var referred = wasReferred ? '?referral=true' : '';
+          if(redirectAuto) {
+            $window.location = document.referrer;
+            return;
+          }
+          $location.url(config.data.idp.identityBasePath + '/' +
+            session.identity.sysSlug + '/dashboard' + referred);
+        }
+      });
   }
 
   var basePath = window.data.idp.identityBasePath;
@@ -71,6 +89,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when(basePath + '/:identity/dashboard', {
       title: 'Dashboard',
       session: 'required',
+      resolve: {redirectIfReferred: redirectIfReferred},
       templateUrl: requirejs.toUrl(
         'bedrock-idp/components/dashboard/dashboard.html')
     })
@@ -86,6 +105,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     })
     .when('/join', {
       title: 'Create Identity',
+      resolve: {redirectIfReferred: redirectIfReferred},
       templateUrl: requirejs.toUrl(
         'bedrock-idp/components/identity/create-identity.html')
     })

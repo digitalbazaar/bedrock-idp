@@ -1,5 +1,9 @@
 <div class="dashboard ng-cloak" ng-controller="DashboardController as model">
 
+  <div ng-if="model.state.redirectLink" class="row">
+    <div class="alert alert-info text-center col-md-offset-2 col-md-8">It looks like you were referred here by another website. Go back to <a href="{{model.state.redirectLink}}">{{model.state.redirectLink}}</a> ?</div>
+  </div>
+
   <div class="row">
     <div class="col-md-12">
       <h1 class="headline">Dashboard</h1>
@@ -55,4 +59,17 @@
     </div>
   </div>
 
+  <stackable-modal stackable="model.modals.shouldShowRedirectModal">
+    <br-modal br-title="Go back?">
+      <br-modal-body>
+        <p>We noticed that you arrived here from <a href="{{model.state.redirectLink}}">{{model.state.redirectLink}}</a></p>
+        <p>Would you like to go back now?</p>
+      </br-modal-body>
+      <br-modal-footer>
+        <button ng-click="model.redirect()" type="button" class="btn btn-primary">Ok</button>
+        <button type="button"
+          class="btn btn-default stackable-cancel">Cancel</button>
+      </br-modal-footer>
+    </br-modal>
+  </stackable-modal>
 </div>

@@ -1,7 +1,9 @@
 /*
- * Copyright (c) 2013-2015 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-
+/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* jshint node: true */
+/* jshint -W030 */
 'use strict';
 
 var brIdentity = require('../../lib/auth');
@@ -9,7 +11,8 @@ var brIdentity = require('../../lib/auth');
 var testPasswordHash =
   'bcrypt:$2a$10$hjp3zswzxnOV9A1gui//COzuM/.AG4hArsQEiAIA1nUION1hQ5W12';
 
-describe('bedrock-idp auth', function() {
+// FIXME: these test should be moved into bedrock-authn-password
+describe.skip('bedrock-idp auth', function() {
   describe('password hashing', function() {
     it('should generate a valid password hash', function(done) {
       brIdentity.createPasswordHash('password', function(err, hash) {

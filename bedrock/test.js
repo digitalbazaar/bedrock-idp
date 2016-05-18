@@ -132,7 +132,12 @@ roles['identity.admin'] = {
     permissions.IDENTITY_EDIT.id,
     permissions.IDENTITY_REMOVE.id,
     permissions.PUBLIC_KEY_CREATE.id,
-    permissions.PUBLIC_KEY_REMOVE.id
+    permissions.PUBLIC_KEY_REMOVE.id,
+    permissions.CREDENTIAL_ADMIN,
+    permissions.CREDENTIAL_ACCESS,
+    permissions.CREDENTIAL_INSERT,
+    permissions.CREDENTIAL_REMOVE,
+    permissions.IDENTITY_COMPOSE
   ]
 };
 roles['identity.manager'] = {
@@ -145,7 +150,11 @@ roles['identity.manager'] = {
     permissions.IDENTITY_INSERT.id,
     permissions.IDENTITY_EDIT.id,
     permissions.PUBLIC_KEY_CREATE.id,
-    permissions.PUBLIC_KEY_REMOVE.id
+    permissions.PUBLIC_KEY_REMOVE.id,
+    permissions.CREDENTIAL_ACCESS,
+    permissions.CREDENTIAL_INSERT,
+    permissions.CREDENTIAL_REMOVE,
+    permissions.IDENTITY_COMPOSE
   ]
 };
 

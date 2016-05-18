@@ -18,13 +18,12 @@ module.controller(controller);
 
 /* @ngInject */
 module.run(function(brNavbarService, brSessionService, config) {
-  brNavbarService.menus.push({
+  brNavbarService.registerMenu('brDashboard', {
     slug: '/dashboard',
     icon: 'fa fa-dashboard',
     label: 'Dashboard',
     pageTitle: 'Dashboard',
     visible: false,
-    weight: 10,
     init: function(scope) {
       var menu = this;
       scope.$watch(function() {

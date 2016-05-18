@@ -27,11 +27,11 @@ function factory(
     sysPublic: [],
     sysSlug: ''
   };
-  self.agreementChecked = false;
+  self.agreementAccepted = false;
   self.passphraseConfirmation = '';
 
   self.submit = function() {
-    if(!self.agreementChecked) {
+    if(!self.agreementAccepted) {
       return false;
     }
     brAlertService.clearFeedback();

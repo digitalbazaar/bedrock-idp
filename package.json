@@ -4,7 +4,7 @@
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
-    "test": "node test.js"
+    "test": "node ./bedrock/test.js test"
   },
   "repository": {
     "type": "git",
@@ -34,21 +34,23 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
+    "bedrock-authn-did": "^1.0.0",
+    "bedrock-authn-password": "^1.0.0",
     "bedrock-consumer": "^2.0.0",
     "bedrock-credentials-mongodb": "^2.0.0",
     "bedrock-credential-curator": "^0.3.0",
     "bedrock-docs": "^2.0.0",
     "bedrock-express": "^2.0.0",
-    "bedrock-identity": "^3.0.0",
-    "bedrock-identity-rest": "^0.2.0",
-    "bedrock-key": "^2.0.0",
+    "bedrock-identity": "^4.0.0",
+    "bedrock-identity-rest": "^0.3.0",
+    "bedrock-key": "^3.0.0",
     "bedrock-key-http": "^2.0.0",
     "bedrock-mail": "^2.0.0",
     "bedrock-mongodb": "^2.0.0",
     "bedrock-passport": "^3.0.0",
     "bedrock-rest": "^2.0.0",
     "bedrock-session-mongodb": "^2.0.0",
-    "bedrock-session-http": "^2.0.0",
+    "bedrock-session-http": "^3.0.0",
     "bedrock-validation": "^2.0.0",
     "bedrock-views": "^4.0.0"
   },

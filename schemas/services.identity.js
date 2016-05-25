@@ -146,7 +146,6 @@ var postIdentities = {
       label: schemas.label(),
       image: schemas.url({required: false}),
       email: schemas.email(),
-      sysPassword: schemas.password(),
       url: schemas.url({required: false}),
       description: schemas.description({required: false}),
       sysImageType: sysImageType,
@@ -181,16 +180,6 @@ var postPreferences = {
   additionalProperties: false
 };
 
-var postEmailVerify = {
-  title: 'Verify email',
-  description: 'Verify an email address.',
-  type: 'object',
-  properties: {
-    sysPasscode: schemas.passcode()
-  },
-  additionalProperties: false
-};
-
 module.exports.postIdentity = function() {
   return postIdentity;
 };
@@ -205,7 +194,4 @@ module.exports.postIdentities = function() {
 };
 module.exports.postPreferences = function() {
   return postPreferences;
-};
-module.exports.postEmailVerify = function() {
-  return postEmailVerify;
 };

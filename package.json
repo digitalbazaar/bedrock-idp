@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "4.1.2-dev",
+  "version": "5.0.0-dev",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {
@@ -35,8 +35,8 @@
   "peerDependencies": {
     "bedrock": "^1.0.0",
     "bedrock-consumer": "^2.0.0",
-    "bedrock-credentials-mongodb": "^2.0.0",
-    "bedrock-credential-curator": "^0.3.0",
+    "bedrock-credentials-mongodb": "^3.0.0",
+    "bedrock-credential-curator": "^0.4.0",
     "bedrock-docs": "^2.0.0",
     "bedrock-express": "^2.0.0",
     "bedrock-identity": "^3.0.0",

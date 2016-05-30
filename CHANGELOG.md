@@ -1,41 +1,46 @@
 # bedrock-idp ChangeLog
 
-## [Unreleased]
+## 5.0.0 - 2016-05-30
 
-## [4.1.1] - 2016-04-29
+### Changed
+- **BREAKING**: Breaking changes in some dependencies such as
+`bedrock-credentials-mongodb`.
+- Moved authentication functions into `bedrock-authn` modules.
 
-## [4.1.0] - 2016-04-19
+## 4.1.1 - 2016-04-29
+
+## 4.1.0 - 2016-04-19
 
 ### Added
 - Show credentials list on identity page.
 
-## [4.0.1] - 2016-04-19
+## 4.0.1 - 2016-04-19
 
 ### Changed
 - Render identity page using AngularJS.
 
-## [4.0.0] - 2016-03-15
+## 4.0.0 - 2016-03-15
 
 ### Changed
 - Update bedrock dependencies.
 - Update bedrock-angular modules to 2.x.
 
-## [3.0.3] - 2016-03-27
+## 3.0.3 - 2016-03-27
 
 ### Changed
 - Use credentials-polyfill 0.8.x.
 
-## [3.0.2] - 2016-03-26
+## 3.0.2 - 2016-03-26
 
 ### Changed
 - Fix-up references to bedrock-session-http.
 
-## [3.0.1] - 2016-03-25
+## 3.0.1 - 2016-03-25
 
 ### Changed
 - Update bedrock-session-http deps.
 
-## [3.0.0] - 2016-03-03
+## 3.0.0 - 2016-03-03
 
 ### Changed
 - Update package dependencies for npm v3 compatibility.
@@ -44,7 +49,7 @@
 - Add credentials menu tab and UI.
 - Add test credentials for test mode.
 
-## [1.0.3] - 2015-07-16
+## 1.0.3 - 2015-07-16
 
 ### Changed
 - Depend on forge and fix paths.
@@ -53,13 +58,13 @@
 ### Fixed
 - Fix error handling bugs.
 
-## [1.0.2] - 2015-05-07
+## 1.0.2 - 2015-05-07
 
 ### Fixed
 - Fix idp data access.
 - Upgrade tests to work with bedrock-protractor v2.
 
-## [1.0.1] - 2015-04-09
+## 1.0.1 - 2015-04-09
 
 ### Changed
 - Move `bedrock.config.identityCredentials.*` to `bedrock.config.idp.*`.
@@ -68,28 +73,28 @@
 ### Deprecated
 - `bedrock.config.identityCredentials.*`
 
-## [1.0.0] - 2015-04-08
+## 1.0.0 - 2015-04-08
 
 ### Changed
 - Change "app" to "bedrock" in module name.
 
-## [0.1.4] - 2015-03-13
+## 0.1.4 - 2015-03-13
 
 ### Fixed
 - Fix config typo.
 
-## [0.1.3] - 2015-03-13
+## 0.1.3 - 2015-03-13
 
 ### Changed
 - Add view context var once in config vs in every addViewVars call.
 
-## [0.1.2] - 2015-02-25
+## 0.1.2 - 2015-02-25
 
 ### Added
 - Config namespace `config.identityCredentials`.
 - `allowInsecureCallback` config value.
 
-## [0.1.1] - 2015-02-23
+## 0.1.1 - 2015-02-23
 
 ### Fixed
 - `identity` param.
@@ -97,21 +102,3 @@
 ## 0.1.0 - 2015-02-23
 
 - See git history for changes.
-
-[Unreleased]: https://github.com/digitalbazaar/bedrock-idp/compare/4.1.1...HEAD
-[4.1.1]: https://github.com/digitalbazaar/bedrock-idp/compare/4.1.0...4.1.1
-[4.1.0]: https://github.com/digitalbazaar/bedrock-idp/compare/4.0.1...4.1.0
-[4.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/4.0.0...4.0.1
-[4.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.3...4.0.0
-[3.0.3]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.2...3.0.3
-[3.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.1...3.0.2
-[3.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/3.0.0...3.0.1
-[3.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.3...3.0.0
-[1.0.3]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.2...1.0.3
-[1.0.2]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.1...1.0.2
-[1.0.1]: https://github.com/digitalbazaar/bedrock-idp/compare/1.0.0...1.0.1
-[1.0.0]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.4...1.0.0
-[0.1.4]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.3...0.1.4
-[0.1.3]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.2...0.1.3
-[0.1.2]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.1...0.1.2
-[0.1.1]: https://github.com/digitalbazaar/bedrock-idp/compare/0.1.0...0.1.1

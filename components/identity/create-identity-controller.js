@@ -14,7 +14,7 @@ define([], function() {
 /* @ngInject */
 function factory(
   $http, $location, $scope, $window, $routeParams,
-  brAlertService, brSessionService, config) {
+  brAlertService, brRefreshService, brSessionService, config) {
   var self = this;
   self.data = config.data;
   self.loading = false;
@@ -59,6 +59,7 @@ function factory(
       // directly refresh the page after session state change
       // (we've had issues around session state not updating correctly
       // unless explicitly refreshing the app)
+      brRefreshService.refresh();
       var referred = shouldRedirect ? '?referral=true' : '';
       if(referred && shouldRedirectAuto) {
         referred = referred + '&auto=true';

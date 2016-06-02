@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.1 - 2016-06-02
+
+### Fixed
+- Do a brResourceService.refresh() after join process.
+
 ## 5.0.0 - 2016-05-30
 
 ### Changed

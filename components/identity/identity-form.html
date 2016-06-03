@@ -1,5 +1,11 @@
 <form class="form-horizontal" role="form">
   <fieldset>
+    <br-form-static ng-show="model.identity.id"
+      br-options="{name: 'id', label: 'ID'}">
+      <br-form-static-content>{{model.identity.id}}</br-form-static-content>
+      <br-form-static-help>ID of Identity.</br-form-static-help>
+    </br-form-static>
+
     <br-input br-model="model.identity.label"
       br-options="{icon: 'tag', name: 'label', label: 'Label'}">
       <br-input-help>Enter the public label for this identity.</br-input-help>

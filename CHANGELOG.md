@@ -1,5 +1,7 @@
 # bedrock-idp ChangeLog
 
+## 5.0.2 - 2016-06-07
+
 ### Changed
 - Update dependencies.
 

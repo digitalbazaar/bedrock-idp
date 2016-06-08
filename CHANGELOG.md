@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.3 - 2016-06-08
+
+### Changed
+- Re-implement informational messages during DID recovery.
+
 ## 5.0.2 - 2016-06-07
 
 ### Changed

@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.4 - 2016-06-13
+
+### Changed
+- Update bedrock-angular-message dependency.
+
 ## 5.0.3 - 2016-06-08
 
 ### Changed

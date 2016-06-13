@@ -86,8 +86,8 @@ describe('bedrock-idp credential tasks', function() {
   describe('credential storage', function() {
     var params = '?storageCallback=https://authio.com';
     var testService =
-    bedrock.config.server.baseUri +
-    config['credential-curator'].endpoints.storeCredentials + params;
+      bedrock.config.server.baseUri +
+      config['credential-curator'].endpoints.storeCredentials + params;
 
     it.skip('should accept a request to store interactively', function(done) {
       var credentialQuery = {

@@ -9,7 +9,6 @@ define([
   'angular',
   './create-identity-controller',
   './passphrase-confirmation-directive',
-  './identity-controller',
   './identity-service',
   './identity-credentials-controller',
   './identity-selector-directive',
@@ -17,8 +16,8 @@ define([
   './add-identity-modal-directive',
   './credential-verify-service'
 ], function(
-  angular, createIdentity, passphraseConfirmation, controller,
-  service, identityCredentials, identitySelector, identitySettingsController,
+  angular, createIdentity, passphraseConfirmation, service,
+  identityCredentials, identitySelector, identitySettingsController,
   modalAddIdentity, credentialVerifyService) {
 
 'use strict';
@@ -26,7 +25,6 @@ define([
 var module = angular.module('bedrock-idp.identity', []);
 
 module.controller(createIdentity);
-module.controller(controller);
 module.controller(identityCredentials.controller);
 module.controller(identitySettingsController);
 module.service(service);

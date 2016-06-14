@@ -28,7 +28,7 @@ var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
   'bedrock-idp', Array.prototype.slice.call(arguments, 1).concat([
-    'bedrock.resolver']));
+    'bedrock.identity', 'bedrock.resolver']));
 
 /* @ngInject */
 module.config(function($routeProvider, routeResolverProvider) {
@@ -100,8 +100,19 @@ module.config(function($routeProvider, routeResolverProvider) {
     })
     .when(basePath + '/:identity', {
       title: 'Identity',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/identity/identity.html')
+      template: '<br-identity-viewer br-identity="$resolve.identity">' +
+        '<br-identity-additional-content>' +
+        '<br-keys br-identity="$resolve.identity"></br-keys>' +
+        '<br-credentials br-identity="$resolve.identity"></br-credentials>' +
+        '</br-identity-additional-content>' +
+        '</br-identity-viewer>',
+      resolve: {
+        identity: function($route, brIdentityService) {
+          var identity = $route.current.params['identity'];
+          return brIdentityService.collection.get(
+            basePath + '/' + identity);
+        }
+      }
     })
     .when('/join', {
       title: 'Create Identity',

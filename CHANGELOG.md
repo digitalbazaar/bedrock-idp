@@ -1,5 +1,9 @@
 # bedrock-idp ChangeLog
 
+### Changed
+- Identities without fields marked as public will return minimial information
+  rather than a 404.
+
 ## 5.0.4 - 2016-06-13
 
 ### Changed

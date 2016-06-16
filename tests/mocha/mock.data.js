@@ -5,7 +5,7 @@
 var bedrock = require('bedrock');
 var config = bedrock.config;
 var util = bedrock.util;
-var uuid = require('node-uuid').v4;
+var uuid = require('uuid').v4;
 
 var mock = {};
 module.exports = mock;

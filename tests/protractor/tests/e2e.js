@@ -3,7 +3,7 @@ var expect = GLOBAL.expect;
 var should = GLOBAL.should;
 var describe = GLOBAL.describe;
 var it = GLOBAL.it;
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 
 describe('IdP join form', function() {
   var identity = {};

@@ -7,23 +7,12 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = function(bedrock) {
-  var prepare = path.join(__dirname, 'prepare.js');
+  var prepare = path.join(__dirname, './protractor/prepare.js');
   if(bedrock.config.protractor && fs.existsSync(prepare)) {
     var protractor = bedrock.config.protractor.config;
     // add protractor tests
     protractor.suites['bedrock-idp'] =
-      path.join(__dirname, './tests/**/*.js');
+      path.join(__dirname, './protractor/**/*.js');
     protractor.params.config.onPrepare.push(prepare);
   }
-
-  // ignore server-side views
-  var packages = bedrock.config.views.angular.optimize.templates.packages;
-  packages['bedrock-idp'] = {
-    src: [
-      '**/*.html',
-      '!**/node_modules/**/*.html',
-      '!**/bower_components/**/*.html',
-      '!views/**/*.html'
-    ]
-  };
 };

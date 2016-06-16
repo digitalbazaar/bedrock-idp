@@ -5,12 +5,10 @@ var bedrock = require('bedrock');
 var fs = require('fs');
 var path = require('path');
 
-require('bedrock-express');
-require('bedrock-requirejs');
-require('bedrock-server');
-require('bedrock-session-mongodb');
-require('bedrock-views');
-require('../lib/idp');
+// NOTE: it is critical that bedrock-protractor be required first so that
+// it can register a bedrock.cli event listener
+require('bedrock-protractor');
+require('bedrock-idp');
 
 var config = bedrock.config;
 var testMode = false;
@@ -43,7 +41,7 @@ bedrock.events.on('bedrock.configure', function() {
   if(!testMode) {
     return;
   }
-  require('../configs/test.data.js');
+  require('./test.data.js');
 });
 
 // server info
@@ -54,11 +52,18 @@ config.server.domain = 'bedrock-idp.dev';
 config.server.host = 'bedrock-idp.dev:36443';
 config.server.baseUri = 'https://' + config.server.host;
 
+// bower package for bedrock-idp
 var dir = path.join(__dirname, '..');
 config.requirejs.bower.packages.push({
   path: dir,
-  manifest: JSON.parse(fs.readFileSync(
-    path.join(dir, 'bower.json'), {encoding: 'utf8'}))
+  manifest: path.join(dir, 'bower.json')
+});
+
+// bower package for bedrock-idp-test
+dir = path.join(__dirname);
+config.requirejs.bower.packages.push({
+  path: path.join(dir, 'components'),
+  manifest: path.join(dir, 'bower.json')
 });
 
 // mongodb config
@@ -221,12 +226,5 @@ config.views.vars.contextMap['https://w3id.org/identity/v1'] =
   config.server.baseUri + '/contexts/identity-v1.jsonld';
 config.views.vars.contextMap['https://w3id.org/credentials/v1'] =
   config.server.baseUri + '/contexts/credentials-v1.jsonld';
-
-// angular-basic pseudo bower package
-var rootPath = path.join(__dirname);
-config.requirejs.bower.packages.push({
-  path: path.join(rootPath, 'components'),
-  manifest: path.join(rootPath, 'bower.json')
-});
 
 bedrock.start();

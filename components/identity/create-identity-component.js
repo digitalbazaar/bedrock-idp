@@ -11,8 +11,16 @@ define([], function() {
 
 'use strict';
 
+function register(module) {
+  module.component('brCreateIdentity', {
+    controller: Ctrl,
+    templateUrl: requirejs.toUrl(
+      'bedrock-idp/components/identity/create-identity-component.html')
+  });
+}
+
 /* @ngInject */
-function factory(
+function Ctrl(
   $http, $location, $scope, $window, $routeParams,
   brAlertService, brRefreshService, brSessionService, config) {
   var self = this;
@@ -75,6 +83,6 @@ function factory(
   };
 }
 
-return {CreateIdentityController: factory};
+return register;
 
 });

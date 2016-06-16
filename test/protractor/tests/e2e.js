@@ -37,17 +37,17 @@ describe('IdP join form', function() {
 
   it('should warn on a short password', function() {
     bedrock.pages.join.testField(
-      'model.identity.sysPassword', threeCharacters, 'minlength');
+      '$ctrl.identity.sysPassword', threeCharacters, 'minlength');
   });
 
   it('should warn on a long password', function() {
     bedrock.pages.join.testField(
-      'model.identity.sysPassword', fortyCharacters, 'maxlength');
+      '$ctrl.identity.sysPassword', fortyCharacters, 'maxlength');
   });
 
   it('should warn if password confirmation does not match', function() {
     bedrock.pages.join.testFieldsMatch(
-      'model.identity.sysPassword', 'model.passphraseConfirmation',
+      '$ctrl.identity.sysPassword', '$ctrl.passphraseConfirmation',
       'goodPhraseA', 'nonMatchingPhraseB', 'inputMatch');
   });
 

@@ -90,7 +90,7 @@ module.config(function($routeProvider) {
         '</br-identity-viewer>',
       resolve: {
         identity: function($route, brIdentityService) {
-          var identity = $route.current.params['identity'];
+          var identity = $route.current.params.identity;
           return brIdentityService.collection.get(
             basePath + '/' + identity);
         }
@@ -99,8 +99,7 @@ module.config(function($routeProvider) {
     .when('/join', {
       title: 'Create Identity',
       resolve: {redirectIfReferred: redirectIfReferred},
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/identity/create-identity.html')
+      template: '<br-create-identity></br-create-identity'
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',

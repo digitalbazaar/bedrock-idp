@@ -1,0 +1,189 @@
+<div class="ng-cloak">
+  <div class="row">
+    <div class="col-md-12">
+      <br-demo-warning></br-demo-warning>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="headline">Create an Identity</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+
+      <form name="$ctrl.regForm" class="form-horizontal" ng-submit="$ctrl.submit()">
+        <fieldset>
+          <legend>Your Email and Password</legend>
+
+          <div class="form-group">
+            <p class="help-block col-md-10">
+              By entering a valid email address and password you will be able to
+              log into the service.
+            </p>
+          </div>
+
+          <br-input br-model="$ctrl.identity.email"
+            br-options="{
+              name: 'email', label: 'Email', disabled: {{$ctrl.loading}},
+              autocomplete: 'off',
+              columns: {
+                label: 'col-md-3',
+                input: 'col-md-7',
+                help: 'col-md-offset-3 col-md-7'
+              }
+            }">
+            A valid email address is required so that we can reset
+            your password if you get locked out.
+          </br-input>
+          <div ng-show="$ctrl.identity.email" class="form-group">
+            <div class="col-md-offset-3 col-md-7"
+              br-duplicate-checker="$ctrl.identity.email"
+              br-duplicate-checker-type="email"
+              br-duplicate-checker-available="This email address is available!"
+              br-duplicate-checker-invalid="Email address is invalid."
+              br-duplicate-checker-taken="This email address is already in use. While you can create a new identity if you want to, you may want to log in as your existing identity instead."
+              br-duplicate-checker-checking="Checking Availability..."
+              br-duplicate-checker-result="$ctrl.emailAvailable">
+            </div>
+          </div>
+
+          <br-input br-model="$ctrl.identity.sysPassword"
+            br-options="{
+              name: 'sysPassword', type: 'password',
+              label: 'Password', disabled: {{$ctrl.loading}},
+              showValidation: true,
+              columns: {
+                label: 'col-md-3',
+                input: 'col-md-7',
+                help: 'col-md-offset-3 col-md-7'
+              }
+            }" ng-minlength="8" ng-maxlength="32" required>
+            <br-input-help>
+              Please enter a secure password that is between 8 and 32 characters long. The best passwords are
+              lengthy, memorable phrases like: the<strong>lemurs</strong>ride<strong>on</strong>the<strong>fortnight</strong>
+            </br-input-help>
+            <br-input-validation-errors>
+              <p ng-show="$ctrl.regForm.sysPassword.$error.required">
+                Password is required.
+              </p>
+              <p ng-show="$ctrl.regForm.sysPassword.$error.minlength">
+                Password is required to be at least 8 characters.
+              </p>
+              <p ng-show="$ctrl.regForm.sysPassword.$error.maxlength">
+                Password must not be longer than 32 characters.
+              </p>
+            </br-input-validation-errors>
+          </br-input>
+
+          <br-input br-model="$ctrl.passphraseConfirmation"
+            br-options="{
+              name: 'passphraseConfirmation', type: 'password',
+              label: 'Confirm Password', disabled: {{$ctrl.loading}},
+              showValidation: true,
+              columns: {
+                label: 'col-md-3',
+                input: 'col-md-7',
+                help: 'col-md-offset-3 col-md-7'
+              }
+            }" br-input-br-passphrase-confirmation="$ctrl.identity.sysPassword">
+            <br-input-help>
+              Please confirm your password.
+            </br-input-help>
+            <br-input-validation-errors>
+              <p ng-show="$ctrl.regForm.passphraseConfirmation.$error.inputMatch">
+                Password and Confirm Password must match.
+              </p>
+            </br-input-validation-errors>
+          </br-input>
+        </fieldset>
+
+        <br/>
+
+        <fieldset>
+          <legend>Your Identity</legend>
+
+          <div class="form-group">
+            <p class="help-block col-md-10">
+              Your identity will be used to keep track of and verify your online
+              activity with this service. Please enter your full name and then
+              select a short name that is used for your identity.  It is usually
+              a good idea to use some shortened form of your full name for your
+              id, similar to how people choose email addresses or Twitter
+              handles.
+            </p>
+          </div>
+
+          <br-input br-model="$ctrl.identity.label"
+            br-options="{
+              name: 'label', label: 'Full Name',
+              placeholder: 'My Full Name', disabled: {{$ctrl.loading}},
+              autocomplete: 'off',
+              columns: {
+                label: 'col-md-3',
+                input: 'col-md-7',
+                help: 'col-md-offset-3 col-md-7'
+              }
+            }">
+            Enter the full name that is associated with this new identity.
+            For instance "My Full Name" or "Mega Corp".
+          </br-input>
+
+          <br-input br-model="$ctrl.identity.sysSlug"
+            ng-model="$ctrl.identity.sysSlug"
+            br-slug-in="$ctrl.identity.label"
+            br-options="{
+              name: 'sysSlug', label: 'Short Name',
+              placeholder: 'my-short-name', disabled: {{$ctrl.loading}},
+              autocomplete: 'off', maxlength: '32',
+              columns: {
+                label: 'col-md-3',
+                input: 'col-md-7',
+                help: 'col-md-offset-3 col-md-7'
+              }
+            }">
+            Enter a short name for this identity. A name similar to your full
+            name will help people to identify you. This short name will be
+            used in your identity address as shown below. An example would be
+            "my-short-name", "myshortname", or "megacorp".
+          </br-input>
+          <div class="form-group">
+            <div class="col-md-offset-3 col-md-7">
+              <small>{{$ctrl.data.idp.identityBaseUri}}/</small><strong>{{$ctrl.identity.sysSlug}}</strong>
+            </div>
+          </div>
+          <div ng-show="$ctrl.identity.sysSlug" class="form-group">
+            <div class="col-md-offset-3 col-md-7"
+              br-duplicate-checker="$ctrl.identity.sysSlug"
+              br-duplicate-checker-type="identity"
+              br-duplicate-checker-available="This identity name is available!"
+              br-duplicate-checker-invalid="Identity name is invalid."
+              br-duplicate-checker-taken="Identity name has already been taken."
+              br-duplicate-checker-checking="Checking Availability..."
+              br-duplicate-checker-result="$ctrl.identitySlugAvailable">
+            </div>
+          </div>
+        </fieldset>
+        <br />
+        <br-agreement
+          ng-model="$ctrl.agreementAccepted"
+          br-agreement-group="bedrock-idp.join">
+        </br-agreement>
+        <hr>
+        <div class="form-group">
+          <div class="col-md-offset-3">
+            <button type="submit"
+              ng-disabled="$ctrl.loading || $ctrl.identitySlugAvailable != 'available' || ($ctrl.emailAvailable != 'available' && $ctrl.emailAvailable != 'unavailable') || !$ctrl.agreementAccepted || $ctrl.regForm.$invalid"
+              class="btn btn-primary btn-lg">Create Identity</button>
+            <span ng-show="$ctrl.loading">
+              <i class="fa fa-refresh fa-spin fa-lg"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

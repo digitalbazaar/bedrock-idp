@@ -5,12 +5,12 @@
  *
  * @author Matthew Collier
  */
-define(['angular'], function(angular) {
+define([], function() {
 
 'use strict';
 
 /* @ngInject */
-function factory(brAuthenticationService, brSessionService, $location) {
+function factory(brSessionService, $location) {
   return {
     restrict: 'E',
     scope: {},
@@ -19,7 +19,7 @@ function factory(brAuthenticationService, brSessionService, $location) {
     link: Link
   };
 
-  function Link(scope, elem, attrs) {
+  function Link(scope) {
     var model = scope.model = {};
     model.loggedIn = false;
     scope.$watch(function() {

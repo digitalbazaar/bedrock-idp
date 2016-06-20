@@ -4,6 +4,10 @@
 - Identities without fields marked as public will return minimial information
   rather than a 404.
 - Use identity component. Remove old identity displayer.
+- Use `bedrock-angular-authn` to handle invalid/missing session checking.
+
+### Removed
+- Remove broken `/session/login` route.
 
 ## 5.0.4 - 2016-06-13
 

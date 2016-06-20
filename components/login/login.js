@@ -7,11 +7,9 @@
  */
 define([
   'angular',
-  './login-controller',
   './idp-join-directive'
 ], function(
   angular,
-  loginController,
   idpJoinDirective
 ) {
 
@@ -19,21 +17,7 @@ define([
 
 var module = angular.module('bedrock-idp.login', []);
 
-module.controller(loginController);
 module.directive(idpJoinDirective);
-
-/* @ngInject */
-module.config(function($routeProvider) {
-  $routeProvider
-    .when('/session/login', {
-      vars: {
-        title: 'Login',
-        // avoid login entry form on login page
-        hideNavbarLogin: true
-      },
-      templateUrl: requirejs.toUrl('bedrock-idp/components/login/login.html')
-    });
-});
 
 return module.name;
 

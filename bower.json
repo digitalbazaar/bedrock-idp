@@ -26,7 +26,7 @@
     "bedrock-angular": "^2.0.0",
     "bedrock-angular-agreement": "^1.0.0",
     "bedrock-angular-alert": "^2.0.0",
-    "bedrock-angular-authn": "^2.0.0",
+    "bedrock-angular-authn": "^2.1.0",
     "bedrock-angular-authn-did": "^1.0.0",
     "bedrock-angular-authn-password": "^1.0.0",
     "bedrock-angular-credential": "^2.0.0",

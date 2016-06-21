@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "5.0.5-dev",
+  "version": "5.0.5",
   "moduleType": [
     "amd"
   ],

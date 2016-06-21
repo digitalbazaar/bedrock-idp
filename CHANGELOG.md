@@ -1,7 +1,9 @@
 # bedrock-idp ChangeLog
 
+## 5.0.5 - 2016-06-21
+
 ### Changed
-- Identities without fields marked as public will return minimial information
+- Identities without fields marked as public will return minimal information
   rather than a 404.
 - Use identity component. Remove old identity displayer.
 - Use `bedrock-angular-authn` to handle invalid/missing session checking.

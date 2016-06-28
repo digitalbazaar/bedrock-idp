@@ -1,5 +1,11 @@
 # bedrock-idp ChangeLog
 
+## 5.0.6 - 2016-06-28
+
+### Changed
+- Create create-identity-component and tests.
+- Restructure repo in support of new testing conventions.
+
 ## 5.0.5 - 2016-06-21
 
 ### Changed

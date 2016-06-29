@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.7 - 2016-06-29
+
+### Fixed
+- Credential deletion.
+
 ## 5.0.6 - 2016-06-28
 
 ### Changed

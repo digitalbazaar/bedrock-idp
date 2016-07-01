@@ -11,10 +11,8 @@ define([
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
-  './key/key',
   './login/login',
-  './passcode/passcode',
-  './settings/settings'
+  './passcode/passcode'
 ], function(angular) {
 
 'use strict';
@@ -82,12 +80,13 @@ module.config(function($routeProvider) {
     })
     .when(basePath + '/:identity', {
       title: 'Identity',
-      template: '<br-identity-viewer br-identity="$resolve.identity">' +
-        '<br-identity-additional-content>' +
-        '<br-keys br-identity="$resolve.identity"></br-keys>' +
-        '<br-credentials br-identity="$resolve.identity"></br-credentials>' +
-        '</br-identity-additional-content>' +
-        '</br-identity-viewer>',
+      template:
+        '<br-identity-viewer br-identity="$resolve.identity">\
+          <br-identity-additional-content>\
+            <br-keys br-identity="$resolve.identity"></br-keys>\
+            <br-credentials br-identity="$resolve.identity"></br-credentials>\
+          </br-identity-additional-content>\
+        </br-identity-viewer>',
       resolve: {
         identity: function($route, brIdentityService) {
           var identity = $route.current.params.identity;
@@ -103,7 +102,26 @@ module.config(function($routeProvider) {
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',
-      templateUrl: requirejs.toUrl('bedrock-idp/components/key/keys.html')
+      template:
+        '<div>\
+          <div class="row">\
+            <div class="col-md-12">\
+              <h1 class="headline">Keys</h1>\
+            </div>\
+          </div>\
+          <div class="row">\
+            <div class="col-md-12">\
+              <br-keys br-identity="$resolve.identity"></br-keys>\
+            </div>\
+          </div>\
+        </div>',
+      resolve: {
+        identity: function($route, brIdentityService) {
+          var identity = $route.current.params.identity;
+          return brIdentityService.collection.get(
+            basePath + '/' + identity);
+        }
+      }
     })
     .when(keyBasePath + '/:keyId', {
       title: 'Key',
@@ -113,14 +131,6 @@ module.config(function($routeProvider) {
     .when(basePath + '/:identity/keys/:keyId', {
       title: 'Key',
       templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
-    })
-    .when(basePath + '/:identity/settings', {
-      title: 'Settings',
-      session: {
-        require: 'identity'
-      },
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/settings/settings.html')
     });
 });
 
@@ -129,17 +139,6 @@ module.run(function(
   brAgreementService, brAuthnService, config) {
   brAgreementService.registerGroup('bedrock-idp.join');
   brAuthnService.displayOrder = ['authn-did', 'authn-password'];
-  // FIXME: need a mechanism for display order on the tabs
-  config.settings = config.settings || {};
-  config.settings.panes = config.settings.panes || [];
-  config.settings.panes.push(
-    {
-      templateUrl: modulePath + 'identity/identity-settings.html'
-    },
-    {
-      templateUrl: modulePath + 'key/key-settings.html'
-    }
-  );
 });
 
 });

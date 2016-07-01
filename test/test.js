@@ -52,19 +52,16 @@ config.server.domain = 'bedrock-idp.dev';
 config.server.host = 'bedrock-idp.dev:36443';
 config.server.baseUri = 'https://' + config.server.host;
 
-// bower package for bedrock-idp
-var dir = path.join(__dirname, '..');
-config.requirejs.bower.packages.push({
-  path: dir,
-  manifest: path.join(dir, 'bower.json')
-});
-
 // bower package for bedrock-idp-test
 dir = path.join(__dirname);
 config.requirejs.bower.packages.push({
   path: path.join(dir, 'components'),
   manifest: path.join(dir, 'bower.json')
 });
+
+var protractor = config.protractor.config;
+protractor.suites['bedrock-idp'] =
+  path.join(__dirname, 'protractor', 'tests', '**', '*.js');
 
 // mongodb config
 config.mongodb.name = 'bedrock_idp_dev';

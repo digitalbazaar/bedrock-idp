@@ -12,10 +12,10 @@ define([], function() {
 /* @ngInject */
 function factory(
   $http, $location, $sanitize, $scope,
-  brAlertService, brIdentityService, config) {
+  brAlertService, brSessionService, config) {
   var self = this;
   self.loading = false;
-  self.identity = brIdentityService.identity;
+  self.identity = brSessionService.session.identity;
   self.identityCredentials = config.data.idp.identityCredentials;
 
   self.authorize = function(accept) {

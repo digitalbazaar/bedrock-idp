@@ -50,7 +50,6 @@ describe('IdP join form', function() {
       '$ctrl.identity.sysPassword', '$ctrl.passphraseConfirmation',
       'goodPhraseA', 'nonMatchingPhraseB', 'inputMatch');
   });
-
 });
 
 describe('Navbar session management', function() {

@@ -11,9 +11,9 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory($routeParams, brIdentityService, $window) {
+function factory($routeParams, brSessionService, $window) {
   var self = this;
-  self.identity = brIdentityService.identity;
+  self.identity = brSessionService.session.identity;
   self.state = {};
   self.modals = {};
 

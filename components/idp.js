@@ -15,7 +15,6 @@ define([
   './login/login',
   './passcode/passcode'
 ], function(angular, keyViewComponent) {
-
 'use strict';
 
 var modulePath = requirejs.toUrl('bedrock-idp/components/');

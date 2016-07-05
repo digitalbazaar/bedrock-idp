@@ -24,7 +24,6 @@ describe('IdP join form', function() {
   var fortyCharacters = 'yA2NdBthMcnTqGYz3Eqe9uNHxM8u00TaooiuhIM';
 
   beforeEach(function() {
-    console.log("BEDRROCK PAGES IDENTITY", bedrock.pages.identity);
     bedrock.pages.join.get();
   });
 
@@ -54,17 +53,8 @@ describe('IdP join form', function() {
       '$ctrl.identity.sysPassword', '$ctrl.passphraseConfirmation',
       'goodPhraseA', 'nonMatchingPhraseB', 'inputMatch');
   });
-
-  it('should log in', function() {
-    bedrock.pages.navbar.login(loginCredentials);
-  });
-
-  it('should go to settings page', function() {
-    bedrock.pages.identity.settings.get();
-    browser.sleep(10000);
-  });
 });
-/*
+
 describe('Navbar session management', function() {
   var loginCredentials = {
     sysIdentifier: 'testuser',
@@ -151,7 +141,7 @@ describe.skip('credential operations', function() {
   });
 
 });
-*/
+
 function generateCredential() {
   var mockCredential = {
     "@context": [

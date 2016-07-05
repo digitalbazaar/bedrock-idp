@@ -15,7 +15,7 @@ define([
   './credential-verify-service'
 ], function(
   angular, createIdentityComponent, passphraseConfirmation,
-  identityCredentials, identitySelector, identitySettingsController,
+  identityCredentials, identitySelector,
   modalAddIdentity, credentialVerifyService) {
 
 'use strict';
@@ -24,7 +24,6 @@ var module = angular.module('bedrock-idp.identity', []);
 
 createIdentityComponent(module);
 module.controller(identityCredentials.controller);
-module.controller(identitySettingsController);
 module.service(credentialVerifyService);
 module.directive(passphraseConfirmation);
 module.directive(identitySelector);

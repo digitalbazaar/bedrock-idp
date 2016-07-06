@@ -7,13 +7,14 @@
  */
 define([
   'angular',
+  './key-view-component',
   './credentials/credentials',
   './dashboard/dashboard',
   './duplicate-checker/duplicate-checker',
   './identity/identity',
   './login/login',
   './passcode/passcode'
-], function(angular) {
+], function(angular, keyViewComponent) {
 
 'use strict';
 
@@ -23,8 +24,10 @@ var credentialsBasePath =
 var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
-  'bedrock-idp', Array.prototype.slice.call(arguments, 1).concat([
+  'bedrock-idp', Array.prototype.slice.call(arguments, 2).concat([
     'bedrock.identity']));
+
+keyViewComponent(module);
 
 /* @ngInject */
 module.config(function($routeProvider) {
@@ -102,19 +105,7 @@ module.config(function($routeProvider) {
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',
-      template:
-        '<div>\
-          <div class="row">\
-            <div class="col-md-12">\
-              <h1 class="headline">Keys</h1>\
-            </div>\
-          </div>\
-          <div class="row">\
-            <div class="col-md-12">\
-              <br-keys br-identity="$resolve.identity"></br-keys>\
-            </div>\
-          </div>\
-        </div>',
+      template: '<br-key-view br-identity="$resolve.identity"></br-key-view>',
       resolve: {
         identity: function($route, brIdentityService) {
           var identity = $route.current.params.identity;

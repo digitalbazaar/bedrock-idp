@@ -62,6 +62,9 @@
   },
   "devDependencies": {
     "bedrock-protractor": "^3.1.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^5.3.0",
+    "mocha": "^2.5.0",
     "uuid": "^2.0.0",
     "supertest": "^1.0.1"
   }

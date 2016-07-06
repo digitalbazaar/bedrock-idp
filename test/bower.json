@@ -28,7 +28,7 @@
     "bedrock-angular-messages": "^2.0.0",
     "bedrock-angular-modal": "^3.0.0",
     "bedrock-angular-navbar": "^3.0.0",
-    "bedrock-angular-resolver": "digitalbazaar/bedrock-angular-resolver#disableUnitTests",
+    "bedrock-angular-resolver": "^2.0.0",
     "bedrock-angular-resource": "^2.0.0",
     "bedrock-angular-selector": "^3.1.0",
     "bedrock-angular-session": "^3.0.0",

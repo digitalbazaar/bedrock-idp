@@ -16,10 +16,6 @@ var module = angular.module('bedrock-idp.settings', []);
 
 module.controller(settings);
 
-module.run(function(brNavbarService, brSessionService, config) {
-
-});
-
 return module.name;
 
 });

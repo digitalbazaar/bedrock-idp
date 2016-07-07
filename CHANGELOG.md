@@ -1,5 +1,11 @@
 # bedrock-idp ChangeLog
 
+## 5.0.8 - 2016-07-07
+
+### Changed
+- Refactor tests.
+- Refactor identity components.
+
 ## 5.0.7 - 2016-06-29
 
 ### Fixed

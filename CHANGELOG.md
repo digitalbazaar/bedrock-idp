@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.9 - 2016-07-07
+
+### Changed
+- Update deps.
+
 ## 5.0.8 - 2016-07-07
 
 ### Changed

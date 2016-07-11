@@ -53,6 +53,7 @@ function Ctrl(
     // TODO: also support local account ID creation as a configurable feature
     navigator.credentials.registerDid({
       idp: config.data.idp.owner.id,
+      name: self.identity.email,
       agentUrl: config.data['authorization-io'].registerUrl
     }).then(function(didDocument) {
       self.identity.id = didDocument.id;

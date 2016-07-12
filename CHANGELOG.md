@@ -1,6 +1,6 @@
 # bedrock-idp ChangeLog
 
-## unpublished
+## 5.0.10 - 2016-07-12
 
 ### Changed
 - Improve join form validation and tests.

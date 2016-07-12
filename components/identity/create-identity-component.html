@@ -27,8 +27,7 @@
 
           <br-input br-model="$ctrl.identity.email"
             br-options="{
-              name: 'email', label: 'Email', disabled: {{$ctrl.loading}},
-              autocomplete: 'off',
+              name: 'email', label: 'Email',
               showValidation: true,
               type: 'email',
               columns: {
@@ -36,7 +35,8 @@
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }" ng-minlength="6" ng-maxlength="100" required>
+            }" br-input-ng-disabled="$ctrl.loading" br-input-autocomplete="off"
+            ng-minlength="6" ng-maxlength="100" required>
             <br-input-help>
               A valid email address is required so that we can reset
               your password if you get locked out.
@@ -71,14 +71,14 @@
           <br-input br-model="$ctrl.identity.sysPassword"
             br-options="{
               name: 'sysPassword', type: 'password',
-              label: 'Password', disabled: {{$ctrl.loading}},
+              label: 'Password',
               showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }" ng-minlength="8" ng-maxlength="32" required>
+            }" br-input-ng-disabled="$ctrl.loading" ng-minlength="8" ng-maxlength="32" required>
             <br-input-help>
               Please enter a secure password that is between 8 and 32 characters long. The best passwords are
               lengthy, memorable phrases like: the<strong>lemurs</strong>ride<strong>on</strong>the<strong>fortnight</strong>
@@ -99,14 +99,15 @@
           <br-input br-model="$ctrl.passphraseConfirmation"
             br-options="{
               name: 'passphraseConfirmation', type: 'password',
-              label: 'Confirm Password', disabled: {{$ctrl.loading}},
+              label: 'Confirm Password',
               showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }" br-input-br-passphrase-confirmation="$ctrl.identity.sysPassword">
+            }" br-input-ng-disabled="$ctrl.loading"
+            br-input-br-passphrase-confirmation="$ctrl.identity.sysPassword">
             <br-input-help>
               Please confirm your password.
             </br-input-help>
@@ -137,15 +138,15 @@
           <br-input br-model="$ctrl.identity.label"
             br-options="{
               name: 'label', label: 'Full Name',
-              placeholder: 'My Full Name', disabled: {{$ctrl.loading}},
-              autocomplete: 'off',
+              placeholder: 'My Full Name',
               showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }" ng-minlength="6" ng-maxlength="64" required>
+            }" br-input-ng-disabled="$ctrl.loading" br-input-autocomplete="off"
+            ng-minlength="6" ng-maxlength="64" required>
             <br-input-help>
               Enter the full name that is associated with this new identity.
               For instance "My Full Name" or "Mega Corp". Full Name must be
@@ -168,15 +169,15 @@
             br-slug-in="$ctrl.identity.label"
             br-options="{
               name: 'sysSlug', label: 'Short Name',
-              placeholder: 'my-short-name', disabled: {{$ctrl.loading}},
-              autocomplete: 'off',
+              placeholder: 'my-short-name',
               showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }" ng-minlength="3" ng-maxlength="32" required>
+            }" br-input-ng-disabled="$ctrl.loading" br-input-autocomplete="off"
+            ng-minlength="3" ng-maxlength="32" required>
             <br-input-help>
               Enter a short name for this identity. A name similar to your full
               name will help people to identify you. This short name will be

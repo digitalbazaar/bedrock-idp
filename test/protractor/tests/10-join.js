@@ -101,7 +101,7 @@ describe('IdP join form', function() {
       });
     }); // end full name validation
 
-    describe('slug validation', function() {
+    describe('short name validation', function() {
       it('should warn on missing name', function() {
         bedrock.pages.join.testField(
           '$ctrl.identity.sysSlug', '', 'required');

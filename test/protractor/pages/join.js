@@ -1,12 +1,17 @@
-var bedrock = GLOBAL.bedrock;
+/*
+ * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ */
+/* jshint -W030 */
+var bedrock = global.bedrock;
+var EC = protractor.ExpectedConditions;
 
 var api = {};
 module.exports = api;
 
-var by = GLOBAL.by;
-var element = GLOBAL.element;
-var should = GLOBAL.should;
-var expect = GLOBAL.expect;
+var by = global.by;
+var element = global.element;
+var should = global.should;
+var expect = global.expect;
 
 api.get = function() {
   bedrock.get('/join');
@@ -40,34 +45,31 @@ api.createIdentity = function(options) {
       agree.click();
     });
 
-  element(by.brModel('$ctrl.identity.sysSlug')).getAttribute('value')
-    .then(function(slug) {
-      var button = element(by.buttonText('Create Identity'));
-      bedrock.waitForAttribute(button, 'disabled', function(disabled) {
-        return disabled !== 'true';
-      });
-      // element(by.buttonText('Next')).click();
-      button.click();
-      bedrock.selectWindow(1);
-      browser.driver.getCurrentUrl()
-        .should.eventually.contain('authorization.dev');
-      browser.driver.close();
-      bedrock.selectWindow(0);
-    });
+  var button = element(by.buttonText('Create Identity'));
+  browser.wait(EC.elementToBeClickable(button), 3000);
+  button.click();
+  bedrock.selectWindow(1);
+  browser.driver.getCurrentUrl()
+    .should.eventually.contain('authorization.dev');
+  browser.driver.close();
+  bedrock.selectWindow(0);
   return api;
 };
 
 api.testField = function(modelName, testString, expectedErrorId) {
   var testElement = element(by.brModel(modelName));
-  testElement.sendKeys(testString);
-  testElement.sendKeys(protractor.Key.TAB);
+  testElement
+    .clear()
+    .sendKeys(testString)
+    .sendKeys(protractor.Key.TAB);
   element(by.brModel(modelName)).getAttribute('name')
     .then(function(elementName) {
-      element(by.attribute('br-model', modelName))
+      var validationError = element(by.attribute('br-model', modelName))
         .element(by.attribute(
           'ng-show',
-          ['$ctrl.regForm', elementName, '$error', expectedErrorId].join('.')))
-        .isDisplayed().should.eventually.be.true;
+          ['$ctrl.regForm', elementName, '$error', expectedErrorId].join('.')));
+      browser.wait(EC.visibilityOf(validationError), 3000);
+      validationError.isDisplayed().should.eventually.be.true;
     });
 };
 

@@ -29,16 +29,34 @@
             br-options="{
               name: 'email', label: 'Email', disabled: {{$ctrl.loading}},
               autocomplete: 'off',
+              showValidation: true,
+              type: 'email',
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }">
-            A valid email address is required so that we can reset
-            your password if you get locked out.
+            }" ng-minlength="6" ng-maxlength="100" required>
+            <br-input-help>
+              A valid email address is required so that we can reset
+              your password if you get locked out.
+            </br-input-help>
+            <br-input-validation-errors>
+              <p ng-show="$ctrl.regForm.email.$error.required">
+                Email is required.
+              </p>
+              <p ng-show="$ctrl.regForm.email.$error.email">
+                Email is not a valid email address.
+              </p>
+              <p ng-show="$ctrl.regForm.email.$error.minlength">
+                Email is required to be at least 6 characters.
+              </p>
+              <p ng-show="$ctrl.regForm.email.$error.maxlength">
+                Email must not be longer than 100 characters.
+              </p>
+            </br-input-validation-errors>
           </br-input>
-          <div ng-show="$ctrl.identity.email" class="form-group">
+          <div ng-show="$ctrl.regForm.email.$valid" class="form-group">
             <div class="col-md-offset-3 col-md-7"
               br-duplicate-checker="$ctrl.identity.email"
               br-duplicate-checker-type="email"
@@ -109,7 +127,7 @@
             <p class="help-block col-md-10">
               Your identity will be used to keep track of and verify your online
               activity with this service. Please enter your full name and then
-              select a short name that is used for your identity.  It is usually
+              select a short name that is used for your identity. It is usually
               a good idea to use some shortened form of your full name for your
               id, similar to how people choose email addresses or Twitter
               handles.
@@ -121,40 +139,69 @@
               name: 'label', label: 'Full Name',
               placeholder: 'My Full Name', disabled: {{$ctrl.loading}},
               autocomplete: 'off',
+              showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }">
-            Enter the full name that is associated with this new identity.
-            For instance "My Full Name" or "Mega Corp".
+            }" ng-minlength="6" ng-maxlength="64" required>
+            <br-input-help>
+              Enter the full name that is associated with this new identity.
+              For instance "My Full Name" or "Mega Corp". Full Name must be
+              between 6 and 64 characters.
+            </br-input-help>
+            <br-input-validation-errors>
+              <p ng-show="$ctrl.regForm.label.$error.required">
+                Full Name is required.
+              </p>
+              <p ng-show="$ctrl.regForm.label.$error.minlength">
+                Full Name is required to be at least 6 characters.
+              </p>
+              <p ng-show="$ctrl.regForm.label.$error.maxlength">
+                Full Name must not be longer than 64 characters.
+              </p>
+            </br-input-validation-errors>
           </br-input>
-
           <br-input br-model="$ctrl.identity.sysSlug"
             ng-model="$ctrl.identity.sysSlug"
             br-slug-in="$ctrl.identity.label"
             br-options="{
               name: 'sysSlug', label: 'Short Name',
               placeholder: 'my-short-name', disabled: {{$ctrl.loading}},
-              autocomplete: 'off', maxlength: '32',
+              autocomplete: 'off',
+              showValidation: true,
               columns: {
                 label: 'col-md-3',
                 input: 'col-md-7',
                 help: 'col-md-offset-3 col-md-7'
               }
-            }">
-            Enter a short name for this identity. A name similar to your full
-            name will help people to identify you. This short name will be
-            used in your identity address as shown below. An example would be
-            "my-short-name", "myshortname", or "megacorp".
+            }" ng-minlength="3" ng-maxlength="32" required>
+            <br-input-help>
+              Enter a short name for this identity. A name similar to your full
+              name will help people to identify you. This short name will be
+              used in your identity address as shown below. An example would be
+              "my-short-name", "myshortname", or "megacorp". Short Name must be
+              between 3 and 32 characters.
+            </br-input-help>
+            <br-input-validation-errors>
+              <p ng-show="$ctrl.regForm.sysSlug.$error.required">
+                Short Name is required.
+              </p>
+              <p ng-show="$ctrl.regForm.sysSlug.$error.minlength">
+                Short Name is required to be at least 3 characters.
+              </p>
+              <p ng-show="$ctrl.regForm.sysSlug.$error.maxlength">
+                Short Name must not be longer than 32 characters.
+              </p>
+            </br-input-validation-errors>
           </br-input>
           <div class="form-group">
             <div class="col-md-offset-3 col-md-7">
               <small>{{$ctrl.data.idp.identityBaseUri}}/</small><strong>{{$ctrl.identity.sysSlug}}</strong>
             </div>
           </div>
-          <div ng-show="$ctrl.identity.sysSlug" class="form-group">
+          <div ng-show="$ctrl.regForm.sysSlug.$valid" class="form-group">
             <div class="col-md-offset-3 col-md-7"
               br-duplicate-checker="$ctrl.identity.sysSlug"
               br-duplicate-checker-type="identity"

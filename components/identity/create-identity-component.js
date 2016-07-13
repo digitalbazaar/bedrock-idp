@@ -56,6 +56,9 @@ function Ctrl(
       name: self.identity.email,
       agentUrl: config.data['authorization-io'].registerUrl
     }).then(function(didDocument) {
+      if(!didDocument) {
+        throw new Error('Decentralized identifier registration canceled.');
+      }
       self.identity.id = didDocument.id;
       return Promise.resolve($http.post('/join', self.identity));
     }).then(function(response) {

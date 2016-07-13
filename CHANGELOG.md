@@ -4,6 +4,7 @@
 
 ### Changed
 - Improve join form validation and tests.
+- Include `email` as human readable identifier for DID registration.
 
 ## 5.0.9 - 2016-07-07
 

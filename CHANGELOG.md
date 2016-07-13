@@ -1,5 +1,8 @@
 # bedrock-idp ChangeLog
 
+### Fixed
+- Throw error when DID registration is canceled.
+
 ## 5.0.10 - 2016-07-12
 
 ### Changed

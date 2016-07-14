@@ -51,7 +51,7 @@ function Ctrl(
     brAlertService.clearFeedback();
     self.loading = true;
     // TODO: also support local account ID creation as a configurable feature
-    navigator.credentials.registerDid({
+    IdentityCredential.register({
       idp: config.data.idp.owner.id,
       name: self.identity.email,
       agentUrl: config.data['authorization-io'].registerUrl

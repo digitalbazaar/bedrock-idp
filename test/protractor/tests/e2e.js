@@ -16,6 +16,7 @@ describe('IdP join form', function() {
   identity.label = identity.sysIdentifier;
   identity.email = identity.sysIdentifier + '@bedrock.dev';
   identity.password = 'password';
+  identity.authio = true;
   var loginCredentials = {
     sysIdentifier: identity.sysIdentifier,
     passphrase: identity.password

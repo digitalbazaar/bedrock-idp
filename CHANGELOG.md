@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.12 - 2016-07-20
+
+### Changed
+- Update bedrock-identity-http dependency.
+
 ## 5.0.11 - 2016-07-14
 
 ### Fixed

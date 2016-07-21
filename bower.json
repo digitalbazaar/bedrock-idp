@@ -42,7 +42,7 @@
     "bedrock-angular-session": "^3.0.0",
     "bedrock-angular-ui": "^2.0.0",
     "bedrock-credential-curator": "^0.4.0",
-    "credentials-polyfill": "^0.8.0",
+    "credentials-polyfill": "^0.10.0",
     "forge": "^0.6.35",
     "opencred-verifier": "^0.1.0",
     "lodash": "^4.0.0"

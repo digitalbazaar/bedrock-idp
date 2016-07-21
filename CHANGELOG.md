@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.13 - 2016-07-21
+
+### Changed
+- Use credentials-polyfill 0.10.x.
+
 ## 5.0.12 - 2016-07-20
 
 ### Changed

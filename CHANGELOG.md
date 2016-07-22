@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.15 - 2016-07-22
+
+### Fixed
+- Update bower.json `ignore`.
+
 ## 5.0.14 - 2016-07-22
 
 ### Fixed

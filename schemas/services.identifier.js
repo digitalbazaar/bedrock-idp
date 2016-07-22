@@ -6,7 +6,7 @@ var schemas = require('bedrock-validation').schemas;
 var postEmailIdentifier = {
   type: 'object',
   properties: {
-    email: schemas.email()
+    email: schemas.email({}, {lowerCaseOnly: true})
   },
   additionalProperties: false
 };

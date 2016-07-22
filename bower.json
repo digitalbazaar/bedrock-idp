@@ -15,11 +15,12 @@
     "bedrock/tests",
     "bedrock/test.js",
     "bower_components",
+    "email-templates",
     "lib",
     "node_modules",
     "package.json",
-    "views",
-    "tests"
+    "schemas",
+    "test"
   ],
   "dependencies": {
     "bedrock-angular": "^2.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "bedrock-idp",
-  "version": "5.0.14-0",
+  "version": "5.0.14",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
   "scripts": {

@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.0.14 - 2016-07-22
+
+### Fixed
+- Only accept lower case email addresses.
+
 ## 5.0.13 - 2016-07-21
 
 ### Changed

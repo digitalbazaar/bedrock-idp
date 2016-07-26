@@ -8,7 +8,8 @@ var describe = global.describe;
 var it = global.it;
 var uuid = require('uuid');
 
-describe('IdP join form', function() {
+/* tests duplicated in 10-join.js, skipping */
+describe.skip('IdP join form', function() {
   var identity = {};
   identity.sysIdentifier = bedrock.randomString().toLowerCase();
   identity.id =

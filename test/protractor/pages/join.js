@@ -63,7 +63,8 @@ api.createIdentity = function(options) {
       bedrock.waitForAngular();
       bedrock.waitForElement(element(by.brModel('$ctrl.email')));
       // Register with auth.io
-      element(by.brModel('$ctrl.email')).sendKeys(options.email);
+      // email is defaulted on authio form, clear the default
+      element(by.brModel('$ctrl.email')).clear().sendKeys(options.email);
       element(by.brModel('$ctrl.passphrase')).sendKeys(options.password);
       element(by.brModel('$ctrl.passphraseConfirmation'))
         .sendKeys(options.password);

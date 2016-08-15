@@ -34,6 +34,8 @@
   },
   "peerDependencies": {
     "bedrock": "^1.0.0",
+    "bedrock-agreement": "^1.0.0",
+    "bedrock-agreement-http": "^1.0.0",
     "bedrock-authn-did": "^3.0.0",
     "bedrock-authn-password": "^3.0.0",
     "bedrock-consumer": "^2.0.0",

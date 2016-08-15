@@ -21,7 +21,7 @@ function register(module) {
 
 /* @ngInject */
 function Ctrl(
-  $http, $location, $scope, $window, $routeParams,
+  $http, $location, $scope, $window, $routeParams, brAgreementService,
   brAlertService, brRefreshService, brSessionService, config) {
   var self = this;
   self.data = config.data;
@@ -61,7 +61,13 @@ function Ctrl(
       }
       self.identity.id = didDocument.id;
       return Promise.resolve($http.post('/join', self.identity));
-    }).then(function(response) {
+    }).then(function() {
+      return brAgreementService
+        .accept(brAgreementService.getAgreements('bedrock-idp.join'))
+        .catch(function() {
+          // ignore error, agreements can be accepted later
+        });
+    }).then(function() {
       return brSessionService.get();
     }).then(function(session) {
       // FIXME: remove after config...session is no longer used to track session

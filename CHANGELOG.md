@@ -1,5 +1,11 @@
 # bedrock-idp ChangeLog
 
+## 5.1.0 - 2016-08-16
+
+### Added
+- Record agreements during the join process.
+- Add route resolver to check service agreements.
+
 ## 5.0.16 - 2016-07-22
 
 ### Fixed

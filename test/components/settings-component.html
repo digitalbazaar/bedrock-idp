@@ -1,0 +1,28 @@
+<div>
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="headline">Settings</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br-tabs ng-if="$ctrl.identity">
+        <br-tabs-pane br-title="Identity" br-tab-id="identity" br-tab-pane-index="0">
+          <div class="section">
+            <br-headline br-title="Identity" br-options="{menu: false}"></br-headline>
+            <br-identity-settings br-identity="$ctrl.identity"></br-identity-settings>
+          </div>
+        </br-tabs-pane>
+        <br-tabs-pane br-title="Notifications" br-tab-id="notifications" br-tab-pane-index="1">
+          <br-idp-notification-settings br-identity="$ctrl.identity"></br-idp-notification-settings>
+        </br-tabs-pane>
+        <br-tabs-pane br-title="Keys" br-tab-id="keys" br-tab-pane-index="2">
+          <br-keys br-identity="$ctrl.identity"></br-keys>
+        </br-tabs-pane>
+      </br-tabs>
+      <div ng-if="!$ctrl.identity">
+        <i class="fa fa-refresh fa-spin text-muted"></i>
+      </div>
+    </div>
+  </div>
+</div>

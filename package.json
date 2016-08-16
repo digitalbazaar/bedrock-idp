@@ -3,9 +3,7 @@
   "version": "5.1.5-0",
   "description": "Bedrock Identity Provider",
   "main": "./lib/idp",
-  "scripts": {
-    "test": "node ./test/test.js test"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-idp"

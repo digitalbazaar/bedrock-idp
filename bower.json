@@ -10,15 +10,7 @@
     "lib",
     "node_modules",
     "package.json",
-    "schemas",
-    "test/bower.json",
-    "test/bower_components",
-    "test/components",
-    "test/mocha",
-    "test/package.json",
-    "test/protractor",
-    "test/static",
-    "test/test*"
+    "schemas"
   ],
   "dependencies": {
     "bedrock-angular": "^2.0.0",

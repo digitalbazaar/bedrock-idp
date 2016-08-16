@@ -2,15 +2,11 @@
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
 var bedrock = global.bedrock;
-var browser = global.browser;
-var by = global.by;
-var element = global.element;
-var expect = global.expect;
-var should = global.should;
+
 var api = {};
 module.exports = api;
 
-api.viewCredentials = function(options) {
+api.viewCredentials = function() {
   // user will already be logged in
   var credentialsLink = element(by.linkText('Credentials'));
   credentialsLink.click();
@@ -104,4 +100,4 @@ function postJsonData(data, url) {
   document.lastChild.appendChild(form);
   form.submit();
 
-};
+}

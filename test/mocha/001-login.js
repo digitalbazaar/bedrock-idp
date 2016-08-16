@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals describe, before, after, it, should, beforeEach, afterEach */
 /* jshint node: true */
 'use strict';
 
@@ -9,12 +8,13 @@ var bedrock = require('bedrock');
 var config = bedrock.config;
 var helpers = require('./helpers');
 var request = require('request');
-request = request.defaults({jar: true, json: true});
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+request = request.defaults({jar: true, json: true, strictSSL: false});
 
 describe('bedrock-idp password login', function() {
-  after(function(done) {
+  before(function(done) {
+    helpers.prepareDatabase({}, done);
+  });
+  afterEach(function(done) {
     helpers.logout(request, done);
   });
 
@@ -27,9 +27,8 @@ describe('bedrock-idp password login', function() {
         body: {sysIdentifier: 'INVALID_LOGIN', password: 'password'}
       },
       function(err, res, body) {
-        should.exist(res.headers['set-cookie']);
         res.statusCode.should.equal(400);
-        res.body.should.not.have.property('identity');
+        body.type.should.equal('InvalidLogin');
         done(err);
       }
     );
@@ -43,10 +42,9 @@ describe('bedrock-idp password login', function() {
       },
       function(err, res, body) {
         res.statusCode.should.equal(200);
-        res.body.should.have.property('identity');
+        body.should.have.property('identity');
         done(err);
       }
     );
   });
-
 });

@@ -1,21 +1,18 @@
 /*
  * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals describe, before, after, it, should, beforeEach, afterEach */
+/* global should */
 /* jshint node: true */
 'use strict';
 
 var async = require('async');
 var bedrock = require('bedrock');
 var config = bedrock.config;
-var database = require('bedrock-mongodb');
 var request = require('request');
 var helpers = require('./helpers');
 var mockData = require('./mock.data');
 var uuid = require('uuid').v4;
-request = request.defaults({jar: true, json: true});
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+request = request.defaults({jar: true, json: true, strictSSL: false});
 
 /*
 * These tests test for the existence of API endpoints.  The functionionality
@@ -59,8 +56,11 @@ describe('bedrock-idp credential tasks', function() {
       request.get(
         config.server.baseUri + config['session-http'].routes.session,
         function(err, res, body) {
-        done();
-      });
+          should.not.exist(err);
+          res.statusCode.should.equal(200);
+          body.identity.sysSlug.should.equal('rsa2048');
+          done();
+        });
     });
 
     it('should accept a request to retrieve credentials', function(done) {
@@ -101,7 +101,7 @@ describe('bedrock-idp credential tasks', function() {
       request.post({
         url: testService,
         body: postData
-      }, function(err, res, body) {
+      }, function(err, res) {
         should.not.exist(err);
         res.statusCode.should.equal(200);
         done(err);
@@ -109,11 +109,12 @@ describe('bedrock-idp credential tasks', function() {
     });
 
     it('should accept a request to store automatically', function(done) {
-      var uniqueCredential = helpers.createUniqueCredential(uuid());
+      var uniqueCredential =
+        helpers.createUniqueCredential(mockData.identities.rsa2048.identity.id);
       request.post({
         url: testService,
         body: uniqueCredential
-      }, function(err, res, body) {
+      }, function(err, res) {
         should.not.exist(err);
         res.statusCode.should.equal(200);
         var credentialId = uniqueCredential.credential[0]['@graph'].id;
@@ -124,6 +125,20 @@ describe('bedrock-idp credential tasks', function() {
         });
       });
     });
-
+    // attempt to save a credential that belongs to another identity
+    it('rejects a credential for a different identity', function(done) {
+      // create credential for some random identity
+      var uniqueCredential =
+        helpers.createUniqueCredential(uuid());
+      request.post({
+        url: testService,
+        body: uniqueCredential
+      }, function(err, res, body) {
+        should.not.exist(err);
+        res.statusCode.should.equal(403);
+        body.type.should.equal('PermissionDenied');
+        done();
+      });
+    });
   });
 });

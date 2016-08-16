@@ -21,7 +21,6 @@ define([
 
 'use strict';
 
-var modulePath = requirejs.toUrl('bedrock-idp/components/');
 var credentialsBasePath =
   window.data['bedrock-angular-credential'].credentialsBasePath;
 var keyBasePath = window.data['bedrock-angular-key'].basePath;
@@ -196,8 +195,7 @@ module.config(function($routeProvider, routeResolverProvider) {
 });
 
 /* @ngInject */
-module.run(function(
-  brAgreementService, brAuthnService, config) {
+module.run(function(brAgreementService, brAuthnService) {
   brAgreementService.registerGroup('bedrock-idp.join');
   brAuthnService.displayOrder = ['authn-did', 'authn-password'];
 });

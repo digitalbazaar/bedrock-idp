@@ -13,10 +13,6 @@ module.exports = mock;
 mock.identities = {};
 mock.didDocuments = {};
 
-// TODO: Correct these paths to be more accurate
-var baseIdPath = bedrock.config.server.baseUri;
-var userName = '';
-
 mock.credentialTemplate = {
   '@context': 'https://w3id.org/identity/v1',
   issuer: 'did:603e6408-7afb-49e0-a484-b236ae2ba01f',
@@ -49,12 +45,23 @@ mock.credentialTemplate = {
   }
 };
 
+var userName = '';
+
+userName = 'dev';
+mock.identities[userName] = {};
+mock.identities[userName].identity = createIdentity(userName);
+mock.identities[userName].identity.sysResourceRole.push({
+  sysRole: 'bedrock-idp.identity.registered',
+  generateResource: 'id'
+});
+
 // user with a valid 2048 bit RSA keypair, identity is made public
 userName = 'rsa2048';
 mock.identities[userName] = {};
 mock.identities[userName].identity = createIdentity(userName);
 mock.identities[userName].identity.sysResourceRole.push({
-  sysRole: 'identity.registered'
+  sysRole: 'bedrock-idp.identity.registered',
+  generateResource: 'id'
 });
 // make this identity public
 mock.identities[userName].identity.sysPublic.push('email');
@@ -103,7 +110,8 @@ userName = 'privateIdentity';
 mock.identities[userName] = {};
 mock.identities[userName].identity = createIdentity(userName);
 mock.identities[userName].identity.sysResourceRole.push({
-  sysRole: 'identity.registered'
+  sysRole: 'bedrock-idp.identity.registered',
+  generateResource: 'id'
 });
 mock.identities[userName].keys = createKeyPair({
   userName: userName,
@@ -182,16 +190,19 @@ var recipientDidDocument = {
 Object.keys(mock.identities).forEach(function(i) {
   var tempDoc = util.clone(recipientDidDocument);
   tempDoc.id = mock.identities[i].identity.id;
-  tempDoc.publicKey[0].id = mock.identities[i].identity.id + '/keys/1';
-  tempDoc.publicKey[0].owner = mock.identities[i].identity.id;
-  tempDoc.publicKey[0].publicKeyPem =
-    mock.identities[i].keys.publicKey.publicKeyPem;
+  if(mock.identities[i].keys) {
+    tempDoc.publicKey[0].id = mock.identities[i].identity.id + '/keys/1';
+    tempDoc.publicKey[0].owner = mock.identities[i].identity.id;
+    tempDoc.publicKey[0].publicKeyPem =
+      mock.identities[i].keys.publicKey.publicKeyPem;
+  }
   mock.didDocuments[mock.identities[i].identity.id] = tempDoc;
 });
 
 function createIdentity(userName) {
   var newIdentity = {
-    id: 'did:' + uuid(),
+    id: config.server.baseUri + config['identity-http'].basePath +
+      '/' + userName,
     type: 'Identity',
     sysSlug: userName,
     label: userName,
@@ -211,6 +222,8 @@ function createKeyPair(options) {
   var publicKey = options.publicKey;
   var privateKey = options.privateKey;
   var ownerId = null;
+  var id = options.id || uuid();
+  var keyId = config.server.baseUri + config.key.basePath + '/' + id;
   if(userName === 'userUnknown') {
     ownerId = '';
   } else {
@@ -219,7 +232,7 @@ function createKeyPair(options) {
   var newKeyPair = {
     publicKey: {
       '@context': 'https://w3id.org/identity/v1',
-      id: ownerId + '/keys/1',
+      id: keyId,
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
@@ -229,7 +242,7 @@ function createKeyPair(options) {
       type: 'CryptographicKey',
       owner: ownerId,
       label: 'Signing Key 1',
-      publicKey: ownerId + '/keys/1',
+      publicKey: keyId,
       privateKeyPem: privateKey
     }
   };

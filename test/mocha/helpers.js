@@ -1,8 +1,6 @@
 /*
  * Copyright (c) 2014-2016 Digital Bazaar, Inc. All rights reserved.
  */
-/* globals after, afterEach, before, beforeEach, it, process, describe,
-  require, should  */
 /* jshint node: true */
 'use strict';
 
@@ -119,8 +117,14 @@ api.login = function(request, authData, callback) {
   request.post({
     url: loginService,
     body: authData
-  }, function(err, res, body) {
-    callback(err);
+  }, function(err, res) {
+    if(err) {
+      return callback(err);
+    }
+    if(res.statusCode !== 200) {
+      return callback(new Error('Login Failed'));
+    }
+    callback();
   });
 };
 
@@ -137,31 +141,33 @@ api.prepareDatabase = function(options, callback) {
     function(callback) {
       insertTestData(options, callback);
     }
-  ], function(err) {
-    callback(err);
-  });
+  ], callback);
 };
 
 api.removeCollections = function(callback) {
   var collectionNames = [
     'credentialProvider', 'identity', 'publicKey', 'eventLog'];
   database.openCollections(collectionNames, function(err) {
+    if(err) {
+      return callback(err);
+    }
     async.each(collectionNames, function(collectionName, callback) {
       database.collections[collectionName].remove({}, callback);
-    }, function(err) {
-      callback(err);
-    });
+    }, callback);
   });
 };
 
 // Insert identities and public keys used for testing into database
 function insertTestData(options, done) {
   async.forEachOf(mockData.identities, function(identity, key, callback) {
-    async.parallel([
+    async.series([
       function(callback) {
         brIdentity.insert(null, identity.identity, callback);
       },
       function(callback) {
+        if(!identity.keys) {
+          return callback();
+        }
         brKey.addPublicKey(null, identity.keys.publicKey, callback);
       },
       function(callback) {

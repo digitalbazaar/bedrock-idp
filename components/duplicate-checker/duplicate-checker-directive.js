@@ -10,7 +10,7 @@ define([], function() {
 'use strict';
 
 /* @ngInject */
-function factory($http, $filter, brAlertService, config) {
+function factory($http, $filter, $timeout, brAlertService, config) {
   return {
     restrict: 'A',
     scope: {
@@ -51,7 +51,7 @@ function factory($http, $filter, brAlertService, config) {
       }
 
       // stop previous check
-      clearTimeout(timer);
+      $timeout.cancel(timer);
 
       // nothing to check
       if(value === undefined || value.length === 0 || !ownerReady) {
@@ -68,62 +68,54 @@ function factory($http, $filter, brAlertService, config) {
         scope.result = false;
 
         // start timer to check
-        timer = setTimeout(function() {
-          scope.$apply(function() {
-            if(value.length === 0) {
-              element.hide();
+        timer = $timeout(function() {
+          if(value.length === 0) {
+            element.hide();
+          } else {
+            if(scope.type === 'email') {
+              lastInput = scope.input;
             } else {
-              timer = null;
-              if(scope.type === 'email') {
-                lastInput = scope.input;
-              } else {
-                lastInput = $filter('slug')(scope.input);
-              }
-              var data = {};
-              if(scope.type === 'email') {
-                data.email = lastInput;
-              } else {
-                data.sysSlug = lastInput;
-              }
-              Promise.resolve(
-                $http.post('/identifier/' + scope.type, $.extend(
-                data, scope.owner ? {owner: scope.owner} : {})))
-                .then(function() {
-                  // available
-                  scope.result = 'available';
-                  element
-                    .hide()
-                    .removeClass('alert-danger alert-success alert-warning')
-                    .addClass('alert-success')
-                    .text(scope.available)
-                    .fadeIn('slow');
-                  scope.$apply();
-                }).catch(function(err) {
-                  element.hide().removeClass(
-                    'alert-danger alert-success alert-warning');
-                  var status = (err.details && err.details.httpStatusCode ?
-                    err.details.httpStatusCode : 500);
-                  if(status === 400) {
-                    // invalid
-                    scope.result = 'invalid';
-                    element
-                      .text(scope.invalid)
-                      .addClass('alert-danger')
-                      .fadeIn('slow');
-                  } else if(status === 409) {
-                    scope.result = 'unavailable';
-                    element
-                      .text(scope.taken)
-                      .addClass('alert-danger')
-                      .fadeIn('slow');
-                  } else {
-                    scope.result = 'error';
-                    brAlertService.add('error', err);
-                  }
-                  scope.$apply();
-                });
+              lastInput = $filter('slug')(scope.input);
             }
-          });
+            var data = {};
+            if(scope.type === 'email') {
+              data.email = lastInput;
+            } else {
+              data.sysSlug = lastInput;
+            }
+            Promise.resolve(
+              $http.post('/identifier/' + scope.type, $.extend(
+              data, scope.owner ? {owner: scope.owner} : {})))
+              .then(function() {
+                scope.result = 'available';
+                return scope.available;
+              }).catch(function(err) {
+                var status = (err.details && err.details.httpStatusCode ?
+                  err.details.httpStatusCode : 500);
+                if(status === 400) {
+                  scope.result = 'invalid';
+                  return scope.invalid;
+                }
+                if(status === 409) {
+                  scope.result = 'unavailable';
+                  return scope.taken;
+                }
+                scope.result = 'error';
+                brAlertService.add('error', err);
+                return null;
+              }).then(function(text) {
+                element.hide().removeClass('alert-danger alert-success alert-warning');
+                if(text !== null) {
+                  if(scope.result === 'available') {
+                      element.addClass('alert-success');
+                  } else {
+                    element.addClass('alert-danger');
+                  }
+                  element.text(text).fadeIn('slow');
+                }
+                scope.$apply();
+              });
+            }
         }, 1000);
       }
     }

@@ -83,9 +83,8 @@ function factory($http, $filter, $timeout, brAlertService, config) {
             } else {
               data.sysSlug = lastInput;
             }
-            Promise.resolve(
-              $http.post('/identifier/' + scope.type, $.extend(
-              data, scope.owner ? {owner: scope.owner} : {})))
+            $http.post('/identifier/' + scope.type, $.extend(
+              data, scope.owner ? {owner: scope.owner} : {}))
               .then(function() {
                 scope.result = 'available';
                 return scope.available;
@@ -113,7 +112,6 @@ function factory($http, $filter, $timeout, brAlertService, config) {
                   }
                   element.text(text).fadeIn('slow');
                 }
-                scope.$apply();
               });
             }
         }, 1000);

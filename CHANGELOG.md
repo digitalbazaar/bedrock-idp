@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.1.1 - 2016-09-01
+
+### Changed
+- Modernize duplicate checker directive.
+
 ## 5.1.0 - 2016-08-16
 
 ### Added

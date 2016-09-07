@@ -44,15 +44,34 @@ api.createIdentity = function(options) {
       var agree = agreements[0].element(by.tagName('input'));
       agree.click();
     });
-
-  var button = element(by.buttonText('Create Identity'));
-  browser.wait(EC.elementToBeClickable(button), 3000);
-  button.click();
-  bedrock.selectWindow(1);
-  browser.driver.getCurrentUrl()
-    .should.eventually.contain('authorization.dev');
-  browser.driver.close();
-  bedrock.selectWindow(0);
+  element(by.brModel('$ctrl.identity.sysSlug')).getAttribute('value')
+    .then(function(slug) {
+      var button = element(by.buttonText('Create Identity'));
+      bedrock.waitForAttribute(button, 'disabled', function(disabled) {
+        return disabled !== 'true';
+      });
+      // element(by.buttonText('Next')).click();
+      button.click();
+      bedrock.selectWindow(1);
+      browser.driver.getCurrentUrl()
+        .should.eventually.contain('authorization.dev');
+      if(!options.authio) {
+        browser.driver.close();
+        bedrock.selectWindow(0);
+        return;
+      }
+      bedrock.waitForAngular();
+      bedrock.waitForElement(element(by.brModel('$ctrl.email')));
+      // Register with auth.io
+      // email is defaulted on authio form, clear the default
+      element(by.brModel('$ctrl.email')).clear().sendKeys(options.email);
+      element(by.brModel('$ctrl.passphrase')).sendKeys(options.password);
+      element(by.brModel('$ctrl.passphraseConfirmation'))
+        .sendKeys(options.password);
+      element(by.buttonText('Register')).click();
+      bedrock.waitForPopupClose(1);
+      bedrock.selectWindow(0);
+    });
   return api;
 };
 

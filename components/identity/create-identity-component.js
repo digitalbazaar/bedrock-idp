@@ -81,6 +81,10 @@ function Ctrl(
       var referred = shouldRedirect ? '?referral=true' : '';
       if(referred && shouldRedirectAuto) {
         referred = referred + '&auto=true';
+        // do early automatic redirection (required for IE11 because
+        // $location.url() below will reset document.referrer)
+        $window.location = document.referrer;
+        return;
       }
       $location.url(config.data.idp.identityBasePath + '/' +
         session.identity.sysSlug + '/dashboard' + referred);

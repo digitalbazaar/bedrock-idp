@@ -20,7 +20,7 @@
     "bedrock-angular-authn": "^2.0.0",
     "bedrock-angular-authn-did": "^1.0.0",
     "bedrock-angular-authn-password": "^1.0.0",
-    "bedrock-angular-credential": "^2.0.0",
+    "bedrock-angular-credential": "^2.2.3",
     "bedrock-angular-form": "^2.0.0",
     "bedrock-angular-identity": "^1.1.0",
     "bedrock-angular-identity-composer": "^1.0.1",

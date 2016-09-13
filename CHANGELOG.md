@@ -1,5 +1,7 @@
 # bedrock-idp ChangeLog
 
+## 5.1.2 - 2016-09-13
+
 ### Fixed
 - Fix referrer bug with IE11; `document.referrer` is reset when
   `$location.url` is called which causes redirection to fail

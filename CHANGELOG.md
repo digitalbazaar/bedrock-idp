@@ -1,5 +1,8 @@
 # bedrock-idp ChangeLog
 
+# Fixed
+- Remove erroneous bower dependency on bedrock-angular-messages.
+
 ## 5.1.2 - 2016-09-13
 
 ### Fixed

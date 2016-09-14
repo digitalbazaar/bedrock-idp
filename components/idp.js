@@ -171,7 +171,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when('/join', {
       title: 'Create Identity',
       resolve: {redirectIfReferred: redirectIfReferred},
-      template: '<br-create-identity></br-create-identity'
+      template: '<br-create-identity></br-create-identity>'
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',

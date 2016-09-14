@@ -96,9 +96,9 @@ module.config(function($routeProvider, routeResolverProvider) {
       title: 'Agreements',
       session: 'required',
       template:
-       '<br-agreement-view br-agreement-group="bedrock-idp.join" \
-       br-on-agree="$resolve.relocate()" br-on-cancel="$resolve.cancel()">\
-       </br-agreement-view>',
+       '<br-agreement-view br-agreement-group="bedrock-idp.join" ' +
+       'br-on-agree="$resolve.relocate()" br-on-cancel="$resolve.cancel()">' +
+       '</br-agreement-view>',
       resolve: {
         cancel: function($route, brSessionService) {
           return function() {
@@ -154,12 +154,12 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when(basePath + '/:identity', {
       title: 'Identity',
       template:
-        '<br-identity-viewer br-identity="$resolve.identity">\
-          <br-identity-additional-content>\
-            <br-keys br-identity="$resolve.identity"></br-keys>\
-            <br-credentials br-identity="$resolve.identity"></br-credentials>\
-          </br-identity-additional-content>\
-        </br-identity-viewer>',
+        '<br-identity-viewer br-identity="$resolve.identity">' +
+        '  <br-identity-additional-content>' +
+        '    <br-keys br-identity="$resolve.identity"></br-keys>' +
+        '    <br-credentials br-identity="$resolve.identity"></br-credentials>' +
+        '  </br-identity-additional-content>' +
+        '</br-identity-viewer>',
       resolve: {
         identity: function($route, brIdentityService) {
           var identity = $route.current.params.identity;

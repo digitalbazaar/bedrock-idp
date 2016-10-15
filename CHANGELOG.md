@@ -1,8 +1,13 @@
 # bedrock-idp ChangeLog
 
+## 5.1.4 - 2016-10-14
+
+### Fixed
+- Improve validation of `Short Name` field.
+
 ## 5.1.3 - 2016-09-14
 
-# Fixed
+### Fixed
 - Remove erroneous bower dependency on bedrock-angular-messages.
 
 ## 5.1.2 - 2016-09-13

@@ -169,6 +169,7 @@
             br-slug-in="$ctrl.identity.label"
             br-options="{
               name: 'sysSlug', label: 'Short Name',
+              lowerCaseOnly: true,
               placeholder: 'my-short-name',
               showValidation: true,
               columns: {
@@ -177,7 +178,7 @@
                 help: 'col-md-offset-3 col-md-7'
               }
             }" br-input-ng-disabled="$ctrl.loading" br-input-autocomplete="off"
-            ng-minlength="3" ng-maxlength="32" required>
+            ng-minlength="3" ng-maxlength="32" ng-pattern="/^[a-z][-a-z0-9~_\\.]*$/" required>
             <br-input-help>
               Enter a short name for this identity. A name similar to your full
               name will help people to identify you. This short name will be
@@ -194,6 +195,10 @@
               </p>
               <p ng-show="$ctrl.regForm.sysSlug.$error.maxlength">
                 Short Name must not be longer than 32 characters.
+              </p>
+              <p ng-show="$ctrl.regForm.sysSlug.$error.pattern">
+                The slug must start with a letter, contain only lowercase
+                letters, numbers, hyphens, periods, underscores, and tildes.
               </p>
             </br-input-validation-errors>
           </br-input>

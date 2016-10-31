@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## 5.1.5 - 2016-10-31
+
+### Changed
+- Improve test suite.
+
 ## 5.1.4 - 2016-10-14
 
 ### Fixed

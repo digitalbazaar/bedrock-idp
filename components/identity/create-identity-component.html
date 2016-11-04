@@ -107,12 +107,12 @@
                 help: 'col-md-offset-3 col-md-7'
               }
             }" br-input-ng-disabled="$ctrl.loading"
-            br-input-br-passphrase-confirmation="$ctrl.identity.sysPassword">
+            br-input-br-validator-same-as="$ctrl.identity.sysPassword">
             <br-input-help>
               Please confirm your password.
             </br-input-help>
             <br-input-validation-errors>
-              <p ng-show="$ctrl.regForm.passphraseConfirmation.$error.inputMatch">
+              <p ng-show="$ctrl.regForm.passphraseConfirmation.$error.brValidatorSameAs">
                 Password and Confirm Password must match.
               </p>
             </br-input-validation-errors>

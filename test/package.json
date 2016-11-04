@@ -5,7 +5,8 @@
   "main": "./lib/idp",
   "scripts": {
     "test": "node --preserve-symlinks test.js test --framework mocha",
-    "postinstall": "bower install && node --preserve-symlinks test compile-less"
+    "postinstall": "bower install && node --preserve-symlinks test compile-less",
+    "protractor": "node --preserve-symlinks test.js test --framework protractor"
   },
   "repository": {
     "type": "git",

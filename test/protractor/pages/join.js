@@ -131,8 +131,43 @@ api.testFieldsMatch =
     var testElementB = element(by.brModel(modelNameB));
     testElementB.sendKeys(testStringB);
     navbar.click();
-    // testElementB.sendKeys(protractor.Key.TAB);
-    element(by.brModel(modelNameB)).getAttribute('name')
+    testElementB.getAttribute('name')
+      .then(function(elementName) {
+        element(by.attribute('br-model', modelNameB))
+          .element(by.attribute(
+            'ng-show',
+            ['$ctrl.regForm', elementName, '$error', expectedErrorId]
+              .join('.')))
+          .isDisplayed().should.eventually.be.true;
+      });
+  };
+
+// set fields to matching values, then change modelNameA
+api.testFieldsMatch2 =
+  function(modelNameA, modelNameB, testStringA, testStringB, expectedErrorId) {
+    var navbar = element(by.tagName('br-navbar'));
+    var testElementA = element(by.brModel(modelNameA));
+    testElementA
+      .clear()
+      .sendKeys(testStringA);
+    var testElementB = element(by.brModel(modelNameB));
+    testElementB
+      .clear()
+      .sendKeys(testStringA);
+    navbar.click();
+    testElementB.getAttribute('name')
+      .then(function(elementName) {
+        element(by.attribute('br-model', modelNameB))
+          .element(by.attribute(
+            'ng-show',
+            ['$ctrl.regForm', elementName, '$error', expectedErrorId]
+              .join('.')))
+          .isDisplayed().should.eventually.be.false;
+      });
+    testElementA
+      .clear()
+      .sendKeys(testStringB);
+    testElementB.getAttribute('name')
       .then(function(elementName) {
         element(by.attribute('br-model', modelNameB))
           .element(by.attribute(

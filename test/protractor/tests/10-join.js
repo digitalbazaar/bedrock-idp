@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  */
-/* jshint multistr: true */
 var bedrock = global.bedrock;
 var uuid = require('uuid').v4;
 var protractor = global.protractor;
@@ -103,7 +102,12 @@ describe('IdP join form', function() {
       it('should warn if password confirmation does not match', function() {
         join.testFieldsMatch(
           '$ctrl.identity.sysPassword', '$ctrl.passphraseConfirmation',
-          'goodPhraseA', 'nonMatchingPhraseB', 'inputMatch');
+          'goodPhraseA', 'nonMatchingPhraseB', 'brValidatorSameAs');
+      });
+      it('warns if password/confirm validated then password is changed', () => {
+        join.testFieldsMatch2(
+          '$ctrl.identity.sysPassword', '$ctrl.passphraseConfirmation',
+          'goodPhraseA', 'nonMatchingPhraseB', 'brValidatorSameAs');
       });
     }); // end password validation
 

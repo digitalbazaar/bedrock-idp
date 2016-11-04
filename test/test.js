@@ -9,6 +9,8 @@ require('bedrock-protractor');
 require('bedrock-idp');
 var brMessages = require('bedrock-messages');
 
+require('./app.config.js');
+
 // generate test messages to new identities
 bedrock.events.on('bedrock.Identity.created', (options, callback) => {
   var identity = options.details.identity;

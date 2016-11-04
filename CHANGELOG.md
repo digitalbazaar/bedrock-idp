@@ -1,5 +1,10 @@
 # bedrock-idp ChangeLog
 
+## unreleased
+
+### Changed
+- Use `sameAs` directive on confirm password field in join form.
+
 ## 5.1.5 - 2016-10-31
 
 ### Changed

@@ -1,9 +1,10 @@
 # bedrock-idp ChangeLog
 
-## unreleased
+## 5.1.6 - 2016-11-11
 
 ### Changed
 - Use `sameAs` directive on confirm password field in join form.
+- Update Protractor test suite and dependencies.
 
 ## 5.1.5 - 2016-10-31
 

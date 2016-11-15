@@ -1,5 +1,5 @@
 /*!
- * Copyright (c) 2016 Digtal Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
  */
 define([], function() {
 

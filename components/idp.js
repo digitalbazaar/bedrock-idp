@@ -57,7 +57,11 @@ module.config(function($routeProvider, routeResolverProvider) {
 
   var agreementRedirect = null;
   /* @ngInject */
-  function resolve($location, $route, brAgreementService, config) {
+  function resolve(
+    $location, $route, brAgreementService, brNavbarService, config) {
+
+    brNavbarService.brandOnly = false;
+
     var session = $route.current.locals.session;
 
     var requiredAgreements =

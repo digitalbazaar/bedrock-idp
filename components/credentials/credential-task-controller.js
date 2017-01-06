@@ -11,14 +11,11 @@ define(['jsonld'], function(jsonld) {
 'use strict';
 
 /* @ngInject */
-function factory(
-  $scope, brAlertService, brAuthenticationService, brNavbarService) {
+function factory($scope, brAlertService, brAuthenticationService) {
   var self = this;
   self.loading = true;
   self.display = {login: false};
   self.sysIdentifier = null;
-
-  brNavbarService.brandOnly = true;
 
   // TODO: guarantee only one promise will be pending at a time
   // (could be an issue if )

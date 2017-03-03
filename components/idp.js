@@ -44,7 +44,7 @@ module.config(function($routeProvider, routeResolverProvider) {
         if(session.identity) {
           var referred = wasReferred ? '?referral=true' : '';
           if(redirectAuto) {
-            $window.location = document.referrer;
+            $window.location = document.referrer + "?referral=idp";
             return;
           }
           $location.url(config.data.idp.identityBasePath + '/' +

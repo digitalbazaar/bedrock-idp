@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "bedrock-protractor": "^3.1.0",
-    "uuid": "^2.0.0",
+    "uuid": "^3.0.1",
     "supertest": "^1.0.1"
   }
 }

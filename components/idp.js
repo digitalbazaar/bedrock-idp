@@ -27,7 +27,7 @@ var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
   'bedrock-idp', Array.prototype.slice.call(arguments, 3).concat([
-    'bedrock.identity', 'bedrock.agreement', 'bedrock.credential-curator']));
+    'bedrock.identity', 'bedrock.agreement']));
 
 keyViewComponent(module);
 

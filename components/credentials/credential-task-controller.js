@@ -47,7 +47,6 @@ function factory($scope, brAlertService, brAuthenticationService) {
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;
-      $scope.$apply();
       return new Promise(function(resolve) {
         _resolve = resolve;
       });

@@ -134,7 +134,10 @@ module.config(function($routeProvider, routeResolverProvider) {
         'bedrock-angular-credential/credential-viewer.html')
     })
     .when('/credential-task', {
-      title: 'Credential Task',
+      vars: {
+        title: 'Credential Task',
+        navbar: {display: 'brand'}
+      },
       templateUrl: requirejs.toUrl(
         'bedrock-idp/components/credentials/credential-task.html')
     })

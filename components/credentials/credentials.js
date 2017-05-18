@@ -16,7 +16,7 @@ define([
 
 var module = angular.module('bedrock-idp.credentials', [
   'bedrock.alert', 'bedrock.authn-password', 'bedrock.credential',
-  'bedrock-credential-curator'
+  'bedrock.credential-curator'
 ]);
 
 module.controller(credentialsController);

@@ -5,14 +5,15 @@
  *
  * @author Dave Longley
  */
-define([], function() {
-
-'use strict';
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/identity-credentials-component.html'
+};
 
 /* @ngInject */
-function factory(
-  $http, $location, $sanitize, $scope,
-  brAlertService, brSessionService, config) {
+function Ctrl(
+  $http, $location, $sanitize, $scope, brAlertService, brSessionService,
+  config) {
   var self = this;
   self.loading = false;
   self.identity = brSessionService.session.identity;
@@ -47,7 +48,3 @@ function factory(
     });
   };
 }
-
-return {IdentityCredentialsController: factory};
-
-});

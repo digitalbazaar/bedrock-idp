@@ -5,31 +5,37 @@
  *
  * @author Dave Longley
  */
-/* jshint multistr: true */
+import angular from 'angular';
+import _ from 'lodash';
+import KeyViewComponent from './key-view-component.js';
+import DashboardComponent from './dashboard-component.js';
+import CredentialsController from './credentials/credentials-controller.js';
+import CredentialTaskController from
+  './credentials/credential-task-controller.js';
+import DuplicateCheckerDirective from './duplicate-checker-directive.js';
+import JoinComponent from './idp-join-component.js';
 
 define([
-  'angular',
-  'lodash',
-  './key-view-component',
-  './credentials/credentials',
-  './dashboard/dashboard',
-  './duplicate-checker/duplicate-checker',
   './identity/identity',
-  './login/login',
-  './passcode/passcode'
 ], function(angular, _, keyViewComponent) {
-
-'use strict';
 
 var credentialsBasePath =
   window.data['bedrock-angular-credential'].credentialsBasePath;
 var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
-  'bedrock-idp', Array.prototype.slice.call(arguments, 3).concat([
-    'bedrock.identity', 'bedrock.agreement']));
+  'bedrock-idp', [
+    'bedrock.agreement', 'bedrock.alert',
+    'bedrock.authn-password', 'bedrock.credential',
+    'bedrock.credential-curator', 'bedrock.identity'
+  ]);
 
-keyViewComponent(module);
+module.component('briDashboard', DashboardComponent);
+module.component('brKeyView', KeyViewComponent);
+module.component('brIdpJoin', JoinComponent);
+module.controller('brCredentialsController', CredentialsController);
+module.controller('brCredentialTaskController', CredentialTaskController);
+module.directive('brDuplicateChecker', DuplicateCheckerDirective);
 
 /* @ngInject */
 module.config(function($routeProvider, routeResolverProvider) {
@@ -66,7 +72,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     if(session && session.identity) {
       // see if identity has signed required agreements
       var hasRequiredAgreements = _.difference(
-          requiredAgreements, session.identity.agreements).length === 0;
+        requiredAgreements, session.identity.agreements).length === 0;
       if(!hasRequiredAgreements) {
         if($location.url() === '/agreement') {
           // already on agreement page, nothing to do
@@ -145,8 +151,7 @@ module.config(function($routeProvider, routeResolverProvider) {
       title: 'Dashboard',
       session: 'required',
       resolve: {redirectIfReferred: redirectIfReferred},
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/dashboard/dashboard.html')
+      template: '<br-idp-dashboard></br-idp-dashboard'
     })
     .when(basePath, {
       title: 'Identity Credentials',
@@ -198,9 +203,61 @@ module.config(function($routeProvider, routeResolverProvider) {
 });
 
 /* @ngInject */
-module.run(function(brAgreementService, brAuthnService) {
+module.run(function(
+  brAgreementService, brAuthnService, brNavbarService, brSessionService,
+  config) {
   brAgreementService.registerGroup('bedrock-idp.join');
   brAuthnService.displayOrder = ['authn-did', 'authn-password'];
+
+  brNavbarService.registerMenu('brDashboard', {
+    slug: '/dashboard',
+    icon: 'fa fa-dashboard',
+    label: 'Dashboard',
+    pageTitle: 'Dashboard',
+    visible: false,
+    init: function(scope) {
+      var menu = this;
+      scope.$watch(function() {
+        return brSessionService.session;
+      }, function(session) {
+        if(session && session.identity) {
+          menu.visible = true;
+          menu.url = config.data.idp.identityBaseUri + '/' +
+            session.identity.sysSlug + menu.slug;
+        } else {
+          menu.visible = false;
+        }
+      }, true);
+      // TODO: should be done elsewhere once
+      // get latest session information
+      brSessionService.get();
+    }
+  });
+
+  brNavbarService.registerMenu('brCredential', {
+    slug: '/credentials',
+    icon: 'fa fa-trophy',
+    label: 'Credentials',
+    pageTitle: 'Credentials',
+    visible: false,
+    init: function(scope) {
+      var menu = this;
+      scope.$watch(function() {
+        return brSessionService.session;
+      }, function(session) {
+        if(session && session.identity) {
+          menu.visible = true;
+          menu.url = config.data.idp.identityBaseUri + '/' +
+            session.identity.sysSlug + menu.slug;
+        } else {
+          menu.visible = false;
+        }
+      }, true);
+      // TODO: should be done elsewhere once
+      // get latest session information
+      brSessionService.get();
+    }
+  });
 });
 
 });

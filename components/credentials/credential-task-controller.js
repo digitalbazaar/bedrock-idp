@@ -6,12 +6,11 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-define(['jsonld'], function(jsonld) {
-
-'use strict';
+import jsonld from 'jsonld';
 
 /* @ngInject */
-function factory($scope, brAlertService, brAuthenticationService) {
+export default function factory(
+  $scope, brAlertService, brAuthenticationService) {
   var self = this;
   self.loading = true;
   self.display = {login: false};
@@ -75,7 +74,3 @@ function factory($scope, brAlertService, brAuthenticationService) {
     _resolve(identity);
   };
 }
-
-return {brCredentialTaskController: factory};
-
-});

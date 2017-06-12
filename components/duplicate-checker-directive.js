@@ -1,16 +1,14 @@
 /*!
  * Duplicate Checker.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  */
-define([], function() {
-
-'use strict';
 
 /* @ngInject */
-function factory($http, $filter, $timeout, brAlertService, config) {
+export default function factory(
+  $http, $filter, $timeout, brAlertService, config) {
   return {
     restrict: 'A',
     scope: {
@@ -30,7 +28,8 @@ function factory($http, $filter, $timeout, brAlertService, config) {
     scope.data = config.data || {};
 
     // hide feedback until input changes
-    element.addClass('alert').hide();
+    element.addClass('alert');
+    element.css('display', 'none');
 
     scope.result = false;
     var lastInput = null;
@@ -38,9 +37,12 @@ function factory($http, $filter, $timeout, brAlertService, config) {
     var init = false;
 
     function change(value) {
+
+      // FIXME: scope.owner is not utilized in this module
+      var ownerReady = (scope.owner === undefined);
       // determine if owner input is ready
-      var ownerReady = (scope.owner === undefined ||
-        scope.owner.length > (scope.data.idp.identityBaseUri + '/').length);
+      // var ownerReady = (scope.owner === undefined ||
+      //   scope.owner.length > (scope.data.idp.identityBaseUri + '/').length);
 
       // initialized once value is defined and owner is ready
       if(!init && value !== undefined && ownerReady) {
@@ -56,21 +58,21 @@ function factory($http, $filter, $timeout, brAlertService, config) {
       // nothing to check
       if(value === undefined || value.length === 0 || !ownerReady) {
         scope.result = false;
-        element.hide();
+        element.css('display', 'none');
       } else if(value !== lastInput) {
         // show checking
         element
           .removeClass('alert-danger alert-success alert-warning')
           .addClass('alert-warning')
           .text(scope.checking)
-          .fadeIn('show');
+          .css('display', 'block');
         lastInput = null;
         scope.result = false;
 
         // start timer to check
         timer = $timeout(function() {
           if(value.length === 0) {
-            element.hide();
+            element.css('display', 'none');
           } else {
             if(scope.type === 'email') {
               lastInput = scope.input;
@@ -103,17 +105,18 @@ function factory($http, $filter, $timeout, brAlertService, config) {
                 brAlertService.add('error', err);
                 return null;
               }).then(function(text) {
-                element.hide().removeClass('alert-danger alert-success alert-warning');
+                element.css('display', 'none');
+                element.removeClass('alert-danger alert-success alert-warning');
                 if(text !== null) {
                   if(scope.result === 'available') {
-                      element.addClass('alert-success');
+                    element.addClass('alert-success');
                   } else {
                     element.addClass('alert-danger');
                   }
-                  element.text(text).fadeIn('slow');
+                  element.text(text).css('display', 'block');
                 }
               });
-            }
+          }
         }, 1000);
       }
     }
@@ -124,7 +127,3 @@ function factory($http, $filter, $timeout, brAlertService, config) {
     });
   }
 }
-
-return {brDuplicateChecker: factory};
-
-});

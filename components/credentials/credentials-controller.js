@@ -2,12 +2,9 @@
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  *
  */
-define([], function() {
-
-'use strict';
 
 /* @ngInject */
-function factory($scope, brSessionService) {
+export default function factory($scope, brSessionService) {
   var self = this;
 
   self.identity = null;
@@ -28,7 +25,3 @@ function factory($scope, brSessionService) {
     }
   }
 }
-
-return {brCredentialsController: factory};
-
-});

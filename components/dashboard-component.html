@@ -1,7 +1,7 @@
-<div class="dashboard ng-cloak" ng-controller="DashboardController as model">
+<div class="dashboard ng-cloak">
 
-  <div ng-if="model.state.redirectLink" class="row">
-    <div class="alert alert-info text-center col-md-offset-2 col-md-8">It looks like you were referred here by another website. Go back to <a href="{{model.state.redirectLink}}">{{model.state.redirectLink}}</a> ?</div>
+  <div ng-if="$ctrl.state.redirectLink" class="row">
+    <div class="alert alert-info text-center col-md-offset-2 col-md-8">It looks like you were referred here by another website. Go back to <a href="{{$ctrl.state.redirectLink}}">{{$ctrl.state.redirectLink}}</a> ?</div>
   </div>
 
   <div class="row">
@@ -12,14 +12,14 @@
 
   <div class="row">
     <div class="section section-itemsX col-md-6">
-      <br-headline br-title="Items X" br-loading="model.state.items.loading">
+      <br-headline br-title="Items X" br-loading="$ctrl.state.items.loading">
         <ul class="stackable-menu dropdown-menu">
           <li>
             <a class="stackable-cancel" ng-click="modals.showAddItem=true"><i class="fa fa-plus"></i> Add Item</a>
           </li>
         </ul>
       </br-headline>
-      <div ng-show="!model.state.items.loading && items.length == 0">
+      <div ng-show="!$ctrl.state.items.loading && items.length == 0">
         <p class="text-center">You have no items for this identity.</p>
         <button type="button"
           class="btn btn-success pull-right"
@@ -28,14 +28,14 @@
     </div>
 
     <div class="section section-itemsY col-md-6">
-      <br-headline br-title="Items Y" br-loading="model.state.items.loading">
+      <br-headline br-title="Items Y" br-loading="$ctrl.state.items.loading">
         <ul class="stackable-menu dropdown-menu">
           <li>
             <a class="stackable-cancel" ng-click="modals.showAddItem=true"><i class="fa fa-plus"></i> Add Item</a>
           </li>
         </ul>
       </br-headline>
-      <div ng-show="!model.state.items.loading && items.length == 0">
+      <div ng-show="!$ctrl.state.items.loading && items.length == 0">
         <p class="text-center">You have no items for this identity.</p>
         <button type="button"
           class="btn btn-success pull-right"
@@ -46,9 +46,9 @@
 
   <div class="row">
     <div class="section section-recent-items col-md-6">
-      <br-headline br-title="Recent Items" br-loading="model.state.items.loading"
+      <br-headline br-title="Recent Items" br-loading="$ctrl.state.items.loading"
         br-options="{menu: false}"></br-headline>
-      <div ng-show="!model.state.items.loading && items.length == 0">
+      <div ng-show="!$ctrl.state.items.loading && items.length == 0">
         <p class="text-center">You have no recent items for this identity.</p>
       </div>
     </div>
@@ -59,14 +59,14 @@
     </div>
   </div>
 
-  <stackable-modal stackable="model.modals.shouldShowRedirectModal">
+  <stackable-modal stackable="$ctrl.modals.shouldShowRedirectModal">
     <br-modal br-title="Go back?">
       <br-modal-body>
-        <p>We noticed that you arrived here from <a href="{{model.state.redirectLink}}">{{model.state.redirectLink}}</a></p>
+        <p>We noticed that you arrived here from <a href="{{$ctrl.state.redirectLink}}">{{$ctrl.state.redirectLink}}</a></p>
         <p>Would you like to go back now?</p>
       </br-modal-body>
       <br-modal-footer>
-        <button ng-click="model.redirect()" type="button" class="btn btn-primary">Ok</button>
+        <button ng-click="$ctrl.redirect()" type="button" class="btn btn-primary">Ok</button>
         <button type="button"
           class="btn btn-default stackable-cancel">Cancel</button>
       </br-modal-footer>

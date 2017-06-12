@@ -1,15 +1,20 @@
 /*!
  * Credential Task Controller.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author Matt Collier
  */
 import jsonld from 'jsonld';
 
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/credential-task-component.html'
+};
+
 /* @ngInject */
-export default function factory(
+function Ctrl(
   $scope, brAlertService, brAuthenticationService) {
   var self = this;
   self.loading = true;

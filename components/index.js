@@ -7,17 +7,14 @@
  */
 import angular from 'angular';
 import _ from 'lodash';
-import KeyViewComponent from './key-view-component.js';
+import CreateIdentityComponent from './create-identity-component.js';
+import CredentialsComponent from './credentials-component.js';
+import CredentialTaskComponent from './credential-task-component.js';
 import DashboardComponent from './dashboard-component.js';
-import CredentialsController from './credentials/credentials-controller.js';
-import CredentialTaskController from
-  './credentials/credential-task-controller.js';
 import DuplicateCheckerDirective from './duplicate-checker-directive.js';
+import IdentityCredentialsComponent from './identity-credentials-component.js';
 import JoinComponent from './idp-join-component.js';
-
-define([
-  './identity/identity',
-], function(angular, _, keyViewComponent) {
+import KeyViewComponent from './key-view-component.js';
 
 var credentialsBasePath =
   window.data['bedrock-angular-credential'].credentialsBasePath;
@@ -30,11 +27,13 @@ var module = angular.module(
     'bedrock.credential-curator', 'bedrock.identity'
   ]);
 
+module.component('briCredentials', CredentialsComponent);
+module.component('briCredentialTask', CredentialTaskComponent);
 module.component('briDashboard', DashboardComponent);
+module.component('briIdentityCredentials', IdentityCredentialsComponent);
+module.component('brCreateIdentity', CreateIdentityComponent);
 module.component('brKeyView', KeyViewComponent);
 module.component('brIdpJoin', JoinComponent);
-module.controller('brCredentialsController', CredentialsController);
-module.controller('brCredentialTaskController', CredentialTaskController);
 module.directive('brDuplicateChecker', DuplicateCheckerDirective);
 
 /* @ngInject */
@@ -131,32 +130,28 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when(basePath + '/:identity/credentials', {
       title: 'Credentials',
       session: 'required',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credentials.html')
+      templateUrl: '<bri-credentials></bri-credentials>'
     })
     .when(credentialsBasePath, {
       title: 'Credentials',
-      templateUrl: requirejs.toUrl(
-        'bedrock-angular-credential/credential-viewer.html')
+      templateUrl: 'bedrock-angular-credential/credential-viewer.html'
     })
     .when('/credential-task', {
       vars: {
         title: 'Credential Task',
         navbar: {display: 'brand'}
       },
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credential-task.html')
+      templateUrl: '<bri-credential-task></bri-credential-task>'
     })
     .when(basePath + '/:identity/dashboard', {
       title: 'Dashboard',
       session: 'required',
       resolve: {redirectIfReferred: redirectIfReferred},
-      template: '<br-idp-dashboard></br-idp-dashboard'
+      template: '<bri-dashboard></bri-dashboard'
     })
     .when(basePath, {
       title: 'Identity Credentials',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/identity/identity-credentials.html')
+      template: '<bri-identity-credentials></bri-identity-credentials>'
     })
     .when(basePath + '/:identity', {
       title: 'Identity',
@@ -164,7 +159,8 @@ module.config(function($routeProvider, routeResolverProvider) {
         '<br-identity-viewer br-identity="$resolve.identity">' +
         '  <br-identity-additional-content>' +
         '    <br-keys br-identity="$resolve.identity"></br-keys>' +
-        '    <br-credentials br-identity="$resolve.identity"></br-credentials>' +
+        '    <br-credentials br-identity="$resolve.identity">' +
+        '    </br-credentials>' +
         '  </br-identity-additional-content>' +
         '</br-identity-viewer>',
       resolve: {
@@ -178,7 +174,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when('/join', {
       title: 'Create Identity',
       resolve: {redirectIfReferred: redirectIfReferred},
-      template: '<br-create-identity></br-create-identity>'
+      template: '<bri-create-identity></bri-create-identity>'
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',
@@ -193,12 +189,12 @@ module.config(function($routeProvider, routeResolverProvider) {
     })
     .when(keyBasePath + '/:keyId', {
       title: 'Key',
-      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
+      templateUrl: 'bedrock-angular-key/key.html'
     })
     // FIXME: deprecated endpoint support for old keys
     .when(basePath + '/:identity/keys/:keyId', {
       title: 'Key',
-      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
+      templateUrl: 'bedrock-angular-key/key.html'
     });
 });
 
@@ -258,6 +254,4 @@ module.run(function(
       brSessionService.get();
     }
   });
-});
-
 });

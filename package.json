@@ -31,7 +31,31 @@
     "request": "^2.60.0"
   },
   "peerDependencies": {
-    "bedrock": "^1.0.0",
+    "bedrock-angular": "^3.0.0",
+    "bedrock-angular-agreement": "^2.0.0",
+    "bedrock-angular-alert": "^3.0.0",
+    "bedrock-angular-authn": "^3.0.0",
+    "bedrock-angular-authn-did": "^3.0.0",
+    "bedrock-angular-authn-password": "^2.0.0",
+    "bedrock-angular-credential": "^3.0.0",
+    "bedrock-angular-form": "^3.0.0",
+    "bedrock-angular-identity": "^3.0.0",
+    "bedrock-angular-identity-composer": "^3.0.0",
+    "bedrock-angular-key": "^3.0.0",
+    "bedrock-angular-modal": "^5.0.0",
+    "bedrock-angular-model": "^3.0.0",
+    "bedrock-angular-navbar": "^4.0.0",
+    "bedrock-angular-resolver": "^3.0.0",
+    "bedrock-angular-resource": "^3.0.0",
+    "bedrock-angular-selector": "^4.0.0",
+    "bedrock-angular-session": "^4.0.0",
+    "bedrock-angular-ui": "^3.0.0",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#6.x",
+    "credentials-polyfill": "^1.1.5",
+    "forge": "^0.6.35",
+    "opencred-verifier": "^0.1.0",
+    "lodash": "^4.0.0",
+    "bedrock": "digitalbazaar/bedrock#updateTestDeps",
     "bedrock-agreement": "^1.0.0",
     "bedrock-agreement-http": "^1.0.0",
     "bedrock-authn-did": "^3.0.0",
@@ -53,14 +77,40 @@
     "bedrock-session-mongodb": "^2.0.2",
     "bedrock-session-http": "^3.0.0",
     "bedrock-validation": "^2.0.0",
-    "bedrock-views": "^4.0.0"
-  },
-  "directories": {
-    "lib": "./lib"
+    "bedrock-views": "^5.0.0"
   },
   "devDependencies": {
     "bedrock-protractor": "^3.1.0",
     "uuid": "^3.0.1",
     "supertest": "^1.0.1"
+  },
+  "bedrock": {
+    "browserDependencies": [
+      "bedrock-angular",
+      "bedrock-angular-agreement",
+      "bedrock-angular-alert",
+      "bedrock-angular-authn",
+      "bedrock-angular-authn-did",
+      "bedrock-angular-authn-password",
+      "bedrock-angular-credential",
+      "bedrock-angular-form",
+      "bedrock-angular-identity",
+      "bedrock-angular-identity-composer",
+      "bedrock-angular-key",
+      "bedrock-angular-modal",
+      "bedrock-angular-model",
+      "bedrock-angular-navbar",
+      "bedrock-angular-resolver",
+      "bedrock-angular-resource",
+      "bedrock-angular-selector",
+      "bedrock-angular-session",
+      "bedrock-angular-ui",
+      "bedrock-credential-curator",
+      "credentials-polyfill",
+      "forge",
+      "opencred-verifier",
+      "lodash"
+    ]
   }
+
 }

@@ -6,6 +6,8 @@
  * @author Dave Longley
  */
 
+import angular from 'angular';
+
 /* @ngInject */
 export default function factory(
   $http, $filter, $timeout, brAlertService, config) {
@@ -85,7 +87,7 @@ export default function factory(
             } else {
               data.sysSlug = lastInput;
             }
-            $http.post('/identifier/' + scope.type, $.extend(
+            $http.post('/identifier/' + scope.type, angular.extend(
               data, scope.owner ? {owner: scope.owner} : {}))
               .then(function() {
                 scope.result = 'available';

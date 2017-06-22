@@ -53,7 +53,6 @@
     "bedrock-angular-ui": "^3.0.0",
     "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#6.x",
     "credentials-polyfill": "^1.1.5",
-    "forge": "^0.6.35",
     "opencred-verifier": "^0.1.0",
     "lodash": "^4.0.0",
     "bedrock": "digitalbazaar/bedrock#updateTestDeps",
@@ -108,7 +107,6 @@
       "bedrock-angular-ui",
       "bedrock-credential-curator",
       "credentials-polyfill",
-      "forge",
       "opencred-verifier",
       "lodash"
     ]

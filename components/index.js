@@ -21,10 +21,10 @@ var credentialsBasePath =
 var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
-  'bedrock-idp', [
+  'bedrock.idp', [
     'bedrock.agreement', 'bedrock.alert',
     'bedrock.authn-password', 'bedrock.credential',
-    'bedrock.credential-curator', 'bedrock.identity'
+    'bedrock.credential-curator', 'bedrock.identity', 'bedrock.resolver'
   ]);
 
 module.component('briCredentials', CredentialsComponent);

@@ -14,8 +14,7 @@ export default {
 };
 
 /* @ngInject */
-function Ctrl(
-  $scope, brAlertService, brAuthenticationService) {
+function Ctrl($scope, brAlertService, brAuthenticationService) {
   var self = this;
   self.loading = true;
   self.display = {login: false};

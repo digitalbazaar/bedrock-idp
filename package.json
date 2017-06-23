@@ -4,7 +4,6 @@
   "description": "Bedrock Identity Provider",
   "browser": "./components/index.js",
   "main": "lib",
-  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/digitalbazaar/bedrock-idp"
@@ -109,5 +108,4 @@
       "lodash"
     ]
   }
-
 }

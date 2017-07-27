@@ -53,7 +53,7 @@
     "lodash": "^4.0.0"
   },
   "peerDependencies": {
-    "bedrock": "digitalbazaar/bedrock#updateTestDeps",
+    "bedrock": "^1.6.0",
     "bedrock-agreement": "^1.0.0",
     "bedrock-agreement-http": "^1.0.0",
     "bedrock-authn-did": "^3.0.0",

@@ -2,12 +2,13 @@
  * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
  *
  */
-define([], function() {
-
-'use strict';
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/credentials-component.html'
+};
 
 /* @ngInject */
-function factory($scope, brSessionService) {
+function Ctrl($scope, brSessionService) {
   var self = this;
 
   self.identity = null;
@@ -28,7 +29,3 @@ function factory($scope, brSessionService) {
     }
   }
 }
-
-return {brCredentialsController: factory};
-
-});

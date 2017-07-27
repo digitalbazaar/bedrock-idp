@@ -1,20 +1,9 @@
 /*!
- * Copyright (c) 2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Digital Bazaar, Inc. All rights reserved.
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.component('brKeyView', {
-    bindings: {
-      identity: '<brIdentity'
-    },
-    templateUrl: requirejs.toUrl(
-      'bedrock-idp/components/key-view-component.html')
-  });
-}
-
-return register;
-
-});
+export default {
+  bindings: {
+    identity: '<brIdentity'
+  },
+  templateUrl: 'bedrock-idp/components/key-view-component.html'
+};

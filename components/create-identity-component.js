@@ -7,17 +7,11 @@
  * @author Manu Sporny
  * @author Matt Collier
  */
-define([], function() {
-
-'use strict';
-
-function register(module) {
-  module.component('brCreateIdentity', {
-    controller: Ctrl,
-    templateUrl: requirejs.toUrl(
-      'bedrock-idp/components/identity/create-identity-component.html')
-  });
-}
+/* globals IdentityCredential */
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/create-identity-component.html'
+};
 
 /* @ngInject */
 function Ctrl(
@@ -96,7 +90,3 @@ function Ctrl(
     });
   };
 }
-
-return register;
-
-});

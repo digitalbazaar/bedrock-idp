@@ -1,17 +1,18 @@
 /*!
  * Identity Dashboard Controller.
  *
- * Copyright (c) 2012-2014 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2012-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author David I. Lehn
  */
-define([], function() {
-
-'use strict';
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/dashboard-component.html'
+};
 
 /* @ngInject */
-function factory($routeParams, brSessionService, $window) {
+function Ctrl($routeParams, brSessionService, $window) {
   var self = this;
   self.identity = brSessionService.session.identity;
   self.state = {};
@@ -30,7 +31,3 @@ function factory($routeParams, brSessionService, $window) {
     }
   };
 }
-
-return {DashboardController: factory};
-
-});

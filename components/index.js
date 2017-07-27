@@ -5,31 +5,36 @@
  *
  * @author Dave Longley
  */
-/* jshint multistr: true */
-
-define([
-  'angular',
-  'lodash',
-  './key-view-component',
-  './credentials/credentials',
-  './dashboard/dashboard',
-  './duplicate-checker/duplicate-checker',
-  './identity/identity',
-  './login/login',
-  './passcode/passcode'
-], function(angular, _, keyViewComponent) {
-
-'use strict';
+import angular from 'angular';
+import _ from 'lodash';
+import CreateIdentityComponent from './create-identity-component.js';
+import CredentialsComponent from './credentials-component.js';
+import CredentialTaskComponent from './credential-task-component.js';
+import DashboardComponent from './dashboard-component.js';
+import DuplicateCheckerDirective from './duplicate-checker-directive.js';
+import IdentityCredentialsComponent from './identity-credentials-component.js';
+import JoinComponent from './idp-join-component.js';
+import KeyViewComponent from './key-view-component.js';
 
 var credentialsBasePath =
   window.data['bedrock-angular-credential'].credentialsBasePath;
 var keyBasePath = window.data['bedrock-angular-key'].basePath;
 
 var module = angular.module(
-  'bedrock-idp', Array.prototype.slice.call(arguments, 3).concat([
-    'bedrock.identity', 'bedrock.agreement']));
+  'bedrock.idp', [
+    'bedrock.agreement', 'bedrock.alert',
+    'bedrock.authn-password', 'bedrock.credential',
+    'bedrock.credential-curator', 'bedrock.identity', 'bedrock.resolver'
+  ]);
 
-keyViewComponent(module);
+module.component('briCredentials', CredentialsComponent);
+module.component('briCredentialTask', CredentialTaskComponent);
+module.component('briDashboard', DashboardComponent);
+module.component('briIdentityCredentials', IdentityCredentialsComponent);
+module.component('brCreateIdentity', CreateIdentityComponent);
+module.component('brKeyView', KeyViewComponent);
+module.component('brIdpJoin', JoinComponent);
+module.directive('brDuplicateChecker', DuplicateCheckerDirective);
 
 /* @ngInject */
 module.config(function($routeProvider, routeResolverProvider) {
@@ -66,7 +71,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     if(session && session.identity) {
       // see if identity has signed required agreements
       var hasRequiredAgreements = _.difference(
-          requiredAgreements, session.identity.agreements).length === 0;
+        requiredAgreements, session.identity.agreements).length === 0;
       if(!hasRequiredAgreements) {
         if($location.url() === '/agreement') {
           // already on agreement page, nothing to do
@@ -125,30 +130,28 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when(basePath + '/:identity/credentials', {
       title: 'Credentials',
       session: 'required',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credentials.html')
+      templateUrl: '<bri-credentials></bri-credentials>'
     })
     .when(credentialsBasePath, {
       title: 'Credentials',
-      templateUrl: requirejs.toUrl(
-        'bedrock-angular-credential/credential-viewer.html')
+      templateUrl: 'bedrock-angular-credential/credential-viewer.html'
     })
     .when('/credential-task', {
-      title: 'Credential Task',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/credentials/credential-task.html')
+      vars: {
+        title: 'Credential Task',
+        navbar: {display: 'brand'}
+      },
+      templateUrl: '<bri-credential-task></bri-credential-task>'
     })
     .when(basePath + '/:identity/dashboard', {
       title: 'Dashboard',
       session: 'required',
       resolve: {redirectIfReferred: redirectIfReferred},
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/dashboard/dashboard.html')
+      template: '<bri-dashboard></bri-dashboard'
     })
     .when(basePath, {
       title: 'Identity Credentials',
-      templateUrl: requirejs.toUrl(
-        'bedrock-idp/components/identity/identity-credentials.html')
+      template: '<bri-identity-credentials></bri-identity-credentials>'
     })
     .when(basePath + '/:identity', {
       title: 'Identity',
@@ -156,7 +159,8 @@ module.config(function($routeProvider, routeResolverProvider) {
         '<br-identity-viewer br-identity="$resolve.identity">' +
         '  <br-identity-additional-content>' +
         '    <br-keys br-identity="$resolve.identity"></br-keys>' +
-        '    <br-credentials br-identity="$resolve.identity"></br-credentials>' +
+        '    <br-credentials br-identity="$resolve.identity">' +
+        '    </br-credentials>' +
         '  </br-identity-additional-content>' +
         '</br-identity-viewer>',
       resolve: {
@@ -170,7 +174,7 @@ module.config(function($routeProvider, routeResolverProvider) {
     .when('/join', {
       title: 'Create Identity',
       resolve: {redirectIfReferred: redirectIfReferred},
-      template: '<br-create-identity></br-create-identity>'
+      template: '<bri-create-identity></bri-create-identity>'
     })
     .when(basePath + '/:identity/keys', {
       title: 'Keys',
@@ -185,19 +189,69 @@ module.config(function($routeProvider, routeResolverProvider) {
     })
     .when(keyBasePath + '/:keyId', {
       title: 'Key',
-      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
+      templateUrl: 'bedrock-angular-key/key.html'
     })
     // FIXME: deprecated endpoint support for old keys
     .when(basePath + '/:identity/keys/:keyId', {
       title: 'Key',
-      templateUrl: requirejs.toUrl('bedrock-angular-key/key.html')
+      templateUrl: 'bedrock-angular-key/key.html'
     });
 });
 
 /* @ngInject */
-module.run(function(brAgreementService, brAuthnService) {
+module.run(function(
+  brAgreementService, brAuthnService, brNavbarService, brSessionService,
+  config) {
   brAgreementService.registerGroup('bedrock-idp.join');
   brAuthnService.displayOrder = ['authn-did', 'authn-password'];
-});
 
+  brNavbarService.registerMenu('brDashboard', {
+    slug: '/dashboard',
+    icon: 'fa fa-dashboard',
+    label: 'Dashboard',
+    pageTitle: 'Dashboard',
+    visible: false,
+    init: function(scope) {
+      var menu = this;
+      scope.$watch(function() {
+        return brSessionService.session;
+      }, function(session) {
+        if(session && session.identity) {
+          menu.visible = true;
+          menu.url = config.data.idp.identityBaseUri + '/' +
+            session.identity.sysSlug + menu.slug;
+        } else {
+          menu.visible = false;
+        }
+      }, true);
+      // TODO: should be done elsewhere once
+      // get latest session information
+      brSessionService.get();
+    }
+  });
+
+  brNavbarService.registerMenu('brCredential', {
+    slug: '/credentials',
+    icon: 'fa fa-trophy',
+    label: 'Credentials',
+    pageTitle: 'Credentials',
+    visible: false,
+    init: function(scope) {
+      var menu = this;
+      scope.$watch(function() {
+        return brSessionService.session;
+      }, function(session) {
+        if(session && session.identity) {
+          menu.visible = true;
+          menu.url = config.data.idp.identityBaseUri + '/' +
+            session.identity.sysSlug + menu.slug;
+        } else {
+          menu.visible = false;
+        }
+      }, true);
+      // TODO: should be done elsewhere once
+      // get latest session information
+      brSessionService.get();
+    }
+  });
 });

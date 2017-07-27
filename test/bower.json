@@ -33,7 +33,7 @@
     "bedrock-angular-selector": "^3.1.0",
     "bedrock-angular-session": "^3.0.0",
     "bedrock-angular-ui": "^2.0.0",
-    "bedrock-credential-curator": "^0.4.0",
+    "bedrock-credential-curator": "^0.5.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "credentials-polyfill": "^0.10.0",

@@ -1,17 +1,20 @@
 /*!
  * Credential Task Controller.
  *
- * Copyright (c) 2015-2016 Digital Bazaar, Inc. All rights reserved.
+ * Copyright (c) 2015-2017 Digital Bazaar, Inc. All rights reserved.
  *
  * @author Dave Longley
  * @author Matt Collier
  */
-define(['jsonld'], function(jsonld) {
+import jsonld from 'jsonld';
 
-'use strict';
+export default {
+  controller: Ctrl,
+  templateUrl: 'bedrock-idp/components/credential-task-component.html'
+};
 
 /* @ngInject */
-function factory($scope, brAlertService, brAuthenticationService) {
+function Ctrl($scope, brAlertService, brAuthenticationService) {
   var self = this;
   self.loading = true;
   self.display = {login: false};
@@ -47,7 +50,6 @@ function factory($scope, brAlertService, brAuthenticationService) {
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;
-      $scope.$apply();
       return new Promise(function(resolve) {
         _resolve = resolve;
       });
@@ -76,7 +78,3 @@ function factory($scope, brAlertService, brAuthenticationService) {
     _resolve(identity);
   };
 }
-
-return {brCredentialTaskController: factory};
-
-});

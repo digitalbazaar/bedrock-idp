@@ -48,8 +48,7 @@
     "bedrock-angular-selector": "^4.0.0",
     "bedrock-angular-session": "^4.0.0",
     "bedrock-angular-ui": "^3.0.0",
-    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#systemjs",
-    "credentials-polyfill": "^1.1.5",
+    "bedrock-credential-curator": "digitalbazaar/bedrock-credential-curator#credential-handler",
     "lodash": "^4.0.0"
   },
   "peerDependencies": {

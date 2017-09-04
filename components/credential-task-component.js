@@ -6,9 +6,12 @@
  * @author Dave Longley
  * @author Matt Collier
  */
-import jsonld from 'jsonld';
+import {ProfileKeyStore} from 'bedrock-credential-handler';
 
 export default {
+  bindings: {
+    requestType: '@brRequestType'
+  },
   controller: Ctrl,
   templateUrl: 'bedrock-idp/components/credential-task-component.html'
 };
@@ -24,54 +27,47 @@ function Ctrl($scope, brAlertService, brAuthenticationService) {
   // (could be an issue if )
   var _resolve = null;
 
-  self.createSession = function(identity) {
+  self.createSession = async identity => {
     // FIXME: validate identity format
 
-    var needsLogin = false;
     self.display = {login: false};
 
-    // inspect public key credential
-    // TODO: `credential` should be an @set; find public key credential in
-    // the set
-    var credentials = jsonld.getValues(identity, 'credential');
-    var publicKey;
-    if(credentials.length === 1) {
-      publicKey = credentials[0]['@graph'].claim.publicKey;
-    }
-    if(publicKey && jsonld.hasValue(
-      publicKey, 'type', 'EphemeralCryptographicKey')) {
-      needsLogin = true;
-      self.display.temporaryDevice = true;
-    } else if(publicKey && publicKey.id.indexOf('did:') !== 0) {
-      needsLogin = true;
+    // TODO: add checkbox for new vs. temporary device on login display
+    //self.display.newDevice = true;
+    //self.display.temporaryDevice = true;
+
+    // check for existing profile on device
+    const pkStore = new ProfileKeyStore('/credential-handler');
+    const profile = await pkStore.get(identity.id);
+
+    if(!profile) {
+      // no profile on device
       self.display.newDevice = true;
-    }
-    if(needsLogin) {
+
       // user needs to login using identifier/password
       self.display.login = true;
       self.sysIdentifier = identity.id;
-      return new Promise(function(resolve) {
-        _resolve = resolve;
-      });
+      return new Promise(resolve => _resolve = resolve);
     }
+
     // auto-login w/DID
-    return new Promise(function(resolve) {
-      var sysIdentifier = identity.id;
-      brAuthenticationService.login(identity).catch(function(err) {
-        brAlertService.add('error', err);
-        $scope.$apply();
-      }).then(function(identity) {
-        if(identity) {
-          return resolve(identity);
-        }
-        // FIXME: strange case that DID-based login fails (document when
-        // this may happen and implement better handling)
-        // show login modal on DID-based failure
-        self.display.login = true;
-        self.sysIdentifier = sysIdentifier;
-        $scope.$apply();
-      });
-    });
+    const domain = window.location.host;
+    const vProfile = await pkStore.createCryptoKeyProfile(
+      {profile, domain, sign: true});
+
+    try {
+      return await brAuthenticationService.login(vProfile);
+    } catch(e) {
+      brAlertService.add('error', e);
+    }
+
+    // FIXME: strange case that DID-based login fails (document when
+    // this may happen and implement better handling)
+    // show login display on DID-based failure
+    self.display.login = true;
+    self.sysIdentifier = identity.id;
+    $scope.$apply();
+    return new Promise(resolve => _resolve = resolve);
   };
 
   self.loggedIn = function(identity) {

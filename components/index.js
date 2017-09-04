@@ -136,12 +136,19 @@ module.config(function($routeProvider, routeResolverProvider) {
       title: 'Credentials',
       templateUrl: 'bedrock-angular-credential/credential-viewer.html'
     })
-    .when('/credential-task', {
+    .when('/credentialrequest', {
       vars: {
-        title: 'Credential Task',
+        title: 'Credential Request',
         navbar: {display: 'brand'}
       },
-      templateUrl: '<bri-credential-task></bri-credential-task>'
+      template: '<bri-credential-task br-request-type="request"></bri-credential-task>'
+    })
+    .when('/credentialstore', {
+      vars: {
+        title: 'Credential Store',
+        navbar: {display: 'brand'}
+      },
+      template: '<bri-credential-task br-request-type="store"></bri-credential-task>'
     })
     .when(basePath + '/:identity/dashboard', {
       title: 'Dashboard',

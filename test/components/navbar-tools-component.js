@@ -9,8 +9,7 @@ define([], function() {
 function register(module) {
   module.component('brIdpTestNavbarTools', {
     controller: Ctrl,
-    templateUrl:
-      requirejs.toUrl('bedrock-idp-test/navbar-tools-component.html')
+    templateUrl: 'bedrock-idp-test/navbar-tools-component.html'
   });
 }
 

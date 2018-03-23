@@ -60,8 +60,8 @@ module.run(function(
   config.site = config.site || {};
   config.site.navbar = config.site.navbar || {};
   config.site.navbar.templates = config.site.navbar.templates || [];
-  config.site.navbar.templates.push(requirejs.toUrl(
-    'bedrock-idp-test/navbar-tools-template.html'));
+  config.site.navbar.templates.push(
+    'bedrock-idp-test/navbar-tools-template.html');
     
   brNavbarService.displayOrder = [
     'brDashboard',
@@ -104,7 +104,7 @@ module.run(function(
   brAgreementService.register(
     'bedrock-idp.join', 'brTos', {
       title: 'Terms of Service',
-      templateUrl: requirejs.toUrl('bedrock-idp-test/agreements/tos.html')
+      templateUrl: 'bedrock-idp-test/agreements/tos.html'
     });
 });
 

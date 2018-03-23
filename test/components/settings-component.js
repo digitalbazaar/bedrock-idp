@@ -11,8 +11,7 @@ function register(module) {
     bindings: {
       identity: '<brIdentity'
     },
-    templateUrl: requirejs.toUrl(
-      'bedrock-idp-test/settings-component.html')
+    templateUrl: 'bedrock-idp-test/settings-component.html'
   });
 }
 

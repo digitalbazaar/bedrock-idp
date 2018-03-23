@@ -1,6 +1,8 @@
 # bedrock-idp ChangeLog
 
 ### Changed
+- **BREAKING**: Switch to material design.
+- Use ES6 syntax.
 - Updated dependencies.
 
 ### Removed

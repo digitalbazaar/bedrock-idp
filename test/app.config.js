@@ -20,17 +20,15 @@ config.mongodb.host = 'localhost';
 config.mongodb.port = 27017;
 config.mongodb.local.collection = 'bedrock_idp_app';
 
-// bower package for bedrock-idp-test
-var dir = path.join(__dirname);
-config.requirejs.bower.packages.push({
-  path: path.join(dir, 'components'),
-  manifest: path.join(dir, 'bower.json')
+// pseudo package for bedrock-idp-test
+config.views.system.packages.push({
+  path: path.join(__dirname, 'components'),
+  manifest: path.join(__dirname, 'package.json')
 });
-// bower package for bedrock-idp
-var parentDir = path.join(__dirname, '..');
-config.requirejs.bower.packages.push({
-  path: path.join(parentDir),
-  manifest: path.join(parentDir, 'bower.json')
+// pseudo package for bedrock-idp
+config.views.system.packages.push({
+  path: path.join(__dirname, '..', 'components'),
+  manifest: path.join(__dirname, '..', 'package.json')
 });
 
 // identity service

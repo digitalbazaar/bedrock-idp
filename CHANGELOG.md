@@ -3,6 +3,9 @@
 ### Changed
 - Updated dependencies.
 
+### Removed
+- **BREAKING**: Remove bower support.
+
 ## 5.1.6 - 2016-11-11
 
 ### Changed

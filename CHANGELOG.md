@@ -1,5 +1,8 @@
 # bedrock-idp ChangeLog
 
+### Changed
+- Update dependencies.
+
 ## 6.0.0 - 2018-03-26
 
 ### Changed

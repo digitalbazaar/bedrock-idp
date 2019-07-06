@@ -48,7 +48,8 @@
     "jsonld-signatures": "^2.3.0",
     "lodash": "^4.17.5",
     "passport-local": "~1.0.0",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "snyk": "^1.192.3"
   },
   "peerDependencies": {
     "bedrock": "^1.9.1",
@@ -104,5 +105,10 @@
       "bedrock-credential-curator",
       "lodash"
     ]
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }

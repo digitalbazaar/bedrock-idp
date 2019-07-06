@@ -1,0 +1,54 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-450202:
+    - bedrock-credential-curator > bedrock-angular-credential > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - did-io > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity-composer > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-credential > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > did-io > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-identity-composer > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-key > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-identity-composer > bedrock-angular-credential > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-authn-password > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
+    - bedrock-credential-curator > bedrock-angular-identity-composer > bedrock-angular-credential > bedrock-angular-form > bedrock-angular-resource > lodash:
+        patched: '2019-07-06T07:13:28.610Z'
